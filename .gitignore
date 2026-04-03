@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+.venv/
+venv/
+results/*.json
+results/*.csv
+results/*.pkl
+*.egg-info/
+.DS_Store
+.vscode/
+.idea/
+*.log
+.ipynb_checkpoints/
+plan.md

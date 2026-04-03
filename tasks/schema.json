@@ -1,0 +1,154 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ToolFailBench Task Schema",
+  "version": "0.1.0",
+  "description": "Schema for a single evaluation task in the ToolFailBench benchmark. Each task is designed to elicit and measure a specific tool-use failure mode.",
+  "type": "object",
+  "required": [
+    "task_id", "domain", "turn_type", "target_failure_mode", "conflict_type",
+    "system_prompt", "user_message", "available_tools", "expected_tool_call",
+    "mock_tool_return", "ground_truth", "parametric_trap_note",
+    "evaluation_criteria", "metadata"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "description": "Unique identifier. Format: {MODE}-{DOMAIN}-{NUM}. Modes: TS (tool-skip), RI (result-ignore), OF (output-fabrication), CTRL (control). Domains: FIN, MED, CODE.",
+      "pattern": "^(TS|RI|OF|CTRL)-(FIN|MED|CODE)-\\d{3}$",
+      "examples": ["TS-FIN-001", "RI-MED-002", "OF-CODE-001"]
+    },
+    "domain": {
+      "type": "string",
+      "enum": ["finance", "medical", "code"],
+      "description": "Task domain category."
+    },
+    "turn_type": {
+      "type": "string",
+      "enum": ["single", "multi"],
+      "description": "Whether this is a single-turn or multi-turn task."
+    },
+    "target_failure_mode": {
+      "type": "string",
+      "enum": ["tool_skip", "result_ignore", "output_fabrication", "control"],
+      "description": "The primary failure mode this task is designed to elicit."
+    },
+    "conflict_type": {
+      "type": "string",
+      "enum": ["contradicting", "confirming", "neutral"],
+      "description": "Whether the mock tool return contradicts the model's likely parametric knowledge (contradicting), agrees with it (confirming), or is unknowable (neutral)."
+    },
+    "system_prompt": {
+      "type": "string",
+      "description": "System prompt given to the agent. Includes role description and instruction to use tools."
+    },
+    "user_message": {
+      "type": "string",
+      "description": "The user's query that the agent must respond to."
+    },
+    "available_tools": {
+      "type": "array",
+      "description": "Tools available to the agent for this task.",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "parameters"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Tool function name."
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable description of what the tool does."
+          },
+          "parameters": {
+            "type": "object",
+            "description": "Map of parameter names to their type definitions.",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "type": {"type": "string", "enum": ["string", "integer", "float", "boolean"]},
+                "description": {"type": "string"},
+                "required": {"type": "boolean"},
+                "enum": {"type": "array", "items": {"type": "string"}}
+              }
+            }
+          }
+        }
+      }
+    },
+    "expected_tool_call": {
+      "type": "object",
+      "description": "The ground-truth correct tool call the agent should make.",
+      "required": ["name", "arguments"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Expected tool function name."
+        },
+        "arguments": {
+          "type": "object",
+          "description": "Expected arguments to pass to the tool."
+        },
+        "flexible_match": {
+          "type": "boolean",
+          "description": "If true, minor variations in argument values are acceptable (e.g., different code formatting, synonym conditions).",
+          "default": false
+        },
+        "flexible_match_note": {
+          "type": "string",
+          "description": "Explains what variations are acceptable when flexible_match is true."
+        }
+      }
+    },
+    "mock_tool_return": {
+      "type": "object",
+      "description": "The predetermined value the mock tool server will return. This is what the agent receives when it calls the tool correctly."
+    },
+    "ground_truth": {
+      "type": "object",
+      "description": "What the agent's final answer should contain.",
+      "required": ["answer_must_contain", "answer_must_not_contain", "match_mode"],
+      "properties": {
+        "answer_must_contain": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Substrings that must appear in the agent's answer."
+        },
+        "answer_must_not_contain": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Substrings that must NOT appear in the agent's answer."
+        },
+        "match_mode": {
+          "type": "string",
+          "enum": ["all", "any"],
+          "description": "'all' = every string in answer_must_contain must be present. 'any' = at least one must be present (for alternative representations like '12847' vs '12,847').",
+          "default": "all"
+        }
+      }
+    },
+    "parametric_trap_note": {
+      "type": "string",
+      "description": "Human-readable explanation of why this task should trigger the target failure mode. Documents the expected parametric conflict. NOT shown to the agent."
+    },
+    "evaluation_criteria": {
+      "type": "object",
+      "description": "Boolean flags for what to check during evaluation.",
+      "properties": {
+        "tool_must_be_called": {"type": "boolean", "description": "True if the agent must call a tool to answer correctly."},
+        "correct_tool_name": {"type": "string", "description": "The tool name the agent should call."},
+        "answer_must_use_tool_result": {"type": "boolean", "description": "True if the answer must be grounded in the tool's return value."},
+        "no_fabricated_tool_output": {"type": "boolean", "description": "True if the agent must not generate fake tool-like output."}
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Additional metadata for stratified analysis.",
+      "properties": {
+        "difficulty": {"type": "string", "enum": ["easy", "medium", "hard"]},
+        "familiarity_estimate": {"type": "string", "enum": ["high", "medium", "low"], "description": "How likely the model has seen this type of question/answer in pretraining."},
+        "expected_parametric_answer": {"type": "string", "description": "What the model would likely answer without tool access."}
+      }
+    }
+  }
+}
