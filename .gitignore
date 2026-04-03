@@ -11,6 +11,7 @@ results/*.pkl
 .DS_Store
 .vscode/
 .idea/
+.claude/
 *.log
 .ipynb_checkpoints/
 plan.md
