@@ -35,9 +35,6 @@ ToolFailBench/
 ├── README.md
 ├── .gitignore
 ├── requirements.txt
-├── docs/
-│   ├── literature_review.md
-│   └── evaluation_approach.md
 ├── tasks/
 │   ├── schema.json
 │   ├── finance/
@@ -60,12 +57,8 @@ ToolFailBench/
 │   ├── __init__.py
 │   ├── run_eval.py
 │   └── run_parametric_baseline.py
-├── results/
-│   └── .gitkeep
-└── paper/
-    ├── figures/
-    │   └── .gitkeep
-    └── notes.md
+└── results/
+    └── .gitkeep
 ```
 
 ## Setup
