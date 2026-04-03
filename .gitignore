@@ -12,6 +12,8 @@ results/*.pkl
 .vscode/
 .idea/
 .claude/
+paper/
+docs/
 *.log
 .ipynb_checkpoints/
 plan.md
