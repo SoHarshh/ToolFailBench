@@ -1,0 +1,19 @@
+# Default experiment configuration for ToolFailBench
+# Override individual fields via --config or by passing --model/--tier flags
+
+inference:
+  temperature: 0.0          # Greedy decoding for deterministic results
+  max_tokens: 1024          # Max tokens in model response
+  seed: 42                  # Reproducibility seed (where supported)
+  tool_choice: "auto"       # "auto" lets model decide; "required" forces a call
+
+wandb:
+  project: "toolfailbench"
+  entity: null              # Defaults to WANDB_ENTITY env var if set
+  log_predictions: true     # Log per-task predictions to wandb Table
+  log_metrics: true         # Log aggregate TSR/RIR/OFR/CTUR metrics
+
+vllm:
+  base_url: null            # Overrides VLLM_BASE_URL env var if set
+  tensor_parallel_size: 1   # Number of GPUs for tensor parallelism
+  gpu_memory_utilization: 0.9

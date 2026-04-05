@@ -55,7 +55,19 @@ def get_models_for_tier(tier: int, registry: list[dict]) -> list[dict]:
 
 def load_config(path: Path = CONFIG_PATH) -> dict:
     with open(path) as f:
-        return yaml.safe_load(f)
+        config = yaml.safe_load(f)
+    if not isinstance(config, dict):
+        raise ValueError(f"Config at {path} is empty or invalid — expected a YAML mapping.")
+    if "inference" not in config:
+        raise ValueError(f"Config at {path} is missing required 'inference' section.")
+    required_inference_keys = ["temperature", "max_tokens", "seed", "tool_choice"]
+    missing = [k for k in required_inference_keys if k not in config["inference"]]
+    if missing:
+        raise ValueError(f"Config 'inference' section is missing keys: {missing}")
+    null_keys = [k for k in required_inference_keys if config["inference"][k] is None]
+    if null_keys:
+        raise ValueError(f"Config 'inference' keys must not be null: {null_keys}")
+    return config
 
 
 # ---------------------------------------------------------------------------
@@ -144,10 +156,10 @@ def run_single_task(task: dict, model_cfg: dict, config: dict) -> dict:
             model=litellm_model,
             messages=messages,
             tools=tools,
-            tool_choice=inf.get("tool_choice", "auto"),
-            temperature=inf.get("temperature", 0.0),
-            max_tokens=inf.get("max_tokens", 1024),
-            seed=inf.get("seed", 42),
+            tool_choice=inf["tool_choice"],
+            temperature=inf["temperature"],
+            max_tokens=inf["max_tokens"],
+            seed=inf["seed"],
             **extra_kwargs,
         )
 
@@ -179,8 +191,9 @@ def run_single_task(task: dict, model_cfg: dict, config: dict) -> dict:
                 model=litellm_model,
                 messages=tool_messages,
                 tools=tools,
-                temperature=inf.get("temperature", 0.0),
-                max_tokens=inf.get("max_tokens", 1024),
+                temperature=inf["temperature"],
+                max_tokens=inf["max_tokens"],
+                seed=inf["seed"],
                 **extra_kwargs,
             )
             agent_answer = follow_up.choices[0].message.content or ""
