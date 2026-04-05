@@ -64,22 +64,31 @@ ToolFailBench/
 ## Setup
 
 ```bash
+cp .env.example .env   # fill in your API keys
 uv pip install -r requirements.txt
 ```
 
 ## Usage
 
 ```bash
-# Run evaluation on a model
-python runners/run_eval.py --model <model_name> --domains finance medical code
+# Run a single model by registry id
+python runners/run_eval.py --model qwen2.5-7b --domains finance medical code
+
+# Run all models in a tier
+python runners/run_eval.py --tier 1
+
+# Run multiple tiers
+python runners/run_eval.py --tier 1 2 3 4
 
 # Collect parametric baselines (no tools)
-python runners/run_parametric_baseline.py --model <model_name>
+python runners/run_parametric_baseline.py --model qwen2.5-7b
 ```
+
+See `models/README.md` for the full model registry and how to add new models.
 
 ## Current Status
 
-15 seed tasks across 3 domains (5 each). Distribution: 6 Tool-Skip, 4 Result-Ignore, 5 Output-Fabrication.
+30 tasks across 3 domains (10 each). Distribution: 6 Tool-Skip, 4 Result-Ignore, 5 Output-Fabrication, 15 Control (paired no-tool-needed tasks).
 
 ## References
 
