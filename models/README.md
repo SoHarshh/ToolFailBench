@@ -1,6 +1,6 @@
 # Model Registry
 
-`registry.json` is the single source of truth for all models used in ToolFailBench experiments.
+`models/configs/{family}/*.yaml` — one YAML file per model, organised by family. Loaded by `models/registry.py`.
 
 ## Schema
 
@@ -51,19 +51,17 @@ Set `VLLM_BASE_URL=http://localhost:8000/v1` in your `.env`.
 
 ## Adding a New Model
 
-Add one JSON object to `registry.json`. That's it — no other files change.
+Drop a YAML file in `models/configs/{family}/your-model-id.yaml`. That's it — no other files change.
 
-```json
-{
-  "id": "your-short-id",
-  "hf_model_id": "org/model-name-on-hf",
-  "family": "family-name",
-  "size": "13B",
-  "tier": 1,
-  "category": "base",
-  "inference_backend": "vllm",
-  "recommended_gpu": "1xA10G"
-}
+```yaml
+id: your-model-id
+hf_model_id: org/model-name-on-hf
+family: family-name
+size: 13B
+tier: 1
+category: base
+inference_backend: vllm
+recommended_gpu: 1xA10G
 ```
 
 ## Running Models

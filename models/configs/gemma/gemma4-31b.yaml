@@ -1,0 +1,10 @@
+id: gemma4-31b
+hf_model_id: google/gemma-4-31B
+family: gemma
+size: 31B
+tier: 1
+category: base
+inference_backend: vllm
+recommended_gpu: 1xA100-40GB
+# Gated model — HF access request required
+# Key pair: gemma4-31b (dense) vs gemma4-27b-a4b (MoE+thinking), same family

@@ -1,0 +1,9 @@
+id: qwen3.5-32b
+hf_model_id: Qwen/Qwen3.5-32B
+family: qwen
+size: 32B
+tier: 3
+category: base
+inference_backend: vllm
+recommended_gpu: 1xA100-40GB
+# Tier 3 — used in thinking mode (no no_think flag), paired against qwq-32b

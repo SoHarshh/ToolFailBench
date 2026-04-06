@@ -1,0 +1,9 @@
+id: kimi-k2
+hf_model_id: moonshotai/Kimi-K2
+family: moonshot
+size: 1T-MoE-32B-active
+tier: 5
+category: experimental
+inference_backend: vllm
+recommended_gpu: 2xA100-80GB
+# Experimental — may require custom vLLM build

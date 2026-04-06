@@ -1,0 +1,10 @@
+id: gemma4-27b-a4b
+hf_model_id: google/gemma-4-27B-A4B
+family: gemma
+size: 25.2B-MoE-3.8B-active
+tier: 3
+category: reasoning
+inference_backend: vllm
+recommended_gpu: 1xA10G
+# Gated model — HF access request required
+# MoE with thinking mode — key pair with gemma4-31b (dense, non-thinking)

@@ -1,0 +1,9 @@
+id: llama3.1-70b
+hf_model_id: meta-llama/Llama-3.1-70B-Instruct
+family: llama
+size: 70B
+tier: 2
+category: base
+inference_backend: vllm
+recommended_gpu: 2xA100-80GB
+# Gated model — HF access request required

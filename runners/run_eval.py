@@ -3,13 +3,14 @@ Main evaluation runner for ToolFailBench.
 Loads tasks, runs models from the registry, logs to Weights & Biases.
 
 Usage:
-  python runners/run_eval.py --model qwen2.5-7b --domains finance medical code
+  python runners/run_eval.py --model qwen3.5-7b --domains finance medical code
   python runners/run_eval.py --tier 1 --domains finance medical code
   python runners/run_eval.py --tier 1 2 3 4
 """
 import argparse
 import json
 import os
+import sys
 import yaml
 from pathlib import Path
 from datetime import datetime
@@ -20,33 +21,16 @@ from evaluation.detect import classify_failure_mode
 from evaluation.metrics import compute_all_metrics
 from evaluation.report import generate_summary_table, save_results_json
 
+# Allow importing models/registry.py from project root
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from models.registry import load_registry, get_model_config, get_models_for_tier
+
 load_dotenv()
 
 ROOT = Path(__file__).parent.parent
 TASK_DIR = ROOT / "tasks"
-REGISTRY_PATH = ROOT / "models" / "registry.json"
 CONFIG_PATH = ROOT / "configs" / "default.yaml"
 DOMAINS = ["finance", "medical", "code"]
-
-
-# ---------------------------------------------------------------------------
-# Registry
-# ---------------------------------------------------------------------------
-
-def load_registry() -> list[dict]:
-    with open(REGISTRY_PATH) as f:
-        return json.load(f)
-
-
-def get_model_config(model_id: str, registry: list[dict]) -> dict:
-    for m in registry:
-        if m["id"] == model_id:
-            return m
-    raise ValueError(f"Model '{model_id}' not found in registry. Check models/registry.json.")
-
-
-def get_models_for_tier(tier: int, registry: list[dict]) -> list[dict]:
-    return [m for m in registry if m["tier"] == tier]
 
 
 # ---------------------------------------------------------------------------
@@ -334,15 +318,14 @@ def main():
     args = parser.parse_args()
 
     config = load_config(Path(args.config))
-    registry = load_registry()
 
     # Resolve which models to run
     if args.model:
-        models_to_run = [get_model_config(args.model, registry)]
+        models_to_run = [get_model_config(args.model)]
     else:
         models_to_run = []
         for tier in args.tier:
-            tier_models = get_models_for_tier(tier, registry)
+            tier_models = get_models_for_tier(tier)
             if not tier_models:
                 print(f"  Warning: no models found for tier {tier}")
             models_to_run.extend(tier_models)

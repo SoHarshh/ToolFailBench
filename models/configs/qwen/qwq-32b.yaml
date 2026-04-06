@@ -1,0 +1,10 @@
+id: qwq-32b
+hf_model_id: Qwen/QwQ-32B
+family: qwen
+size: 32B
+tier: 3
+category: reasoning
+inference_backend: vllm
+recommended_gpu: 1xA100-40GB
+# RL-heavy reasoning model — naturally thinks, no no_think flag
+# Key pair: qwq-32b vs qwen3.5-32b (same size, reasoning vs agent-optimized)

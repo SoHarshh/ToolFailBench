@@ -1,0 +1,9 @@
+id: qwen3.5-72b
+hf_model_id: Qwen/Qwen3.5-72B
+family: qwen
+size: 72B
+tier: 2
+category: base
+inference_backend: vllm
+recommended_gpu: 2xA100-80GB
+no_think: true
