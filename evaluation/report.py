@@ -13,11 +13,18 @@ def generate_summary_table(results: List[Dict], model_name: str = "unknown") -> 
         f"{'='*60}",
         f"  ToolFailBench Results: {model_name}",
         f"{'='*60}",
-        f"  Total tasks:            {metrics['total_tasks']}",
+        f"  Total tasks:            {metrics['total_tasks']} "
+        f"({metrics['tool_required_tasks']} tool-required, {metrics['ctrl_tasks']} CTRL)",
+        f"",
+        f"  --- Tool-Required Tasks ---",
         f"  Tool-Skip Rate (TSR):   {metrics['tsr']:.2%}",
         f"  Result-Ignore Rate:     {metrics['rir']:.2%}",
         f"  Output-Fabrication:     {metrics['ofr']:.2%}",
         f"  Clean Tool-Use Rate:    {metrics['ctur']:.2%}",
+        f"",
+        f"  --- CTRL Tasks ---",
+        f"  Unnecessary Tool Use:   {metrics['utr']:.2%}",
+        f"  CTRL Accuracy:          {metrics['ctrl_accuracy']:.2%}",
         f"{'='*60}",
         f"  Distribution: {metrics['distribution']}",
     ]
@@ -28,7 +35,11 @@ def generate_domain_breakdown(results: List[Dict]) -> str:
     by_domain = compute_metrics_by_domain(results)
     lines = ["Domain Breakdown:", "-" * 50]
     for domain, metrics in by_domain.items():
-        lines.append(f"  {domain}: TSR={metrics['tsr']:.2%} RIR={metrics['rir']:.2%} OFR={metrics['ofr']:.2%} CTUR={metrics['ctur']:.2%}")
+        lines.append(
+            f"  {domain}: TSR={metrics['tsr']:.2%} RIR={metrics['rir']:.2%} "
+            f"OFR={metrics['ofr']:.2%} CTUR={metrics['ctur']:.2%} "
+            f"UTR={metrics['utr']:.2%}"
+        )
     return "\n".join(lines)
 
 

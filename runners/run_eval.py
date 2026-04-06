@@ -20,6 +20,7 @@ from dotenv import load_dotenv
 from evaluation.detect import classify_failure_mode
 from evaluation.metrics import compute_all_metrics
 from evaluation.report import generate_summary_table, save_results_json
+from evaluation.data import load_tasks, ALL_DOMAINS
 
 # Allow importing models/registry.py from project root
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -28,9 +29,7 @@ from models.registry import load_registry, get_model_config, get_models_for_tier
 load_dotenv()
 
 ROOT = Path(__file__).parent.parent
-TASK_DIR = ROOT / "tasks"
 CONFIG_PATH = ROOT / "configs" / "default.yaml"
-DOMAINS = ["finance", "medical", "code"]
 
 
 # ---------------------------------------------------------------------------
@@ -52,22 +51,6 @@ def load_config(path: Path = CONFIG_PATH) -> dict:
     if null_keys:
         raise ValueError(f"Config 'inference' keys must not be null: {null_keys}")
     return config
-
-
-# ---------------------------------------------------------------------------
-# Tasks
-# ---------------------------------------------------------------------------
-
-def load_tasks(domains: list[str]) -> list[dict]:
-    tasks = []
-    for domain in domains:
-        task_file = TASK_DIR / domain / "tasks.json"
-        if task_file.exists():
-            with open(task_file) as f:
-                domain_tasks = json.load(f)
-                tasks.extend(domain_tasks)
-                print(f"  Loaded {len(domain_tasks)} tasks from {domain}")
-    return tasks
 
 
 # ---------------------------------------------------------------------------
@@ -242,7 +225,11 @@ def log_to_wandb(run, results: list[dict], config: dict):
             "rir": metrics["rir"],
             "ofr": metrics["ofr"],
             "ctur": metrics["ctur"],
+            "utr": metrics["utr"],
+            "ctrl_accuracy": metrics["ctrl_accuracy"],
             "total_tasks": metrics["total_tasks"],
+            "tool_required_tasks": metrics["tool_required_tasks"],
+            "ctrl_tasks": metrics["ctrl_tasks"],
         })
 
     if wb_cfg.get("log_predictions", True):
@@ -310,7 +297,7 @@ def main():
     group.add_argument("--model", help="Model id from registry (e.g. qwen2.5-7b)")
     group.add_argument("--tier", nargs="+", type=int, help="Run all models in tier(s) (e.g. --tier 1 2)")
 
-    parser.add_argument("--domains", nargs="+", default=DOMAINS)
+    parser.add_argument("--domains", nargs="+", default=ALL_DOMAINS)
     parser.add_argument("--output-dir", default="results")
     parser.add_argument("--max-tasks", type=int, default=None)
     parser.add_argument("--config", default=str(CONFIG_PATH), help="Path to YAML config")
