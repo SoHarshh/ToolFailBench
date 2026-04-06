@@ -18,6 +18,6 @@ docs/
 *.log
 .ipynb_checkpoints/
 plan.md
+CURSOR.md
 wandb/
 results/
-plan.md

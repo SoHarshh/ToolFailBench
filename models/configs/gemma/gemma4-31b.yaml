@@ -1,11 +1,12 @@
 id: gemma4-31b
-hf_model_id: google/gemma-4-31B
+hf_model_id: google/gemma-4-31B-IT
 family: gemma
 size: 31B
 tier: 1
-category: base
+category: instruct
 inference_backend: vllm
-recommended_gpu: 1xA100-40GB
+recommended_gpu: 1xH100-80GB
 tool_call_parser: gemma4
-# Gated model — HF access request required
+# Not gated — no HF login required
+# Must use -IT (instruct) variant: base model has no chat template and cannot do tool calling
 # Key pair: gemma4-31b (dense) vs gemma4-27b-a4b (MoE+thinking), same family
