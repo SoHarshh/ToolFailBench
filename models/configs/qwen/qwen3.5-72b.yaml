@@ -7,3 +7,4 @@ category: base
 inference_backend: vllm
 recommended_gpu: 2xA100-80GB
 no_think: true
+tool_call_parser: hermes

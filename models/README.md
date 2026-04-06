@@ -21,7 +21,7 @@
 
 | Tier | Purpose | Models |
 |------|---------|--------|
-| 1 | Small cross-family comparison (7–31B) | qwen3.5-7b, llama3.1-8b, mistral-7b, gemma4-31b, glm4-9b |
+| 1 | Small cross-family comparison (7–31B) | qwen3.5-9b, llama3.1-8b, mistral-7b, gemma4-31b, glm4-9b |
 | 2 | Scaling comparison (70B+) | qwen3.5-72b, llama3.1-70b |
 | 3 | Reasoning vs agent-optimized | qwq-32b, qwen3.5-32b, deepseek-r1-7b, gemma4-27b-a4b |
 | 4 | Closed API baselines | gpt-4o, claude-sonnet-4 |

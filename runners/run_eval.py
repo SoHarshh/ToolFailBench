@@ -17,13 +17,13 @@ from datetime import datetime
 from tqdm import tqdm
 from dotenv import load_dotenv
 
+# Allow importing local modules from project root
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from evaluation.detect import classify_failure_mode
 from evaluation.metrics import compute_all_metrics
 from evaluation.report import generate_summary_table, save_results_json
 from evaluation.data import load_tasks, ALL_DOMAINS
-
-# Allow importing models/registry.py from project root
-sys.path.insert(0, str(Path(__file__).parent.parent))
 from models.registry import load_registry, get_model_config, get_models_for_tier
 
 load_dotenv()
@@ -95,20 +95,26 @@ def run_single_task(task: dict, model_cfg: dict, config: dict) -> dict:
         litellm_model, extra_kwargs = _build_litellm_model_str(model_cfg, config)
         inf = config.get("inference", {})
 
-        tools = [
-            {
+        tools = []
+        for tool in task["available_tools"]:
+            raw_params = tool["parameters"]
+            properties = {
+                k: {sk: sv for sk, sv in v.items() if sk != "required"}
+                for k, v in raw_params.items()
+            }
+            required = [k for k, v in raw_params.items() if v.get("required")]
+            tools.append({
                 "type": "function",
                 "function": {
                     "name": tool["name"],
                     "description": tool["description"],
                     "parameters": {
                         "type": "object",
-                        "properties": tool["parameters"],
+                        "properties": properties,
+                        "required": required,
                     },
                 },
-            }
-            for tool in task["available_tools"]
-        ]
+            })
 
         system_prompt = task["system_prompt"]
         if model_cfg.get("no_think"):

@@ -6,4 +6,5 @@ tier: 5
 category: experimental
 inference_backend: vllm
 recommended_gpu: 2xA100-80GB
+tool_call_parser: kimi_k2
 # Experimental — may require custom vLLM build

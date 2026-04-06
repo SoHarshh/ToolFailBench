@@ -1,9 +1,10 @@
-id: qwen3.5-7b
-hf_model_id: Qwen/Qwen3.5-7B
+id: qwen3.5-9b
+hf_model_id: Qwen/Qwen3.5-9B
 family: qwen
-size: 7B
+size: 9B
 tier: 1
 category: base
 inference_backend: vllm
 recommended_gpu: 1xA10G
 no_think: true
+tool_call_parser: hermes

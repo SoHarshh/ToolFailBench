@@ -6,5 +6,6 @@ tier: 3
 category: reasoning
 inference_backend: vllm
 recommended_gpu: 1xA10G
+tool_call_parser: gemma4
 # Gated model — HF access request required
 # MoE with thinking mode — key pair with gemma4-31b (dense, non-thinking)

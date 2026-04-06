@@ -6,4 +6,5 @@ tier: 3
 category: base
 inference_backend: vllm
 recommended_gpu: 1xA100-40GB
+tool_call_parser: hermes
 # Tier 3 — used in thinking mode (no no_think flag), paired against qwq-32b

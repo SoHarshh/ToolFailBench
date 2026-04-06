@@ -6,5 +6,6 @@ tier: 3
 category: reasoning
 inference_backend: vllm
 recommended_gpu: 1xA100-40GB
+tool_call_parser: hermes
 # RL-heavy reasoning model — naturally thinks, no no_think flag
 # Key pair: qwq-32b vs qwen3.5-32b (same size, reasoning vs agent-optimized)

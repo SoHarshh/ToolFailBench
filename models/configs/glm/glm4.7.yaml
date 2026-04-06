@@ -1,0 +1,11 @@
+id: glm4.7
+hf_model_id: zai-org/GLM-4.7
+family: glm
+size: 358B-MoE-32B-active
+tier: 2
+category: base
+inference_backend: vllm
+recommended_gpu: 2xA100-80GB
+tool_call_parser: glm47
+# Highest open-source tau2-bench score (87.4%). Native tool calling support.
+# Scaling pair: glm4.7 (32B active) vs glm4.7-flash (3B active)

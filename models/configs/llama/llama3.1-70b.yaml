@@ -6,4 +6,5 @@ tier: 2
 category: base
 inference_backend: vllm
 recommended_gpu: 2xA100-80GB
+tool_call_parser: llama3_json
 # Gated model — HF access request required

@@ -6,3 +6,4 @@ tier: 1
 category: base
 inference_backend: vllm
 recommended_gpu: 1xA10G
+tool_call_parser: mistral
