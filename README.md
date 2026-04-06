@@ -15,6 +15,9 @@ Agent calls the tool correctly but generates output inconsistent with the return
 ### Output-Fabrication (OF)
 Agent calls the tool but fabricates a plausible-looking response instead of using the actual return value.
 
+### Control (CTRL)
+Paired tasks where no tool call is needed. Tests whether the model correctly avoids unnecessary tool use.
+
 ## Domains
 
 - **Finance:** Stock prices, exchange rates, cryptocurrency prices, market capitalization, bank transactions
@@ -34,29 +37,39 @@ Agent calls the tool but fabricates a plausible-looking response instead of usin
 ToolFailBench/
 ├── README.md
 ├── .gitignore
+├── .env.example
 ├── requirements.txt
+├── pyproject.toml
+├── configs/
+│   └── default.yaml          # inference + W&B + vLLM settings
+├── models/
+│   ├── registry.py            # loads all model configs
+│   ├── README.md
+│   └── configs/
+│       ├── qwen/              # qwen3.5-7b, qwen3.5-32b, qwen3.5-72b, qwq-32b
+│       ├── llama/             # llama3.1-8b, llama3.1-70b
+│       ├── mistral/           # mistral-7b
+│       ├── gemma/             # gemma4-31b, gemma4-27b-a4b
+│       ├── glm/               # glm4-9b
+│       ├── deepseek/          # deepseek-r1-7b
+│       ├── moonshot/          # kimi-k2
+│       ├── openai/            # gpt-4o
+│       └── anthropic/         # claude-sonnet-4
 ├── tasks/
 │   ├── schema.json
-│   ├── finance/
-│   │   └── tasks.json
-│   ├── medical/
-│   │   └── tasks.json
-│   ├── code/
-│   │   └── tasks.json
-│   └── control/
-│       └── tasks.json
+│   ├── finance/tasks.json     # 10 tasks (2 TS, 2 RI, 1 OF, 5 CTRL)
+│   ├── medical/tasks.json     # 10 tasks (2 TS, 1 RI, 2 OF, 5 CTRL)
+│   └── code/tasks.json        # 10 tasks (2 TS, 1 RI, 2 OF, 5 CTRL)
 ├── tools/
-│   ├── tool_definitions.json
-│   └── mock_server.py
+│   └── mock_server.py         # FastAPI mock tool server
 ├── evaluation/
-│   ├── __init__.py
-│   ├── detect.py
-│   ├── metrics.py
-│   └── report.py
+│   ├── data.py                # shared task loader
+│   ├── detect.py              # failure mode classification
+│   ├── metrics.py             # TSR, RIR, OFR, CTUR, UTR, CTRL accuracy
+│   └── report.py              # summary tables, JSON export
 ├── runners/
-│   ├── __init__.py
-│   ├── run_eval.py
-│   └── run_parametric_baseline.py
+│   ├── run_eval.py            # main eval runner (with tools)
+│   └── run_parametric_baseline.py  # baseline runner (no tools)
 └── results/
     └── .gitkeep
 ```
@@ -72,7 +85,7 @@ uv pip install -r requirements.txt
 
 ```bash
 # Run a single model by registry id
-python runners/run_eval.py --model qwen2.5-7b --domains finance medical code
+python runners/run_eval.py --model qwen3.5-7b
 
 # Run all models in a tier
 python runners/run_eval.py --tier 1
@@ -81,14 +94,26 @@ python runners/run_eval.py --tier 1
 python runners/run_eval.py --tier 1 2 3 4
 
 # Collect parametric baselines (no tools)
-python runners/run_parametric_baseline.py --model qwen2.5-7b
+python runners/run_parametric_baseline.py --model qwen3.5-7b
+python runners/run_parametric_baseline.py --tier 1
 ```
 
 See `models/README.md` for the full model registry and how to add new models.
 
+## Metrics
+
+| Metric | Applies to | Definition |
+|--------|-----------|------------|
+| TSR | Tool-required tasks | Fraction where agent skipped the tool |
+| RIR | Tool-required tasks | Fraction where tool was called but result ignored |
+| OFR | Tool-required tasks | Fraction where tool was called but output fabricated |
+| CTUR | Tool-required tasks | Fraction fully correct |
+| UTR | CTRL tasks | Fraction where agent called a tool unnecessarily |
+| CTRL Acc | CTRL tasks | Fraction answered correctly without tool use |
+
 ## Current Status
 
-30 tasks across 3 domains (10 each). Distribution: 6 Tool-Skip, 4 Result-Ignore, 5 Output-Fabrication, 15 Control (paired no-tool-needed tasks).
+30 tasks across 3 domains (10 each). Distribution: 6 TS, 4 RI, 5 OF, 15 CTRL. 14 models across 5 tiers.
 
 ## References
 
