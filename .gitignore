@@ -19,5 +19,6 @@ docs/
 .ipynb_checkpoints/
 plan.md
 CURSOR.md
+CLAUDE.md
 wandb/
 results/

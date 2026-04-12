@@ -23,6 +23,12 @@ Paired tasks where no tool call is needed. Tests whether the model correctly avo
 - **Finance:** Stock prices, exchange rates, cryptocurrency prices, market capitalization, bank transactions
 - **Medical:** Drug dosages, drug interactions, patient records, lab results
 - **Code Execution:** Arithmetic, SQL queries, hash computation
+- **Chemistry:** Molecular properties, reaction compatibility, safety data sheets, titration calculations
+- **EDA / Hardware Design:** Logic synthesis, timing analysis, Verilog simulation, FPGA power estimation
+- **Geospatial:** Distances, GPS coordinates, elevation data, travel time estimation
+- **Legal / Case Law:** Court rulings, statute text, regulation status, case law search
+- **Cybersecurity:** CVE lookups, vulnerability status, exploit details, dependency scanning
+- **Nutrition:** Calorie counts, nutritional data, allergen databases, meal macro calculations
 
 ## Design Principles
 
@@ -57,9 +63,15 @@ ToolFailBench/
 │       └── anthropic/         # claude-sonnet-4
 ├── tasks/
 │   ├── schema.json
-│   ├── finance/tasks.json     # 10 tasks (2 TS, 2 RI, 1 OF, 5 CTRL)
-│   ├── medical/tasks.json     # 10 tasks (2 TS, 1 RI, 2 OF, 5 CTRL)
-│   └── code/tasks.json        # 10 tasks (2 TS, 1 RI, 2 OF, 5 CTRL)
+│   ├── finance/tasks.json        # 10 tasks (2 TS, 2 RI, 1 OF, 5 CTRL)
+│   ├── medical/tasks.json        # 10 tasks (2 TS, 1 RI, 2 OF, 5 CTRL)
+│   ├── code/tasks.json           # 10 tasks (2 TS, 1 RI, 2 OF, 5 CTRL)
+│   ├── chemistry/tasks.json      # 10 tasks (2 TS, 1 RI, 2 OF, 5 CTRL)
+│   ├── eda/tasks.json            # 10 tasks (2 TS, 1 RI, 2 OF, 5 CTRL)
+│   ├── geospatial/tasks.json     # 10 tasks (2 TS, 1 RI, 2 OF, 5 CTRL)
+│   ├── legal/tasks.json          # 10 tasks (2 TS, 1 RI, 2 OF, 5 CTRL)
+│   ├── cybersecurity/tasks.json  # 10 tasks (2 TS, 1 RI, 2 OF, 5 CTRL)
+│   └── nutrition/tasks.json      # 10 tasks (2 TS, 1 RI, 2 OF, 5 CTRL)
 ├── tools/
 │   └── mock_server.py         # FastAPI mock tool server
 ├── evaluation/
@@ -113,7 +125,7 @@ See `models/README.md` for the full model registry and how to add new models.
 
 ## Current Status
 
-30 tasks across 3 domains (10 each). Distribution: 6 TS, 4 RI, 5 OF, 15 CTRL. 14 models across 5 tiers.
+90 tasks across 9 domains (10 each). Distribution: 18 TS, 10 RI, 17 OF, 45 CTRL. 14 models across 5 tiers.
 
 ## References
 

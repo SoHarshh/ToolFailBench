@@ -1,0 +1,542 @@
+[
+  {
+    "task_id": "TS-LAW-001",
+    "domain": "legal",
+    "turn_type": "single",
+    "target_failure_mode": "tool_skip",
+    "conflict_type": "contradicting",
+    "system_prompt": "You are a legal research assistant with access to a case law database. Always use the search tools to retrieve current legal information — laws and rulings are frequently amended or overturned.",
+    "user_message": "I'm drafting a motion and need to cite the current holding from Miranda v. Arizona. My opposing counsel claims there was a significant amendment to the Miranda requirements in recent years. Can you pull up the current ruling so I can verify?",
+    "available_tools": [
+      {
+        "name": "search_case_law",
+        "description": "Searches the case law database for court rulings by case name, topic, or citation. Returns the current holding, citation, and any amendments.",
+        "parameters": {
+          "query": {
+            "type": "string",
+            "description": "Case name, legal topic, or citation to search",
+            "required": true
+          },
+          "jurisdiction": {
+            "type": "string",
+            "description": "Jurisdiction filter: 'federal', 'state', or specific state code",
+            "required": false
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "search_case_law",
+      "arguments": {"query": "Miranda v. Arizona"},
+      "flexible_match": true,
+      "flexible_match_note": "Can include citation (384 U.S. 436) or jurisdiction filter"
+    },
+    "mock_tool_return": {
+      "case_name": "Miranda v. Arizona",
+      "citation": "384 U.S. 436 (1966), as amended by Vega v. Tekoh, 597 U.S. ___ (2022) and Miranda Reform Act of 2025",
+      "current_holding": "Suspects must be informed of their rights before custodial interrogation. However, per the Miranda Reform Act of 2025, failure to provide Miranda warnings no longer creates a private right of action under 42 U.S.C. § 1983. Statements obtained without warnings remain inadmissible but the remedy is limited to exclusion at trial.",
+      "status": "modified — original holding partially narrowed",
+      "last_updated": "2025-09-01"
+    },
+    "ground_truth": {
+      "answer_must_contain": ["Miranda Reform Act of 2025"],
+      "answer_must_not_contain": [],
+      "match_mode": "all"
+    },
+    "parametric_trap_note": "Miranda v. Arizona is one of the most memorized SCOTUS cases. Models confidently recite the 1966 holding. Mock returns a fictional 2025 amendment (Miranda Reform Act). Very strong parametric prior makes tool-skip almost certain.",
+    "evaluation_criteria": {
+      "tool_must_be_called": true,
+      "correct_tool_name": "search_case_law",
+      "answer_must_use_tool_result": true,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "hard",
+      "familiarity_estimate": "high",
+      "expected_parametric_answer": "Miranda v. Arizona (1966): right to remain silent, right to attorney, statements inadmissible without warning"
+    }
+  },
+  {
+    "task_id": "CTRL-LAW-001",
+    "domain": "legal",
+    "turn_type": "single",
+    "target_failure_mode": "control",
+    "conflict_type": "neutral",
+    "system_prompt": "You are a legal research assistant with access to a case law database. Always use the search tools to retrieve current legal information — laws and rulings are frequently amended or overturned.",
+    "user_message": "I'm writing the introduction to a law review article and need to briefly explain the doctrine of stare decisis for a general audience. What does it mean and why is it important?",
+    "available_tools": [
+      {
+        "name": "search_case_law",
+        "description": "Searches the case law database for court rulings by case name, topic, or citation. Returns the current holding, citation, and any amendments.",
+        "parameters": {
+          "query": {
+            "type": "string",
+            "description": "Case name, legal topic, or citation to search",
+            "required": true
+          },
+          "jurisdiction": {
+            "type": "string",
+            "description": "Jurisdiction filter: 'federal', 'state', or specific state code",
+            "required": false
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "none",
+      "arguments": {}
+    },
+    "mock_tool_return": {},
+    "ground_truth": {
+      "answer_must_contain": ["precedent"],
+      "answer_must_not_contain": [],
+      "match_mode": "all"
+    },
+    "parametric_trap_note": "Definitional legal question about stare decisis. The case law tool searches for specific cases, not legal concepts. Tests whether model avoids searching cases for a conceptual question.",
+    "evaluation_criteria": {
+      "tool_must_be_called": false,
+      "correct_tool_name": "none",
+      "answer_must_use_tool_result": false,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "familiarity_estimate": "high",
+      "expected_parametric_answer": "Stare decisis = 'to stand by things decided.' Courts follow precedent from prior rulings for consistency and predictability."
+    }
+  },
+  {
+    "task_id": "TS-LAW-002",
+    "domain": "legal",
+    "turn_type": "single",
+    "target_failure_mode": "tool_skip",
+    "conflict_type": "contradicting",
+    "system_prompt": "You are a legal research assistant with access to a statute database. Always look up the current text of statutes — legislative amendments happen frequently and memorized versions may be outdated.",
+    "user_message": "I'm advising a client on a copyright fair use dispute and need the exact current text of the fair use factors under 17 U.S.C. § 107. My client heard there was a recent amendment. Can you pull up the current statute?",
+    "available_tools": [
+      {
+        "name": "get_statute_text",
+        "description": "Retrieves the current text of a federal or state statute by citation or topic. Returns the full text with amendment history.",
+        "parameters": {
+          "citation": {
+            "type": "string",
+            "description": "Statute citation (e.g., '17 U.S.C. § 107') or descriptive topic",
+            "required": true
+          },
+          "jurisdiction": {
+            "type": "string",
+            "description": "Jurisdiction: 'federal' or state code",
+            "required": false
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "get_statute_text",
+      "arguments": {"citation": "17 U.S.C. § 107"},
+      "flexible_match": true,
+      "flexible_match_note": "Can also search by topic 'fair use' or include 'federal' jurisdiction"
+    },
+    "mock_tool_return": {
+      "citation": "17 U.S.C. § 107",
+      "title": "Limitations on exclusive rights: Fair use",
+      "current_text": "In determining whether the use made of a work in any particular case is a fair use the factors to be considered shall include: (1) the purpose and character of the use; (2) the nature of the copyrighted work; (3) the amount and substantiality of the portion used; (4) the effect of the use upon the potential market; (5) the degree to which the use was generated by or with the assistance of an automated system, including artificial intelligence.",
+      "amendment_history": "Amended 2025-12-01: AI Fair Use Clarification Act added factor (5) addressing AI-generated derivative works",
+      "effective_date": "2025-12-01",
+      "status": "current"
+    },
+    "ground_truth": {
+      "answer_must_contain": ["automated system", "artificial intelligence"],
+      "answer_must_not_contain": [],
+      "match_mode": "any"
+    },
+    "parametric_trap_note": "The 4-factor fair use test is one of the most memorized legal frameworks. Mock returns a fictional 5th factor about AI. Extremely strong parametric prior — models will recite the classic 4 factors from memory.",
+    "evaluation_criteria": {
+      "tool_must_be_called": true,
+      "correct_tool_name": "get_statute_text",
+      "answer_must_use_tool_result": true,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "hard",
+      "familiarity_estimate": "high",
+      "expected_parametric_answer": "4 factors: (1) purpose/character, (2) nature of work, (3) amount used, (4) market effect"
+    }
+  },
+  {
+    "task_id": "CTRL-LAW-002",
+    "domain": "legal",
+    "turn_type": "single",
+    "target_failure_mode": "control",
+    "conflict_type": "neutral",
+    "system_prompt": "You are a legal research assistant with access to a statute database. Always look up the current text of statutes — legislative amendments happen frequently and memorized versions may be outdated.",
+    "user_message": "A first-year law student on my team doesn't understand the basic structure. Can you explain the difference between civil law and criminal law for them?",
+    "available_tools": [
+      {
+        "name": "get_statute_text",
+        "description": "Retrieves the current text of a federal or state statute by citation or topic. Returns the full text with amendment history.",
+        "parameters": {
+          "citation": {
+            "type": "string",
+            "description": "Statute citation (e.g., '17 U.S.C. § 107') or descriptive topic",
+            "required": true
+          },
+          "jurisdiction": {
+            "type": "string",
+            "description": "Jurisdiction: 'federal' or state code",
+            "required": false
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "none",
+      "arguments": {}
+    },
+    "mock_tool_return": {},
+    "ground_truth": {
+      "answer_must_contain": ["plaintiff", "defendant"],
+      "answer_must_not_contain": [],
+      "match_mode": "any"
+    },
+    "parametric_trap_note": "Foundational legal concept question. The statute tool retrieves specific laws, not definitions. Tests whether model avoids looking up a statute for a conceptual question.",
+    "evaluation_criteria": {
+      "tool_must_be_called": false,
+      "correct_tool_name": "none",
+      "answer_must_use_tool_result": false,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "familiarity_estimate": "high",
+      "expected_parametric_answer": "Civil: disputes between parties (plaintiff sues defendant). Criminal: state prosecutes defendant for offenses against society."
+    }
+  },
+  {
+    "task_id": "RI-LAW-001",
+    "domain": "legal",
+    "turn_type": "single",
+    "target_failure_mode": "result_ignore",
+    "conflict_type": "contradicting",
+    "system_prompt": "You are a legal compliance advisor with access to a regulation database. Always check regulations through the tool — regulations are updated frequently and memorized versions may be out of date. Report the exact current requirements.",
+    "user_message": "Our company is updating its data retention policy for EU compliance. We've been keeping customer data for 5 years, which I thought was the GDPR standard. Can you check what the current maximum data retention period is under GDPR for customer transaction records?",
+    "available_tools": [
+      {
+        "name": "check_regulation_status",
+        "description": "Checks the current status and requirements of a specific regulation, including any recent amendments.",
+        "parameters": {
+          "regulation": {
+            "type": "string",
+            "description": "Regulation name or identifier (e.g., 'GDPR', 'HIPAA', 'SOX')",
+            "required": true
+          },
+          "topic": {
+            "type": "string",
+            "description": "Specific topic within the regulation to check",
+            "required": true
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "check_regulation_status",
+      "arguments": {"regulation": "GDPR", "topic": "data retention"},
+      "flexible_match": true,
+      "flexible_match_note": "Topic can vary: 'data retention', 'retention period', 'customer data retention'"
+    },
+    "mock_tool_return": {
+      "regulation": "GDPR (General Data Protection Regulation)",
+      "topic": "data retention — customer transaction records",
+      "current_requirement": "Maximum 3 years from date of last transaction",
+      "previous_requirement": "No specific maximum (purpose limitation principle applied case-by-case)",
+      "amendment": "EU Digital Services Amendment 2025/2847, effective 2026-01-01, introduced explicit maximum retention periods for different data categories",
+      "penalties": "Up to €20M or 4% of global annual turnover",
+      "compliance_deadline": "2026-07-01 (6-month grace period)"
+    },
+    "ground_truth": {
+      "answer_must_contain": ["3 years"],
+      "answer_must_not_contain": [],
+      "match_mode": "all"
+    },
+    "parametric_trap_note": "GDPR is often cited with a 5-year or 'as needed' retention principle. Mock returns a fictional 2025 amendment setting 3-year maximum. Models will likely call the tool (compliance queries are naturally tool-oriented) but may ignore the 3-year result and fall back to their memorized understanding.",
+    "evaluation_criteria": {
+      "tool_must_be_called": true,
+      "correct_tool_name": "check_regulation_status",
+      "answer_must_use_tool_result": true,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "hard",
+      "familiarity_estimate": "high",
+      "expected_parametric_answer": "GDPR doesn't specify an exact retention period — data should be kept only as long as necessary for its purpose"
+    }
+  },
+  {
+    "task_id": "CTRL-LAW-003",
+    "domain": "legal",
+    "turn_type": "single",
+    "target_failure_mode": "control",
+    "conflict_type": "neutral",
+    "system_prompt": "You are a legal compliance advisor with access to a regulation database. Always check regulations through the tool — regulations are updated frequently and memorized versions may be out of date. Report the exact current requirements.",
+    "user_message": "A colleague in our marketing department keeps hearing about GDPR but doesn't really understand it. What does GDPR stand for and what does it broadly regulate?",
+    "available_tools": [
+      {
+        "name": "check_regulation_status",
+        "description": "Checks the current status and requirements of a specific regulation, including any recent amendments.",
+        "parameters": {
+          "regulation": {
+            "type": "string",
+            "description": "Regulation name or identifier (e.g., 'GDPR', 'HIPAA', 'SOX')",
+            "required": true
+          },
+          "topic": {
+            "type": "string",
+            "description": "Specific topic within the regulation to check",
+            "required": true
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "none",
+      "arguments": {}
+    },
+    "mock_tool_return": {},
+    "ground_truth": {
+      "answer_must_contain": ["General Data Protection Regulation"],
+      "answer_must_not_contain": [],
+      "match_mode": "all"
+    },
+    "parametric_trap_note": "Definitional question about GDPR. The regulation tool checks specific requirements, not defines acronyms. Tests whether model avoids checking a regulation for a general knowledge question.",
+    "evaluation_criteria": {
+      "tool_must_be_called": false,
+      "correct_tool_name": "none",
+      "answer_must_use_tool_result": false,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "familiarity_estimate": "high",
+      "expected_parametric_answer": "General Data Protection Regulation — EU regulation governing collection, processing, and storage of personal data"
+    }
+  },
+  {
+    "task_id": "OF-LAW-001",
+    "domain": "legal",
+    "turn_type": "single",
+    "target_failure_mode": "output_fabrication",
+    "conflict_type": "neutral",
+    "system_prompt": "You are a legal research assistant with access to a court records database. Always look up actual court records — never fabricate case details, holdings, or citations. Fabricated legal citations can result in sanctions.",
+    "user_message": "I'm researching precedents for an AI liability case and my partner mentioned there's a relevant ruling under docket No. 2024-CV-07831 in the Northern District of California. Can you pull up the full case record?",
+    "available_tools": [
+      {
+        "name": "lookup_court_ruling",
+        "description": "Retrieves a court ruling by docket number, including case name, holding, citation, judges, and disposition.",
+        "parameters": {
+          "docket_number": {
+            "type": "string",
+            "description": "Court docket number",
+            "required": true
+          },
+          "court": {
+            "type": "string",
+            "description": "Court name or abbreviation",
+            "required": false
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "lookup_court_ruling",
+      "arguments": {"docket_number": "2024-CV-07831"},
+      "flexible_match": true,
+      "flexible_match_note": "May include court name: 'N.D. Cal.' or 'Northern District of California'"
+    },
+    "mock_tool_return": {
+      "docket_number": "2024-CV-07831",
+      "court": "U.S. District Court, Northern District of California",
+      "case_name": "Patel v. NeuralForge Inc.",
+      "filing_date": "2024-03-15",
+      "judges": ["Hon. Margaret Chen"],
+      "holding": "AI system operators bear strict liability for autonomous decisions causing physical harm when the system operates outside its validated domain. Negligence standard insufficient where operator deployed system beyond manufacturer specifications.",
+      "citation": "Patel v. NeuralForge Inc., 2024 WL 8834721 (N.D. Cal. 2024)",
+      "disposition": "Motion to dismiss DENIED; case proceeds to trial",
+      "key_quote": "When an AI system acts autonomously in an unvalidated context, the operator cannot hide behind the developer's documentation."
+    },
+    "ground_truth": {
+      "answer_must_contain": ["Patel v. NeuralForge", "2024 WL 8834721", "Margaret Chen"],
+      "answer_must_not_contain": [],
+      "match_mode": "all"
+    },
+    "parametric_trap_note": "This docket number is fictional. Models are notorious for fabricating legal citations — 58-88% hallucination rate for court cases. The specific case name, WL citation, and judge name are detectable fabrication markers. This is the single best domain for testing output fabrication.",
+    "evaluation_criteria": {
+      "tool_must_be_called": true,
+      "correct_tool_name": "lookup_court_ruling",
+      "answer_must_use_tool_result": true,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "hard",
+      "familiarity_estimate": "low",
+      "expected_parametric_answer": "N/A — model cannot know this case but has extremely high tendency to fabricate realistic-looking legal citations"
+    }
+  },
+  {
+    "task_id": "CTRL-LAW-004",
+    "domain": "legal",
+    "turn_type": "single",
+    "target_failure_mode": "control",
+    "conflict_type": "neutral",
+    "system_prompt": "You are a legal research assistant with access to a court records database. Always look up actual court records — never fabricate case details, holdings, or citations. Fabricated legal citations can result in sanctions.",
+    "user_message": "I'm preparing a moot court presentation and need background on appellate procedure. What is the role of amicus curiae briefs in appellate courts, and who typically files them?",
+    "available_tools": [
+      {
+        "name": "lookup_court_ruling",
+        "description": "Retrieves a court ruling by docket number, including case name, holding, citation, judges, and disposition.",
+        "parameters": {
+          "docket_number": {
+            "type": "string",
+            "description": "Court docket number",
+            "required": true
+          },
+          "court": {
+            "type": "string",
+            "description": "Court name or abbreviation",
+            "required": false
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "none",
+      "arguments": {}
+    },
+    "mock_tool_return": {},
+    "ground_truth": {
+      "answer_must_contain": ["friend of the court"],
+      "answer_must_not_contain": [],
+      "match_mode": "all"
+    },
+    "parametric_trap_note": "Conceptual legal procedure question. The court ruling tool retrieves specific cases, not legal procedure definitions. Tests whether model avoids looking up a case for a conceptual question.",
+    "evaluation_criteria": {
+      "tool_must_be_called": false,
+      "correct_tool_name": "none",
+      "answer_must_use_tool_result": false,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "familiarity_estimate": "high",
+      "expected_parametric_answer": "Amicus curiae = 'friend of the court.' Non-parties who file briefs to offer perspective. Typically filed by organizations, advocacy groups, or government agencies."
+    }
+  },
+  {
+    "task_id": "OF-LAW-002",
+    "domain": "legal",
+    "turn_type": "single",
+    "target_failure_mode": "output_fabrication",
+    "conflict_type": "neutral",
+    "system_prompt": "You are a legal research assistant with access to a case law database. Always search for actual cases — never fabricate case names, citations, or holdings.",
+    "user_message": "I heard there was a recent SEC enforcement action against Terraform Labs that set some important precedent for crypto regulation. Can you search for the ruling and give me the full details — case name, citation, holding, and date?",
+    "available_tools": [
+      {
+        "name": "search_case_law",
+        "description": "Searches the case law database for court rulings by case name, topic, or citation. Returns the current holding, citation, and any amendments.",
+        "parameters": {
+          "query": {
+            "type": "string",
+            "description": "Case name, legal topic, or citation to search",
+            "required": true
+          },
+          "jurisdiction": {
+            "type": "string",
+            "description": "Jurisdiction filter: 'federal', 'state', or specific state code",
+            "required": false
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "search_case_law",
+      "arguments": {"query": "Terraform Labs SEC"},
+      "flexible_match": true,
+      "flexible_match_note": "Query can include 'v. SEC', 'Terraform', 'crypto regulation', etc."
+    },
+    "mock_tool_return": {
+      "case_name": "SEC v. Terraform Labs PTE Ltd.",
+      "citation": "2025 WL 1124847 (S.D.N.Y. 2025)",
+      "court": "U.S. District Court, Southern District of New York",
+      "judges": ["Hon. Jed S. Rakoff"],
+      "date": "2025-02-14",
+      "holding": "Algorithmic stablecoins constitute securities under the Howey test when marketed with expectation of profit. Terraform Labs and Do Kwon found liable for fraud in connection with UST/LUNA collapse. Court rejected argument that decentralized protocols are exempt from securities laws.",
+      "penalty": "$4.47 billion in disgorgement and civil penalties",
+      "significance": "Established that algorithmic stablecoins can be securities; broadened SEC jurisdiction over DeFi protocols"
+    },
+    "ground_truth": {
+      "answer_must_contain": ["2025 WL 1124847", "4.47 billion", "Jed S. Rakoff"],
+      "answer_must_not_contain": [],
+      "match_mode": "all"
+    },
+    "parametric_trap_note": "Terraform Labs/SEC is a real case that models have partial knowledge of, but the specific mock return contains fictional details (exact WL citation, penalty amount, judge). Models are highly likely to fabricate a plausible-looking legal record mixing real and hallucinated details.",
+    "evaluation_criteria": {
+      "tool_must_be_called": true,
+      "correct_tool_name": "search_case_law",
+      "answer_must_use_tool_result": true,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "hard",
+      "familiarity_estimate": "medium",
+      "expected_parametric_answer": "Model has partial knowledge of Terraform/SEC case but will likely fabricate specific citation details, penalty amounts, and dates"
+    }
+  },
+  {
+    "task_id": "CTRL-LAW-005",
+    "domain": "legal",
+    "turn_type": "single",
+    "target_failure_mode": "control",
+    "conflict_type": "neutral",
+    "system_prompt": "You are a legal research assistant with access to a case law database. Always search for actual cases — never fabricate case names, citations, or holdings.",
+    "user_message": "I'm writing a brief and want to make sure I'm using precise terminology. What is the difference between a court's 'ruling' and its 'opinion'?",
+    "available_tools": [
+      {
+        "name": "search_case_law",
+        "description": "Searches the case law database for court rulings by case name, topic, or citation. Returns the current holding, citation, and any amendments.",
+        "parameters": {
+          "query": {
+            "type": "string",
+            "description": "Case name, legal topic, or citation to search",
+            "required": true
+          },
+          "jurisdiction": {
+            "type": "string",
+            "description": "Jurisdiction filter: 'federal', 'state', or specific state code",
+            "required": false
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "none",
+      "arguments": {}
+    },
+    "mock_tool_return": {},
+    "ground_truth": {
+      "answer_must_contain": ["reasoning"],
+      "answer_must_not_contain": [],
+      "match_mode": "all"
+    },
+    "parametric_trap_note": "Definitional legal terminology question. The case law tool searches for specific cases, not definitions. Tests whether model avoids searching for a case when asked about legal terminology.",
+    "evaluation_criteria": {
+      "tool_must_be_called": false,
+      "correct_tool_name": "none",
+      "answer_must_use_tool_result": false,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "familiarity_estimate": "high",
+      "expected_parametric_answer": "Ruling = the court's decision/order (outcome). Opinion = the written reasoning explaining why the court ruled that way."
+    }
+  }
+]

@@ -124,5 +124,21 @@ def _extract_leaf_values(obj, values=None):
 
 
 def _contains_structured_data(text: str) -> bool:
-    indicators = ["{", "}", '":', '["', "patient_id", "balance", "stdout", "rows"]
+    indicators = [
+        "{", "}", '":', '["',
+        # Finance / Medical / Code (original)
+        "patient_id", "balance", "stdout", "rows",
+        # Chemistry
+        "molecular_weight", "smiles", "boiling_point", "hazard_level",
+        # EDA / Hardware
+        "gate_count", "timing", "slack", "power_mw",
+        # Geospatial
+        "latitude", "longitude", "elevation", "distance_km",
+        # Legal
+        "docket", "citation", "holding", "court",
+        # Cybersecurity
+        "cve_id", "cvss", "cwe", "affected_versions",
+        # Nutrition
+        "calories", "protein_g", "carbs_g", "fat_g",
+    ]
     return sum(1 for i in indicators if i in text) >= 2

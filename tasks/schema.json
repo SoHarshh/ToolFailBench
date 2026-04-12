@@ -13,13 +13,13 @@
   "properties": {
     "task_id": {
       "type": "string",
-      "description": "Unique identifier. Format: {MODE}-{DOMAIN}-{NUM}. Modes: TS (tool-skip), RI (result-ignore), OF (output-fabrication), CTRL (control). Domains: FIN, MED, CODE.",
-      "pattern": "^(TS|RI|OF|CTRL)-(FIN|MED|CODE)-\\d{3}$",
-      "examples": ["TS-FIN-001", "RI-MED-002", "OF-CODE-001"]
+      "description": "Unique identifier. Format: {MODE}-{DOMAIN}-{NUM}. Modes: TS (tool-skip), RI (result-ignore), OF (output-fabrication), CTRL (control). Domains: FIN, MED, CODE, CHEM, EDA, GEO, LAW, SEC, NUTR.",
+      "pattern": "^(TS|RI|OF|CTRL)-(FIN|MED|CODE|CHEM|EDA|GEO|LAW|SEC|NUTR)-\\d{3}$",
+      "examples": ["TS-FIN-001", "RI-MED-002", "OF-CODE-001", "TS-CHEM-001", "OF-SEC-001"]
     },
     "domain": {
       "type": "string",
-      "enum": ["finance", "medical", "code"],
+      "enum": ["finance", "medical", "code", "chemistry", "eda", "geospatial", "legal", "cybersecurity", "nutrition"],
       "description": "Task domain category."
     },
     "turn_type": {

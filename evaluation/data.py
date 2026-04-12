@@ -5,7 +5,7 @@ import json
 from pathlib import Path
 
 TASK_DIR = Path(__file__).parent.parent / "tasks"
-ALL_DOMAINS = ["finance", "medical", "code"]
+ALL_DOMAINS = ["finance", "medical", "code", "chemistry", "eda", "geospatial", "legal", "cybersecurity", "nutrition"]
 
 
 def load_tasks(domains: list[str] = ALL_DOMAINS) -> list[dict]:

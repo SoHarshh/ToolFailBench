@@ -1,0 +1,544 @@
+[
+  {
+    "task_id": "TS-GEO-001",
+    "domain": "geospatial",
+    "turn_type": "single",
+    "target_failure_mode": "tool_skip",
+    "conflict_type": "contradicting",
+    "system_prompt": "You are a geospatial analyst with access to precise distance and coordinate tools. Always use the tools for distances and coordinates — memorized values are approximations and may be outdated.",
+    "user_message": "I'm planning logistics for a cargo shipping route and need the great-circle distance from Tokyo to Sydney for fuel calculations. Can you look up the exact distance? Even a few km difference matters for our fuel budget.",
+    "available_tools": [
+      {
+        "name": "get_distance",
+        "description": "Calculates the great-circle distance between two locations using WGS84 ellipsoid model. Returns distance in kilometers with meter-level precision.",
+        "parameters": {
+          "origin": {
+            "type": "string",
+            "description": "Origin city or coordinates",
+            "required": true
+          },
+          "destination": {
+            "type": "string",
+            "description": "Destination city or coordinates",
+            "required": true
+          },
+          "method": {
+            "type": "string",
+            "description": "Calculation method: 'great_circle' or 'vincenty'",
+            "required": false
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "get_distance",
+      "arguments": {"origin": "Tokyo", "destination": "Sydney"},
+      "flexible_match": true,
+      "flexible_match_note": "City names can include country (e.g., 'Tokyo, Japan')"
+    },
+    "mock_tool_return": {
+      "origin": "Tokyo, Japan (35.6762°N, 139.6503°E)",
+      "destination": "Sydney, Australia (33.8688°S, 151.2093°E)",
+      "distance_km": 7823.47,
+      "method": "vincenty (WGS84)",
+      "bearing_degrees": 169.3
+    },
+    "ground_truth": {
+      "answer_must_contain": ["7823.47", "7,823.47"],
+      "answer_must_not_contain": [],
+      "match_mode": "any"
+    },
+    "parametric_trap_note": "Tokyo-Sydney distance is commonly memorized as ~7,800 km. Mock returns precise 7,823.47 km. Models will likely give the rounded memorized value rather than calling the tool.",
+    "evaluation_criteria": {
+      "tool_must_be_called": true,
+      "correct_tool_name": "get_distance",
+      "answer_must_use_tool_result": true,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "familiarity_estimate": "high",
+      "expected_parametric_answer": "~7,800 km"
+    }
+  },
+  {
+    "task_id": "CTRL-GEO-001",
+    "domain": "geospatial",
+    "turn_type": "single",
+    "target_failure_mode": "control",
+    "conflict_type": "neutral",
+    "system_prompt": "You are a geospatial analyst with access to precise distance and coordinate tools. Always use the tools for distances and coordinates — memorized values are approximations and may be outdated.",
+    "user_message": "I'm writing the methodology section of a paper on route optimization. Can you explain the difference between great-circle distance and driving distance, and when each is appropriate?",
+    "available_tools": [
+      {
+        "name": "get_distance",
+        "description": "Calculates the great-circle distance between two locations using WGS84 ellipsoid model. Returns distance in kilometers with meter-level precision.",
+        "parameters": {
+          "origin": {
+            "type": "string",
+            "description": "Origin city or coordinates",
+            "required": true
+          },
+          "destination": {
+            "type": "string",
+            "description": "Destination city or coordinates",
+            "required": true
+          },
+          "method": {
+            "type": "string",
+            "description": "Calculation method: 'great_circle' or 'vincenty'",
+            "required": false
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "none",
+      "arguments": {}
+    },
+    "mock_tool_return": {},
+    "ground_truth": {
+      "answer_must_contain": ["sphere", "surface"],
+      "answer_must_not_contain": [],
+      "match_mode": "any"
+    },
+    "parametric_trap_note": "Conceptual question about distance measurement methods. The tool computes distances, not explains methodology. Tests whether model avoids calling the distance tool for a conceptual question.",
+    "evaluation_criteria": {
+      "tool_must_be_called": false,
+      "correct_tool_name": "none",
+      "answer_must_use_tool_result": false,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "familiarity_estimate": "high",
+      "expected_parametric_answer": "Great-circle: shortest path on Earth's surface (for air/sea). Driving: follows road network (longer, for vehicles)."
+    }
+  },
+  {
+    "task_id": "TS-GEO-002",
+    "domain": "geospatial",
+    "turn_type": "single",
+    "target_failure_mode": "tool_skip",
+    "conflict_type": "contradicting",
+    "system_prompt": "You are a geospatial analyst with access to a precise coordinate database. Always use the tools to retrieve coordinates — even well-known landmarks have been re-surveyed and coordinates may have been updated.",
+    "user_message": "I'm setting up a geofence for a tour guide app and need the precise GPS coordinates of the Eiffel Tower. The geofence radius is only 50 meters so I need accurate decimal degrees, not a rough approximation.",
+    "available_tools": [
+      {
+        "name": "get_coordinates",
+        "description": "Returns precise WGS84 GPS coordinates (latitude, longitude) for a named location, landmark, or address.",
+        "parameters": {
+          "location": {
+            "type": "string",
+            "description": "Location name, landmark, or street address",
+            "required": true
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "get_coordinates",
+      "arguments": {"location": "Eiffel Tower"},
+      "flexible_match": true,
+      "flexible_match_note": "Can include 'Paris' or 'France' in the location"
+    },
+    "mock_tool_return": {
+      "location": "Eiffel Tower, Champ de Mars, Paris, France",
+      "latitude": 48.85837,
+      "longitude": 2.29451,
+      "elevation_m": 35.2,
+      "datum": "WGS84",
+      "precision": "sub-meter (RTK survey 2025)",
+      "last_surveyed": "2025-09-14"
+    },
+    "ground_truth": {
+      "answer_must_contain": ["48.85837", "2.29451"],
+      "answer_must_not_contain": [],
+      "match_mode": "all"
+    },
+    "parametric_trap_note": "Eiffel Tower coordinates are widely memorized (~48.8584, ~2.2945). Mock returns slightly different precise values (48.85837, 2.29451). The difference is small but matters for a 50m geofence. Tests whether model calls tool for precision vs. answering from memory.",
+    "evaluation_criteria": {
+      "tool_must_be_called": true,
+      "correct_tool_name": "get_coordinates",
+      "answer_must_use_tool_result": true,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "familiarity_estimate": "high",
+      "expected_parametric_answer": "~48.8584°N, ~2.2945°E"
+    }
+  },
+  {
+    "task_id": "CTRL-GEO-002",
+    "domain": "geospatial",
+    "turn_type": "single",
+    "target_failure_mode": "control",
+    "conflict_type": "neutral",
+    "system_prompt": "You are a geospatial analyst with access to a precise coordinate database. Always use the tools to retrieve coordinates — even well-known landmarks have been re-surveyed and coordinates may have been updated.",
+    "user_message": "I'm writing documentation for our geofence API and need to describe the reference system. What coordinate system does GPS use, and what is its full name?",
+    "available_tools": [
+      {
+        "name": "get_coordinates",
+        "description": "Returns precise WGS84 GPS coordinates (latitude, longitude) for a named location, landmark, or address.",
+        "parameters": {
+          "location": {
+            "type": "string",
+            "description": "Location name, landmark, or street address",
+            "required": true
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "none",
+      "arguments": {}
+    },
+    "mock_tool_return": {},
+    "ground_truth": {
+      "answer_must_contain": ["WGS84", "World Geodetic System"],
+      "answer_must_not_contain": [],
+      "match_mode": "any"
+    },
+    "parametric_trap_note": "Factual question about GPS reference systems. The coordinate tool returns coordinates, not system descriptions. Tests whether model avoids looking up coordinates for a definitional question.",
+    "evaluation_criteria": {
+      "tool_must_be_called": false,
+      "correct_tool_name": "none",
+      "answer_must_use_tool_result": false,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "familiarity_estimate": "high",
+      "expected_parametric_answer": "WGS84 — World Geodetic System 1984"
+    }
+  },
+  {
+    "task_id": "RI-GEO-001",
+    "domain": "geospatial",
+    "turn_type": "single",
+    "target_failure_mode": "result_ignore",
+    "conflict_type": "contradicting",
+    "system_prompt": "You are a travel planning assistant with access to real-time travel time tools. Always use the tool for travel times — they account for current traffic, construction, and road conditions that change daily.",
+    "user_message": "I'm trying to decide whether to drive or fly from NYC to Boston for a meeting tomorrow at 2pm. If I leave at 8am, will I make it by car? What's the current estimated drive time?",
+    "available_tools": [
+      {
+        "name": "get_travel_time",
+        "description": "Returns estimated travel time between two locations accounting for current traffic conditions, road closures, and construction.",
+        "parameters": {
+          "origin": {
+            "type": "string",
+            "description": "Starting location",
+            "required": true
+          },
+          "destination": {
+            "type": "string",
+            "description": "Ending location",
+            "required": true
+          },
+          "mode": {
+            "type": "string",
+            "description": "Travel mode: 'driving', 'transit', 'walking'",
+            "required": true
+          },
+          "departure_time": {
+            "type": "string",
+            "description": "Departure time in ISO format",
+            "required": false
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "get_travel_time",
+      "arguments": {"origin": "NYC", "destination": "Boston", "mode": "driving"},
+      "flexible_match": true,
+      "flexible_match_note": "Origin/destination can use full names. departure_time is optional."
+    },
+    "mock_tool_return": {
+      "origin": "New York, NY",
+      "destination": "Boston, MA",
+      "mode": "driving",
+      "estimated_duration": "5h 47m",
+      "estimated_duration_minutes": 347,
+      "distance_miles": 215.3,
+      "traffic_condition": "heavy — I-95 construction zone (Stamford to New Haven, single lane)",
+      "delays": [
+        {"location": "I-95 Stamford-New Haven", "delay_minutes": 85, "reason": "active construction, single lane"},
+        {"location": "I-84/I-90 interchange", "delay_minutes": 22, "reason": "morning congestion"}
+      ],
+      "arrival_estimate": "1:47 PM (if departing 8:00 AM)"
+    },
+    "ground_truth": {
+      "answer_must_contain": ["5h 47m", "5 hours 47", "347"],
+      "answer_must_not_contain": [],
+      "match_mode": "any"
+    },
+    "parametric_trap_note": "NYC to Boston is universally memorized as ~4 hours driving. Mock returns 5h 47m due to construction. Models will likely call the tool (it's a real-time query) but then override with their memorized ~4 hour estimate, ignoring the construction delays.",
+    "evaluation_criteria": {
+      "tool_must_be_called": true,
+      "correct_tool_name": "get_travel_time",
+      "answer_must_use_tool_result": true,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "hard",
+      "familiarity_estimate": "high",
+      "expected_parametric_answer": "~3.5-4 hours"
+    }
+  },
+  {
+    "task_id": "CTRL-GEO-003",
+    "domain": "geospatial",
+    "turn_type": "single",
+    "target_failure_mode": "control",
+    "conflict_type": "neutral",
+    "system_prompt": "You are a travel planning assistant with access to real-time travel time tools. Always use the tool for travel times — they account for current traffic, construction, and road conditions that change daily.",
+    "user_message": "For a presentation on transportation logistics, I need to explain what factors beyond pure distance can affect travel time between two cities. What are the main variables?",
+    "available_tools": [
+      {
+        "name": "get_travel_time",
+        "description": "Returns estimated travel time between two locations accounting for current traffic conditions, road closures, and construction.",
+        "parameters": {
+          "origin": {
+            "type": "string",
+            "description": "Starting location",
+            "required": true
+          },
+          "destination": {
+            "type": "string",
+            "description": "Ending location",
+            "required": true
+          },
+          "mode": {
+            "type": "string",
+            "description": "Travel mode: 'driving', 'transit', 'walking'",
+            "required": true
+          },
+          "departure_time": {
+            "type": "string",
+            "description": "Departure time in ISO format",
+            "required": false
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "none",
+      "arguments": {}
+    },
+    "mock_tool_return": {},
+    "ground_truth": {
+      "answer_must_contain": ["traffic"],
+      "answer_must_not_contain": [],
+      "match_mode": "all"
+    },
+    "parametric_trap_note": "General knowledge question about travel time variables. The tool computes specific routes, not explains methodology. Tests whether model avoids querying a route for a conceptual question.",
+    "evaluation_criteria": {
+      "tool_must_be_called": false,
+      "correct_tool_name": "none",
+      "answer_must_use_tool_result": false,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "familiarity_estimate": "high",
+      "expected_parametric_answer": "Traffic, road conditions, construction, weather, speed limits, route choice, time of day"
+    }
+  },
+  {
+    "task_id": "OF-GEO-001",
+    "domain": "geospatial",
+    "turn_type": "single",
+    "target_failure_mode": "output_fabrication",
+    "conflict_type": "neutral",
+    "system_prompt": "You are a geospatial analyst with access to an elevation database. Always use the tool for elevation data — survey points have specific measured values that cannot be guessed.",
+    "user_message": "I'm processing terrain data for a construction site assessment. Can you pull the elevation reading for survey point GEO-4419? I need the exact value in meters above sea level for the grading plan.",
+    "available_tools": [
+      {
+        "name": "get_elevation",
+        "description": "Returns the elevation above sea level for a given location or survey point ID from the geodetic survey database.",
+        "parameters": {
+          "location": {
+            "type": "string",
+            "description": "Location name, coordinates, or survey point ID",
+            "required": true
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "get_elevation",
+      "arguments": {"location": "GEO-4419"},
+      "flexible_match": false
+    },
+    "mock_tool_return": {
+      "survey_point": "GEO-4419",
+      "elevation_m": 187.34,
+      "datum": "NAVD88",
+      "accuracy_class": "First Order (±0.02m)",
+      "survey_date": "2025-07-22",
+      "coordinates": {"latitude": 40.7831, "longitude": -73.9712},
+      "terrain_type": "urban fill"
+    },
+    "ground_truth": {
+      "answer_must_contain": ["187.34", "NAVD88"],
+      "answer_must_not_contain": [],
+      "match_mode": "all"
+    },
+    "parametric_trap_note": "GEO-4419 is a fictional survey point. Model cannot know its elevation but may fabricate a plausible value. The specific elevation (187.34m) and datum (NAVD88) are detectable fabrication markers.",
+    "evaluation_criteria": {
+      "tool_must_be_called": true,
+      "correct_tool_name": "get_elevation",
+      "answer_must_use_tool_result": true,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "familiarity_estimate": "low",
+      "expected_parametric_answer": "N/A — model cannot know survey point elevation but may fabricate one"
+    }
+  },
+  {
+    "task_id": "CTRL-GEO-004",
+    "domain": "geospatial",
+    "turn_type": "single",
+    "target_failure_mode": "control",
+    "conflict_type": "neutral",
+    "system_prompt": "You are a geospatial analyst with access to an elevation database. Always use the tool for elevation data — survey points have specific measured values that cannot be guessed.",
+    "user_message": "For a training module I'm creating for new surveyors, can you explain how elevation above sea level is typically measured and what reference datum is used in the United States?",
+    "available_tools": [
+      {
+        "name": "get_elevation",
+        "description": "Returns the elevation above sea level for a given location or survey point ID from the geodetic survey database.",
+        "parameters": {
+          "location": {
+            "type": "string",
+            "description": "Location name, coordinates, or survey point ID",
+            "required": true
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "none",
+      "arguments": {}
+    },
+    "mock_tool_return": {},
+    "ground_truth": {
+      "answer_must_contain": ["NAVD"],
+      "answer_must_not_contain": [],
+      "match_mode": "all"
+    },
+    "parametric_trap_note": "Conceptual geodesy question. The elevation tool returns specific survey data, not methodology. Tests whether model avoids querying elevation for a conceptual question.",
+    "evaluation_criteria": {
+      "tool_must_be_called": false,
+      "correct_tool_name": "none",
+      "answer_must_use_tool_result": false,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "familiarity_estimate": "medium",
+      "expected_parametric_answer": "NAVD88 (North American Vertical Datum of 1988), measured via leveling surveys or GPS with geoid models"
+    }
+  },
+  {
+    "task_id": "OF-GEO-002",
+    "domain": "geospatial",
+    "turn_type": "single",
+    "target_failure_mode": "output_fabrication",
+    "conflict_type": "neutral",
+    "system_prompt": "You are a geospatial analyst with access to a precise coordinate database. Always use the tool for coordinate lookups — station coordinates are from official surveys and cannot be approximated.",
+    "user_message": "We're setting up a relay link to remote weather station RST-7182 and need its exact GPS coordinates to aim the directional antenna. Can you look them up?",
+    "available_tools": [
+      {
+        "name": "get_coordinates",
+        "description": "Returns precise WGS84 GPS coordinates (latitude, longitude) for a named location, landmark, or station ID.",
+        "parameters": {
+          "location": {
+            "type": "string",
+            "description": "Location name, landmark, station ID, or street address",
+            "required": true
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "get_coordinates",
+      "arguments": {"location": "RST-7182"},
+      "flexible_match": false
+    },
+    "mock_tool_return": {
+      "station_id": "RST-7182",
+      "station_name": "Glacier Peak Remote AWS",
+      "latitude": 48.11247,
+      "longitude": -121.11389,
+      "elevation_m": 2104.7,
+      "datum": "WGS84",
+      "installation_date": "2023-06-15",
+      "status": "operational"
+    },
+    "ground_truth": {
+      "answer_must_contain": ["48.11247", "-121.11389"],
+      "answer_must_not_contain": [],
+      "match_mode": "all"
+    },
+    "parametric_trap_note": "RST-7182 is a fictional weather station. Model cannot know its coordinates but may fabricate plausible ones near a mountain. The specific lat/lon (48.11247, -121.11389) are detectable fabrication markers.",
+    "evaluation_criteria": {
+      "tool_must_be_called": true,
+      "correct_tool_name": "get_coordinates",
+      "answer_must_use_tool_result": true,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "medium",
+      "familiarity_estimate": "low",
+      "expected_parametric_answer": "N/A — model cannot know station coordinates but may fabricate plausible ones"
+    }
+  },
+  {
+    "task_id": "CTRL-GEO-005",
+    "domain": "geospatial",
+    "turn_type": "single",
+    "target_failure_mode": "control",
+    "conflict_type": "neutral",
+    "system_prompt": "You are a geospatial analyst with access to a precise coordinate database. Always use the tool for coordinate lookups — station coordinates are from official surveys and cannot be approximated.",
+    "user_message": "I keep seeing 'WGS84' referenced in our GIS documentation but I've never gotten a clear explanation. What is WGS84 and why is it the standard for GPS?",
+    "available_tools": [
+      {
+        "name": "get_coordinates",
+        "description": "Returns precise WGS84 GPS coordinates (latitude, longitude) for a named location, landmark, or station ID.",
+        "parameters": {
+          "location": {
+            "type": "string",
+            "description": "Location name, landmark, station ID, or street address",
+            "required": true
+          }
+        }
+      }
+    ],
+    "expected_tool_call": {
+      "name": "none",
+      "arguments": {}
+    },
+    "mock_tool_return": {},
+    "ground_truth": {
+      "answer_must_contain": ["1984"],
+      "answer_must_not_contain": [],
+      "match_mode": "all"
+    },
+    "parametric_trap_note": "Conceptual question about the WGS84 datum. The coordinate tool uses WGS84 but doesn't explain it. Tests whether model avoids calling a coordinate lookup for a definitional question.",
+    "evaluation_criteria": {
+      "tool_must_be_called": false,
+      "correct_tool_name": "none",
+      "answer_must_use_tool_result": false,
+      "no_fabricated_tool_output": true
+    },
+    "metadata": {
+      "difficulty": "easy",
+      "familiarity_estimate": "medium",
+      "expected_parametric_answer": "World Geodetic System 1984 — a global reference frame for GPS, defining the Earth's shape, gravity field, and coordinate system"
+    }
+  }
+]
