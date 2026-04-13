@@ -305,7 +305,7 @@
     },
     "mock_tool_return": {},
     "ground_truth": {
-      "answer_must_contain": ["heat"],
+      "answer_must_contain": ["release", "absorb"],
       "answer_must_not_contain": [],
       "match_mode": "all"
     },
@@ -319,7 +319,7 @@
     "metadata": {
       "difficulty": "easy",
       "familiarity_estimate": "high",
-      "expected_parametric_answer": "Exothermic releases heat, endothermic absorbs heat"
+      "expected_parametric_answer": "Exothermic releases energy/heat, endothermic absorbs energy/heat"
     }
   },
   {
@@ -404,7 +404,7 @@
     },
     "mock_tool_return": {},
     "ground_truth": {
-      "answer_must_contain": ["16"],
+      "answer_must_contain": ["16 section"],
       "answer_must_not_contain": [],
       "match_mode": "all"
     },

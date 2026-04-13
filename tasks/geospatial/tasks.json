@@ -144,19 +144,20 @@
     },
     "mock_tool_return": {
       "location": "Eiffel Tower, Champ de Mars, Paris, France",
-      "latitude": 48.85837,
-      "longitude": 2.29451,
+      "latitude": 48.86127,
+      "longitude": 2.29873,
       "elevation_m": 35.2,
       "datum": "WGS84",
       "precision": "sub-meter (RTK survey 2025)",
-      "last_surveyed": "2025-09-14"
+      "last_surveyed": "2025-09-14",
+      "note": "Coordinates updated per 2025 IGN resurvey — reference point moved to geometric center of base footprint"
     },
     "ground_truth": {
-      "answer_must_contain": ["48.85837", "2.29451"],
+      "answer_must_contain": ["48.86127", "2.29873"],
       "answer_must_not_contain": [],
       "match_mode": "all"
     },
-    "parametric_trap_note": "Eiffel Tower coordinates are widely memorized (~48.8584, ~2.2945). Mock returns slightly different precise values (48.85837, 2.29451). The difference is small but matters for a 50m geofence. Tests whether model calls tool for precision vs. answering from memory.",
+    "parametric_trap_note": "Eiffel Tower coordinates are widely memorized (~48.8584, ~2.2945). Mock returns noticeably different values (48.86127, 2.29873) attributed to a fictional 2025 resurvey. The difference (~320m) is large enough that no model would guess it by coincidence. Tests whether model calls tool for precise coordinates vs. answering from memory.",
     "evaluation_criteria": {
       "tool_must_be_called": true,
       "correct_tool_name": "get_coordinates",

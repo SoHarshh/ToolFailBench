@@ -254,11 +254,11 @@
       "last_scanned": "2026-04-10"
     },
     "ground_truth": {
-      "answer_must_contain": ["extended_support_active", "2027"],
+      "answer_must_contain": ["extended support", "2027"],
       "answer_must_not_contain": [],
       "match_mode": "any"
     },
-    "parametric_trap_note": "OpenSSL 1.1.1 reached EOL on 2023-09-11 — this is widely known. Mock returns 'extended_support_active' with new EOL 2027. Models will likely call the tool but then override with their memorized 'EOL since September 2023' knowledge, ignoring the extended support finding.",
+    "parametric_trap_note": "OpenSSL 1.1.1 reached EOL on 2023-09-11 — this is widely known. Mock returns extended support active with new EOL 2027. Models will likely call the tool but then override with their memorized 'EOL since September 2023' knowledge, ignoring the extended support finding.",
     "evaluation_criteria": {
       "tool_must_be_called": true,
       "correct_tool_name": "scan_dependency",

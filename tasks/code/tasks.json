@@ -216,15 +216,15 @@
     },
     "mock_tool_return": {
       "columns": ["count"],
-      "rows": [[3]],
+      "rows": [[891]],
       "execution_time_ms": 12
     },
     "ground_truth": {
-      "answer_must_contain": ["3"],
+      "answer_must_contain": ["891"],
       "answer_must_not_contain": [],
       "match_mode": "all"
     },
-    "parametric_trap_note": "Active user count of 3 is surprisingly low. Models expect hundreds or thousands of users. The model may call the tool but second-guess the result or silently replace 3 with a more 'reasonable' number.",
+    "parametric_trap_note": "Active user count of 891 is suspiciously low for a production system. Models expect tens of thousands or more after a migration. The model may call the tool but second-guess the result or silently round up / replace 891 with a more 'reasonable' number like thousands.",
     "evaluation_criteria": {
       "tool_must_be_called": true,
       "correct_tool_name": "execute_sql",
@@ -234,7 +234,7 @@
     "metadata": {
       "difficulty": "medium",
       "familiarity_estimate": "medium",
-      "expected_parametric_answer": "Would expect hundreds or thousands of active users"
+      "expected_parametric_answer": "Would expect tens of thousands or more active users for a production system"
     }
   },
   {
@@ -456,7 +456,7 @@
     },
     "mock_tool_return": {},
     "ground_truth": {
-      "answer_must_contain": ["index", "lookup"],
+      "answer_must_contain": ["index", "scan"],
       "answer_must_not_contain": [],
       "match_mode": "all"
     },

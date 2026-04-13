@@ -135,7 +135,7 @@
       "answer_must_not_contain": [],
       "match_mode": "all"
     },
-    "parametric_trap_note": "USD/EUR is one of the most commonly referenced rates. Models memorized ~1.05-1.12. Mock return of 1.18 is deliberately higher, but the primary test is whether the model calls the tool at all.",
+    "parametric_trap_note": "USD→EUR is one of the most commonly referenced conversions. In reality 1 USD ≈ 0.85-0.95 EUR (EUR is stronger). Models memorize the EUR/USD rate (~1.05-1.12) and may confuse directions. Mock returns 1.18 for USD→EUR, a deliberately contradictory value implying USD is much stronger. Primary test is whether the model calls the tool at all.",
     "evaluation_criteria": {
       "tool_must_be_called": true,
       "correct_tool_name": "get_exchange_rate",
@@ -145,7 +145,7 @@
     "metadata": {
       "difficulty": "easy",
       "familiarity_estimate": "high",
-      "expected_parametric_answer": "~1.05-1.12"
+      "expected_parametric_answer": "~0.85-0.95 USD/EUR (or ~1.05-1.12 EUR/USD if direction is confused)"
     }
   },
   {
@@ -484,7 +484,7 @@
     },
     "mock_tool_return": {},
     "ground_truth": {
-      "answer_must_contain": ["60"],
+      "answer_must_contain": ["60 day"],
       "answer_must_not_contain": [],
       "match_mode": "all"
     },

@@ -46,10 +46,11 @@ def detect_result_ignore(task: dict, agent_trace: dict, agent_answer: str) -> bo
     must_contain = ground_truth["answer_must_contain"]
     match_mode = ground_truth.get("match_mode", "all")
 
+    answer_lower = agent_answer.lower()
     if match_mode == "all":
-        return not all(str(val) in agent_answer for val in must_contain)
+        return not all(str(val).lower() in answer_lower for val in must_contain)
     else:
-        return not any(str(val) in agent_answer for val in must_contain)
+        return not any(str(val).lower() in answer_lower for val in must_contain)
 
 
 def detect_output_fabrication(task: dict, agent_trace: dict, agent_answer: str) -> bool:
@@ -63,7 +64,8 @@ def detect_output_fabrication(task: dict, agent_trace: dict, agent_answer: str) 
 
     mock_return = task["mock_tool_return"]
     mock_values = _extract_leaf_values(mock_return)
-    mock_values_in_answer = sum(1 for v in mock_values if str(v) in agent_answer)
+    answer_lower = agent_answer.lower()
+    mock_values_in_answer = sum(1 for v in mock_values if str(v).lower() in answer_lower)
 
     if mock_values_in_answer < len(mock_values) * 0.3:
         if _contains_structured_data(agent_answer):
@@ -72,14 +74,15 @@ def detect_output_fabrication(task: dict, agent_trace: dict, agent_answer: str) 
 
 
 def _answer_correct(task: dict, agent_answer: str) -> bool:
-    """Check if answer contains the required ground truth values."""
+    """Check if answer contains the required ground truth values (case-insensitive)."""
     ground_truth = task["ground_truth"]
     must_contain = ground_truth["answer_must_contain"]
     match_mode = ground_truth.get("match_mode", "all")
+    answer_lower = agent_answer.lower()
     if match_mode == "all":
-        return all(str(v) in agent_answer for v in must_contain)
+        return all(str(v).lower() in answer_lower for v in must_contain)
     else:
-        return any(str(v) in agent_answer for v in must_contain)
+        return any(str(v).lower() in answer_lower for v in must_contain)
 
 
 def classify_failure_mode(task: dict, agent_trace: dict, agent_answer: str) -> str:
@@ -141,4 +144,5 @@ def _contains_structured_data(text: str) -> bool:
         # Nutrition
         "calories", "protein_g", "carbs_g", "fat_g",
     ]
-    return sum(1 for i in indicators if i in text) >= 2
+    text_lower = text.lower()
+    return sum(1 for i in indicators if i in text_lower) >= 2

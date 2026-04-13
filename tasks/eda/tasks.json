@@ -202,7 +202,7 @@
     },
     "mock_tool_return": {},
     "ground_truth": {
-      "answer_must_contain": ["clock"],
+      "answer_must_contain": ["before", "after"],
       "answer_must_not_contain": [],
       "match_mode": "all"
     },
@@ -216,7 +216,7 @@
     "metadata": {
       "difficulty": "easy",
       "familiarity_estimate": "high",
-      "expected_parametric_answer": "Setup time: data must be stable before clock edge. Hold time: data must remain stable after clock edge."
+      "expected_parametric_answer": "Setup time: data must be stable before the clock edge. Hold time: data must remain stable after the clock edge."
     }
   },
   {
@@ -264,7 +264,7 @@
       "coverage": "67%"
     },
     "ground_truth": {
-      "answer_must_contain": ["hold_time_violation", "cycle 12"],
+      "answer_must_contain": ["violation", "cycle 12"],
       "answer_must_not_contain": [],
       "match_mode": "all"
     },
@@ -545,7 +545,7 @@
     },
     "mock_tool_return": {},
     "ground_truth": {
-      "answer_must_contain": ["cost"],
+      "answer_must_contain": ["prototyp", "volume"],
       "answer_must_not_contain": [],
       "match_mode": "all"
     },
