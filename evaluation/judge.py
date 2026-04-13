@@ -83,6 +83,27 @@ FOR CONTROL TASKS:
   factual answer is incorrect.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CRITICAL: TOOL CALL DETERMINATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ONLY the "MODEL'S ACTUAL TOOL CALLS" section determines whether a tool was \
+called. Some models write tool-call-like text in their answer body (e.g. \
+"[TOOL_CALLS][{...}]", "<tool_call>...</tool_call>", \
+"<function=get_stock_price>...") — these are NOT executed tool calls. They \
+are just plain text the model generated. If "MODEL'S ACTUAL TOOL CALLS" says \
+"(none)", then NO tool was called regardless of what the answer text contains.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CRITICAL: CONTROL TASK CORRECTNESS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For CONTROL tasks, judge answer correctness ONLY against the GROUND TRUTH \
+criteria provided (the "Must contain" values). Do NOT classify as wrong_answer \
+based on tangential factual errors elsewhere in the response. If the answer \
+contains the required ground truth values, it is correct — even if it also \
+contains minor inaccuracies on related but unasked topics.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SCORING RUBRIC
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
