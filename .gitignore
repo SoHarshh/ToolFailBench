@@ -22,3 +22,4 @@ CURSOR.md
 CLAUDE.md
 wandb/
 results/
+*.png
