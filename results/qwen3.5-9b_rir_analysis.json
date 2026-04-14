@@ -1,0 +1,43 @@
+{
+  "model_id": "qwen3.5-9b",
+  "eval_file": "results/qwen3.5-9b_20260413_011955.json",
+  "baseline_file": "results/baselines/qwen3.5-9b_baseline_20260413_034023.json",
+  "total_tasks": 90,
+  "classification_stats": {
+    "correct": {
+      "count": 43,
+      "empty_eval_answers": 0,
+      "non_empty_eval_answers": 43,
+      "mean_jaccard": 0.3041,
+      "mean_containment": 0.5094,
+      "mean_ngram3": 0.4137,
+      "eval_gt_match_rate": 1.0,
+      "baseline_gt_match_rate": 0.8062
+    },
+    "tool_skip": {
+      "count": 45,
+      "empty_eval_answers": 0,
+      "non_empty_eval_answers": 45,
+      "mean_jaccard": 0.2064,
+      "mean_containment": 0.6607,
+      "mean_ngram3": 0.2366,
+      "eval_gt_match_rate": 0.0111,
+      "baseline_gt_match_rate": 0.0815
+    },
+    "wrong_answer": {
+      "count": 2,
+      "empty_eval_answers": 0,
+      "non_empty_eval_answers": 2,
+      "mean_jaccard": 0.2286,
+      "mean_containment": 0.5824,
+      "mean_ngram3": 0.3009,
+      "eval_gt_match_rate": 0.0,
+      "baseline_gt_match_rate": 0.5
+    }
+  },
+  "rir_fallback_analysis": {
+    "count": 0,
+    "message": "No RIR tasks to analyze"
+  },
+  "rir_by_domain": {}
+}

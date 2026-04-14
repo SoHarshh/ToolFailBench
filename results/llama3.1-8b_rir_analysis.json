@@ -1,0 +1,180 @@
+{
+  "model_id": "llama3.1-8b",
+  "eval_file": "results/llama3.1-8b_20260414_081332.json",
+  "baseline_file": "results/baselines/llama3.1-8b_baseline_20260413_085015.json",
+  "total_tasks": 90,
+  "classification_stats": {
+    "correct": {
+      "count": 16,
+      "empty_eval_answers": 0,
+      "non_empty_eval_answers": 16,
+      "mean_jaccard": 0.1816,
+      "mean_containment": 0.6207,
+      "mean_ngram3": 0.1996,
+      "eval_gt_match_rate": 0.9688,
+      "baseline_gt_match_rate": 0.0938
+    },
+    "other_error": {
+      "count": 5,
+      "empty_eval_answers": 0,
+      "non_empty_eval_answers": 5,
+      "mean_jaccard": 0.0088,
+      "mean_containment": 0.1077,
+      "mean_ngram3": 0.0452,
+      "eval_gt_match_rate": 0.0,
+      "baseline_gt_match_rate": 1.0
+    },
+    "output_fabrication": {
+      "count": 21,
+      "empty_eval_answers": 0,
+      "non_empty_eval_answers": 21,
+      "mean_jaccard": 0.0363,
+      "mean_containment": 0.2995,
+      "mean_ngram3": 0.0641,
+      "eval_gt_match_rate": 0.0238,
+      "baseline_gt_match_rate": 0.0
+    },
+    "result_ignore": {
+      "count": 8,
+      "empty_eval_answers": 0,
+      "non_empty_eval_answers": 8,
+      "mean_jaccard": 0.0931,
+      "mean_containment": 0.4113,
+      "mean_ngram3": 0.1176,
+      "eval_gt_match_rate": 0.2292,
+      "baseline_gt_match_rate": 0.0
+    },
+    "unnecessary_tool_use": {
+      "count": 40,
+      "empty_eval_answers": 0,
+      "non_empty_eval_answers": 40,
+      "mean_jaccard": 0.2204,
+      "mean_containment": 0.5956,
+      "mean_ngram3": 0.2697,
+      "eval_gt_match_rate": 0.5375,
+      "baseline_gt_match_rate": 0.95
+    }
+  },
+  "rir_fallback_analysis": {
+    "count": 8,
+    "empty_answer_count": 0,
+    "non_empty_count": 8,
+    "parametric_fallback_count": 3,
+    "parametric_fallback_rate": 0.375,
+    "evidence": [
+      {
+        "task_id": "TS-MED-002",
+        "domain": "medical",
+        "eval_baseline_similarity": 0.0427,
+        "eval_has_ground_truth": 0.0,
+        "baseline_has_ground_truth": 0.0,
+        "eval_has_mock_values": 0.5,
+        "baseline_has_mock_values": 0.5,
+        "parametric_fallback": false
+      },
+      {
+        "task_id": "RI-MED-001",
+        "domain": "medical",
+        "eval_baseline_similarity": 0.0172,
+        "eval_has_ground_truth": 0.0,
+        "baseline_has_ground_truth": 0.0,
+        "eval_has_mock_values": 0.4,
+        "baseline_has_mock_values": 0.4,
+        "parametric_fallback": false
+      },
+      {
+        "task_id": "OF-CODE-002",
+        "domain": "code",
+        "eval_baseline_similarity": 0.093,
+        "eval_has_ground_truth": 0.6666666666666666,
+        "baseline_has_ground_truth": 0.0,
+        "eval_has_mock_values": 0.3333333333333333,
+        "baseline_has_mock_values": 0.2222222222222222,
+        "parametric_fallback": false
+      },
+      {
+        "task_id": "TS-EDA-001",
+        "domain": "eda",
+        "eval_baseline_similarity": 0.0229,
+        "eval_has_ground_truth": 0.0,
+        "baseline_has_ground_truth": 0.0,
+        "eval_has_mock_values": 0.42857142857142855,
+        "baseline_has_mock_values": 0.14285714285714285,
+        "parametric_fallback": false
+      },
+      {
+        "task_id": "RI-EDA-001",
+        "domain": "eda",
+        "eval_baseline_similarity": 0.1028,
+        "eval_has_ground_truth": 0.5,
+        "baseline_has_ground_truth": 0.0,
+        "eval_has_mock_values": 0.08333333333333333,
+        "baseline_has_mock_values": 0.25,
+        "parametric_fallback": true
+      },
+      {
+        "task_id": "OF-EDA-002",
+        "domain": "eda",
+        "eval_baseline_similarity": 0.1622,
+        "eval_has_ground_truth": 0.6666666666666666,
+        "baseline_has_ground_truth": 0.0,
+        "eval_has_mock_values": 0.8571428571428571,
+        "baseline_has_mock_values": 0.21428571428571427,
+        "parametric_fallback": false
+      },
+      {
+        "task_id": "TS-LAW-002",
+        "domain": "legal",
+        "eval_baseline_similarity": 0.1223,
+        "eval_has_ground_truth": 0.0,
+        "baseline_has_ground_truth": 0.0,
+        "eval_has_mock_values": 0.3333333333333333,
+        "baseline_has_mock_values": 0.5,
+        "parametric_fallback": true
+      },
+      {
+        "task_id": "OF-NUTR-002",
+        "domain": "nutrition",
+        "eval_baseline_similarity": 0.1818,
+        "eval_has_ground_truth": 0.0,
+        "baseline_has_ground_truth": 0.0,
+        "eval_has_mock_values": 0.0,
+        "baseline_has_mock_values": 0.0,
+        "parametric_fallback": true
+      }
+    ],
+    "summary": "Of 8 RIR tasks:\n  - 0 (0%) produced empty eval answers (tool result dropped entirely)\n  - 8 (100%) produced non-empty answers\n  - 3 of 8 non-empty answers (38%) show parametric fallback (low mock-value usage + baseline similarity)"
+  },
+  "rir_by_domain": {
+    "code": {
+      "count": 1,
+      "empty": 0,
+      "non_empty": 1,
+      "mean_jaccard": 0.093
+    },
+    "eda": {
+      "count": 3,
+      "empty": 0,
+      "non_empty": 3,
+      "mean_jaccard": 0.096
+    },
+    "legal": {
+      "count": 1,
+      "empty": 0,
+      "non_empty": 1,
+      "mean_jaccard": 0.1223
+    },
+    "medical": {
+      "count": 2,
+      "empty": 0,
+      "non_empty": 2,
+      "mean_jaccard": 0.03
+    },
+    "nutrition": {
+      "count": 1,
+      "empty": 0,
+      "non_empty": 1,
+      "mean_jaccard": 0.1818
+    }
+  }
+}

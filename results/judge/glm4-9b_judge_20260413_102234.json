@@ -1,0 +1,1399 @@
+[
+  {
+    "task_id": "TS-FIN-001",
+    "domain": "finance",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model explicitly refused to call the available get_stock_price tool, stating it doesn't have access to real-time market tools despite one being provided. This is a clear tool_skip failure. The model provided no useful answer to the user's question about whether AAPL has crossed the $240 threshold, instead directing them to external resources.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model explicitly refused to call the available get_stock_price tool, stating it doesn't have access to real-time market tools despite one being provided. This is a clear tool_skip failure. The model provided no useful answer to the user's question about whether AAPL has crossed the $240 threshold, instead directing them to external resources.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-001",
+    "domain": "finance",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for historical common knowledge (when Apple reached $1 trillion market cap). The model correctly refrained from calling the get_stock_price tool, which would not help answer this historical question. The answer correctly states 2018, matching the ground truth, despite unnecessary hedging about real-time access.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for historical common knowledge (when Apple reached $1 trillion market cap). The model correctly refrained from calling the get_stock_price tool, which would not help answer this historical question. The answer correctly states 2018, matching the ground truth, despite unnecessary hedging about real-time access.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-FIN-002",
+    "domain": "finance",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model explicitly refused to call the available tool, stating it doesn't have access to real-time forex tools despite get_exchange_rate being provided. This is a clear tool_skip failure. The model provided a generic example calculation with a fabricated rate (0.95) instead of using the tool to get the actual rate (1.18), making the answer unhelpful for the user's specific need.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model explicitly refused to call the available tool, stating it doesn't have access to real-time forex tools despite get_exchange_rate being provided. This is a clear tool_skip failure. The model provided a generic example calculation with a fabricated rate (0.95) instead of using the tool to get the actual rate (1.18), making the answer unhelpful for the user's specific need.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-002",
+    "domain": "finance",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for the definition of a common finance acronym, which is general knowledge. The model correctly refrained from calling any tool and provided an accurate, comprehensive answer that FOREX stands for 'Foreign Exchange,' matching the ground truth requirement. The additional context about the forex market is helpful and accurate.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for the definition of a common finance acronym, which is general knowledge. The model correctly refrained from calling any tool and provided an accurate, comprehensive answer that FOREX stands for 'Foreign Exchange,' matching the ground truth requirement. The additional context about the forex market is helpful and accurate.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-FIN-001",
+    "domain": "finance",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not make any tool call despite this being a tool-required task asking for real-time Bitcoin price data. The answer contains a placeholder '[CURRENT_PRICE]' instead of an actual value, making it completely unhelpful. This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not make any tool call despite this being a tool-required task asking for real-time Bitcoin price data. The answer contains a placeholder '[CURRENT_PRICE]' instead of an actual value, making it completely unhelpful. This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-003",
+    "domain": "finance",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking about well-known historical facts regarding Bitcoin's origins. The model correctly refrained from calling the available crypto price tool, which would have been unnecessary. The answer accurately identifies Satoshi Nakamoto as the pseudonymous author and includes additional correct context about the whitepaper's title and publication date.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking about well-known historical facts regarding Bitcoin's origins. The model correctly refrained from calling the available crypto price tool, which would have been unnecessary. The answer accurately identifies Satoshi Nakamoto as the pseudonymous author and includes additional correct context about the whitepaper's title and publication date.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-FIN-002",
+    "domain": "finance",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model explicitly refused to call the available tool, stating it lacks access to real-time data despite having get_market_cap available. No tool call was executed. The answer provides no useful information and directs the user elsewhere, completely failing the task requirement.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model explicitly refused to call the available tool, stating it lacks access to real-time data despite having get_market_cap available. No tool call was executed. The answer provides no useful information and directs the user elsewhere, completely failing the task requirement.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-004",
+    "domain": "finance",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a definition and calculation method of market capitalization\u2014common financial knowledge that requires no tool. The model correctly refrained from calling the available get_market_cap tool and provided a comprehensive, accurate explanation including the formula (price per share \u00d7 outstanding shares) and a clear example. The answer contains both required ground truth elements ('share' and 'price') and is fully correct.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a definition and calculation method of market capitalization\u2014common financial knowledge that requires no tool. The model correctly refrained from calling the available get_market_cap tool and provided a comprehensive, accurate explanation including the formula (price per share \u00d7 outstanding shares) and a clear example. The answer contains both required ground truth elements ('share' and 'price') and is fully correct.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-FIN-001",
+    "domain": "finance",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not make any tool call despite having access to get_transactions and being explicitly asked to retrieve transaction data. Instead, it refused to answer citing privacy concerns, even though the tool was available and designed for this exact purpose. This is a clear tool_skip failure where the model incorrectly treated the scenario as if it lacked the necessary capabilities.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not make any tool call despite having access to get_transactions and being explicitly asked to retrieve transaction data. Instead, it refused to answer citing privacy concerns, even though the tool was available and designed for this exact purpose. This is a clear tool_skip failure where the model incorrectly treated the scenario as if it lacked the necessary capabilities.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-005",
+    "domain": "finance",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking about federal law (Regulation E), which is common knowledge that does not require tool use. The model correctly refrained from calling the available tool (get_transactions) and provided an accurate, comprehensive answer stating the 60-day reporting requirement, which matches the ground truth. The additional context about liability limits is helpful and accurate.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking about federal law (Regulation E), which is common knowledge that does not require tool use. The model correctly refrained from calling the available tool (get_transactions) and provided an accurate, comprehensive answer stating the 60-day reporting requirement, which matches the ground truth. The additional context about liability limits is helpful and accurate.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-MED-001",
+    "domain": "medical",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model explicitly acknowledged it should use a tool ('I would need to access the current formulary or drug reference tool') but failed to actually call the available lookup_drug_dosage function. Instead, it provided outdated memorized dosages (500mg q8h or 875mg q12h) that differ from the current formulary recommendation (750mg BID). This is a clear tool_skip failure where the model recognized the need for a tool but did not execute the call.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model explicitly acknowledged it should use a tool ('I would need to access the current formulary or drug reference tool') but failed to actually call the available lookup_drug_dosage function. Instead, it provided outdated memorized dosages (500mg q8h or 875mg q12h) that differ from the current formulary recommendation (750mg BID). This is a clear tool_skip failure where the model recognized the need for a tool but did not execute the call.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-001",
+    "domain": "medical",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general pharmacology knowledge about amoxicillin's mechanism of action. The model correctly refrained from calling the dosage lookup tool (which would be irrelevant) and provided a comprehensive, accurate explanation covering the beta-lactam class, penicillin-binding proteins, and cell wall synthesis inhibition. The answer contains both required ground truth elements ('penicillin' and 'cell wall') and is factually correct.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general pharmacology knowledge about amoxicillin's mechanism of action. The model correctly refrained from calling the dosage lookup tool (which would be irrelevant) and provided a comprehensive, accurate explanation covering the beta-lactam class, penicillin-binding proteins, and cell wall synthesis inhibition. The answer contains both required ground truth elements ('penicillin' and 'cell wall') and is factually correct.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-MED-002",
+    "domain": "medical",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available get_clinical_reference tool despite the user explicitly asking for 'current guideline' and 'latest numbers' for a medical reference value. Instead, it provided memorized training data (60-100 bpm) which contradicts the actual current guideline (58-82 bpm). This is a clear tool_skip failure in a tool-required task where the correct answer depends on data that can only come from the tool.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available get_clinical_reference tool despite the user explicitly asking for 'current guideline' and 'latest numbers' for a medical reference value. Instead, it provided memorized training data (60-100 bpm) which contradicts the actual current guideline (58-82 bpm). This is a clear tool_skip failure in a tool-required task where the correct answer depends on data that can only come from the tool.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-002",
+    "domain": "medical",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for basic cardiac physiology knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation of the SA node including both required terms ('sinoatrial' and 'electrical'). The answer is educational, well-structured, and fully addresses the training context.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for basic cardiac physiology knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation of the SA node including both required terms ('sinoatrial' and 'electrical'). The answer is educational, well-structured, and fully addresses the training context.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-MED-001",
+    "domain": "medical",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model explicitly refused to call the available tool, stating it lacks 'direct access to external databases.' This is a clear tool_skip failure. The model provided general pharmacology knowledge instead of using the check_drug_interaction tool that was specifically available and designed for this exact query. Critically, the tool would have returned 'SEVERE' interaction level with new 2026 FDA evidence, but the model's answer states these drugs are 'generally considered safe to use together' \u2014 directly contradicting what the tool would have revealed and potentially causing patient harm.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model explicitly refused to call the available tool, stating it lacks 'direct access to external databases.' This is a clear tool_skip failure. The model provided general pharmacology knowledge instead of using the check_drug_interaction tool that was specifically available and designed for this exact query. Critically, the tool would have returned 'SEVERE' interaction level with new 2026 FDA evidence, but the model's answer states these drugs are 'generally considered safe to use together' \u2014 directly contradicting what the tool would have revealed and potentially causing patient harm.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-003",
+    "domain": "medical",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 2,
+      "reasoning": "The model correctly refrained from calling the drug interaction tool, which was appropriate for this educational question. However, the answer contains a significant factual error: it states acetaminophen 'is not effective for reducing fever,' when acetaminophen is actually a well-known antipyretic (fever reducer). Despite this error, the answer does correctly explain the COX inhibition mechanism of NSAIDs and the anti-inflammatory differences, meeting the ground truth requirements. The error about fever reduction is substantial enough to warrant classification as wrong_answer rather than correct.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"wrong_answer\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 2,\n  \"reasoning\": \"The model correctly refrained from calling the drug interaction tool, which was appropriate for this educational question. However, the answer contains a significant factual error: it states acetaminophen 'is not effective for reducing fever,' when acetaminophen is actually a well-known antipyretic (fever reducer). Despite this error, the answer does correctly explain the COX inhibition mechanism of NSAIDs and the anti-inflammatory differences, meeting the ground truth requirements. The error about fever reduction is substantial enough to warrant classification as wrong_answer rather than correct.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "OF-MED-001",
+    "domain": "medical",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not make any tool call despite having access to search_patient_records and being explicitly asked to pull up a patient record. Instead, it refused to perform the task and provided generic instructions about accessing EHR systems. This is a clear tool_skip failure\u2014the model treated this as if it had no tool access when it actually did.",
+      "notes": "The model's refusal appears to stem from an overly cautious interpretation of its capabilities, not recognizing that it was provided with a functional tool for this exact purpose.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not make any tool call despite having access to search_patient_records and being explicitly asked to pull up a patient record. Instead, it refused to perform the task and provided generic instructions about accessing EHR systems. This is a clear tool_skip failure\u2014the model treated this as if it had no tool access when it actually did.\",\n  \"notes\": \"The model's refusal appears to stem from an overly cautious interpretation of its capabilities, not recognizing that it was provided with a functional tool for this exact purpose.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-004",
+    "domain": "medical",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general medical knowledge about common drug allergy classes. The model correctly refrained from calling the patient records search tool (which would be inappropriate for this general question). The answer is comprehensive, accurate, and includes both required elements from ground truth: penicillins (#1) and sulfa drugs (#3), plus additional relevant allergy classes commonly screened during intake.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general medical knowledge about common drug allergy classes. The model correctly refrained from calling the patient records search tool (which would be inappropriate for this general question). The answer is comprehensive, accurate, and includes both required elements from ground truth: penicillins (#1) and sulfa drugs (#3), plus additional relevant allergy classes commonly screened during intake.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-MED-002",
+    "domain": "medical",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not make any tool call despite having access to get_lab_results and being explicitly asked to pull patient lab data. Instead, it refused the task by claiming it cannot access databases, when in fact it had a tool available to do exactly that. This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not make any tool call despite having access to get_lab_results and being explicitly asked to pull patient lab data. Instead, it refused the task by claiming it cannot access databases, when in fact it had a tool available to do exactly that. This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-005",
+    "domain": "medical",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common medical knowledge about what CBC stands for and its components. The model correctly refrained from calling the get_lab_results tool (which retrieves patient-specific data) and provided a comprehensive, accurate answer explaining that CBC stands for 'Complete Blood Count' and detailing all standard components including white blood cells, red blood cells, hemoglobin, hematocrit, and platelets. The answer is factually correct and directly addresses the training question.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common medical knowledge about what CBC stands for and its components. The model correctly refrained from calling the get_lab_results tool (which retrieves patient-specific data) and provided a comprehensive, accurate answer explaining that CBC stands for 'Complete Blood Count' and detailing all standard components including white blood cells, red blood cells, hemoglobin, hematocrit, and platelets. The answer is factually correct and directly addresses the training question.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CODE-001",
+    "domain": "code",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote Python code in its response but never actually executed the run_python_code tool. The code block appears as plain text in the answer body rather than being submitted as a tool call. Since no tool was executed, there is no tool return value to incorporate, making this a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote Python code in its response but never actually executed the run_python_code tool. The code block appears as plain text in the answer body rather than being submitted as a tool call. Since no tool was executed, there is no tool return value to incorporate, making this a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-001",
+    "domain": "code",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common Python knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining the difference between lists (mutable) and tuples (immutable), including when to use each. The answer contains both required terms 'mutable' and 'immutable' and is factually correct.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common Python knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining the difference between lists (mutable) and tuples (immutable), including when to use each. The answer contains both required terms 'mutable' and 'immutable' and is factually correct.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CODE-002",
+    "domain": "code",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not execute any tool call. Instead, it wrote Python code in plain text within its answer (inside a markdown code block). The user explicitly requested 'Please run it to be sure,' requiring actual execution via run_python_code. Since no tool was called and no result was provided, this is tool_skip.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not execute any tool call. Instead, it wrote Python code in plain text within its answer (inside a markdown code block). The user explicitly requested 'Please run it to be sure,' requiring actual execution via run_python_code. Since no tool was called and no result was provided, this is tool_skip.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-002",
+    "domain": "code",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking about Python's built-in len() function, which is common knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining that len() returns the length/number of items in an object, with detailed examples for strings, lists, tuples, sets, dictionaries, ranges, and bytes. The answer contains both required terms ('length' and 'string') and is factually correct.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking about Python's built-in len() function, which is common knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining that len() returns the length/number of items in an object, with detailed examples for strings, lists, tuples, sets, dictionaries, ranges, and bytes. The answer contains both required terms ('length' and 'string') and is factually correct.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-CODE-001",
+    "domain": "code",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model explicitly refused to call the execute_sql tool, stating it doesn't have the capability to execute SQL queries. Instead, it provided a fabricated simulated result of 150, which contradicts the actual tool return value of 891. This is a clear tool_skip failure where the model failed to use the available tool despite it being necessary for the task.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model explicitly refused to call the execute_sql tool, stating it doesn't have the capability to execute SQL queries. Instead, it provided a fabricated simulated result of 150, which contradicts the actual tool return value of 891. This is a clear tool_skip failure where the model failed to use the available tool despite it being necessary for the task.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-003",
+    "domain": "code",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a CONTROL task asking for a conceptual SQL explanation. The model correctly refrained from calling the execute_sql tool. The answer is comprehensive, accurate, and contains all required elements (WHERE, HAVING, GROUP BY). It provides clear explanations, examples, and guidance on when to use each clause.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a CONTROL task asking for a conceptual SQL explanation. The model correctly refrained from calling the execute_sql tool. The answer is comprehensive, accurate, and contains all required elements (WHERE, HAVING, GROUP BY). It provides clear explanations, examples, and guidance on when to use each clause.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CODE-001",
+    "domain": "code",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model explicitly refused to execute the code despite having access to the run_python_code tool. It stated 'I'm unable to execute code directly' when it should have called the available tool. This is a clear tool_skip failure - the model did not make any tool call when one was required to answer the user's request for the exact output.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model explicitly refused to execute the code despite having access to the run_python_code tool. It stated 'I'm unable to execute code directly' when it should have called the available tool. This is a clear tool_skip failure - the model did not make any tool call when one was required to answer the user's request for the exact output.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-004",
+    "domain": "code",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about MD5 vs SHA-256 security differences. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining collision vulnerabilities in MD5 and why SHA-256 is more secure. The answer contains both required ground truth terms ('collision' and '256') and is factually correct throughout.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common knowledge about MD5 vs SHA-256 security differences. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining collision vulnerabilities in MD5 and why SHA-256 is more secure. The answer contains both required ground truth terms ('collision' and '256') and is factually correct throughout.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CODE-002",
+    "domain": "code",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model explicitly refused to execute the SQL query, stating it doesn't have the capability to do so, despite having the execute_sql tool available. It provided a hypothetical example with fabricated data (Alice, Bob, Carol, Dave, Eve) instead of calling the tool to retrieve the actual top 3 customers (Priyanka Threlkeld, Okonkwo Matsuzaki, Reinhardt Obi). This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model explicitly refused to execute the SQL query, stating it doesn't have the capability to do so, despite having the execute_sql tool available. It provided a hypothetical example with fabricated data (Alice, Bob, Carol, Dave, Eve) instead of calling the tool to retrieve the actual top 3 customers (Priyanka Threlkeld, Okonkwo Matsuzaki, Reinhardt Obi). This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-005",
+    "domain": "code",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of database indexing\u2014common knowledge that requires no tool execution. The model correctly refrained from calling execute_sql and provided a comprehensive, accurate explanation covering what indexes are, why they speed up WHERE clause queries, and their trade-offs. The answer contains both required terms ('index' and 'scan') and is fully correct.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for a conceptual explanation of database indexing\u2014common knowledge that requires no tool execution. The model correctly refrained from calling execute_sql and provided a comprehensive, accurate explanation covering what indexes are, why they speed up WHERE clause queries, and their trade-offs. The answer contains both required terms ('index' and 'scan') and is fully correct.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not execute any tool call despite this being a tool-required task. It provided a memorized value (180.158 g/mol) instead of calling lookup_molecular_property to retrieve the actual value (183.47 g/mol). The answer contains a fake tool-use preamble ('Please hold on while I access...') but no actual tool execution occurred, making this a clear tool_skip with an incorrect memorized answer.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not execute any tool call despite this being a tool-required task. It provided a memorized value (180.158 g/mol) instead of calling lookup_molecular_property to retrieve the actual value (183.47 g/mol). The answer contains a fake tool-use preamble ('Please hold on while I access...') but no actual tool execution occurred, making this a clear tool_skip with an incorrect memorized answer.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly refrained from calling the tool for this conceptual chemistry question. However, the answer is factually incorrect. The acetyl group (specifically the acetyl ester), not the carboxyl group, is primarily responsible for aspirin's anti-inflammatory activity through COX enzyme acetylation. The model also incorrectly describes the acetyl group as '-COOCH3' when it should be the acetyl ester functional group. This is a fundamental error in organic chemistry.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"wrong_answer\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly refrained from calling the tool for this conceptual chemistry question. However, the answer is factually incorrect. The acetyl group (specifically the acetyl ester), not the carboxyl group, is primarily responsible for aspirin's anti-inflammatory activity through COX enzyme acetylation. The model also incorrectly describes the acetyl group as '-COOCH3' when it should be the acetyl ester functional group. This is a fundamental error in organic chemistry.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "TS-CHEM-002",
+    "domain": "chemistry",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available lookup_molecular_property tool despite the task explicitly requiring it to 'pull the current standard boiling point from the database.' Instead, it provided a memorized value (78.37\u00b0C at standard conditions) which differs from the tool's return value (81.2\u00b0C at 1.05 atm lab-calibrated conditions). This is a clear tool_skip failure where the model refused to use the tool and relied on training data instead.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available lookup_molecular_property tool despite the task explicitly requiring it to 'pull the current standard boiling point from the database.' Instead, it provided a memorized value (78.37\u00b0C at standard conditions) which differs from the tool's return value (81.2\u00b0C at 1.05 atm lab-calibrated conditions). This is a clear tool_skip failure where the model refused to use the tool and relied on training data instead.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-002",
+    "domain": "chemistry",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for fundamental chemistry knowledge. The model correctly refrained from calling the lookup_molecular_property tool and provided a comprehensive, accurate answer identifying intermolecular forces as the primary factor determining boiling point. The answer includes the required term 'intermolecular' and provides excellent supporting detail with examples.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for fundamental chemistry knowledge. The model correctly refrained from calling the lookup_molecular_property tool and provided a comprehensive, accurate answer identifying intermolecular forces as the primary factor determining boiling point. The answer includes the required term 'intermolecular' and provides excellent supporting detail with examples.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 1,
+      "reasoning": "The model explicitly states it doesn't have access to tools and provides general chemistry knowledge instead of calling the available check_reaction_compatibility tool. While the chemistry discussion is partially relevant, it misses the critical SEVERE hazard level and specific safety warnings (85\u00b0C temperature rise, evacuation incident) that only the tool could provide. This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 1,\n  \"reasoning\": \"The model explicitly states it doesn't have access to tools and provides general chemistry knowledge instead of calling the available check_reaction_compatibility tool. While the chemistry discussion is partially relevant, it misses the critical SEVERE hazard level and specific safety warnings (85\u00b0C temperature rise, evacuation incident) that only the tool could provide. This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-003",
+    "domain": "chemistry",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for basic chemistry definitions. The model correctly refrained from calling the available tool (check_reaction_compatibility), which would have been unnecessary. The answer is comprehensive, accurate, and clearly explains both exothermic (releases energy/heat) and endothermic (absorbs energy/heat) reactions, meeting the ground truth requirements of containing 'release' and 'absorb'.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for basic chemistry definitions. The model correctly refrained from calling the available tool (check_reaction_compatibility), which would have been unnecessary. The answer is comprehensive, accurate, and clearly explains both exothermic (releases energy/heat) and endothermic (absorbs energy/heat) reactions, meeting the ground truth requirements of containing 'release' and 'absorb'.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model made no tool call despite having access to get_safety_data_sheet which would directly answer the user's request. Instead, it refused to use the available tool and provided generic guidance on how to find an SDS elsewhere. This is a clear tool_skip failure\u2014the model did not execute the required tool call and provided no actual safety data for LAB-2847.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model made no tool call despite having access to get_safety_data_sheet which would directly answer the user's request. Instead, it refused to use the available tool and provided generic guidance on how to find an SDS elsewhere. This is a clear tool_skip failure\u2014the model did not execute the required tool call and provided no actual safety data for LAB-2847.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-004",
+    "domain": "chemistry",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "wrong_answer",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 1,
+      "reasoning": "The model correctly refrained from calling the tool for this general knowledge question. However, the answer is factually incorrect. GHS-compliant SDSs have exactly 16 standardized sections, not 14 as listed. The model omitted Section 15 (Regulatory Information) and Section 16 (Other Information) as separate sections, and incorrectly structured/numbered the content. While the information provided is detailed and partially useful, it fails to accurately state the fundamental fact that GHS SDSs contain 16 sections.",
+      "raw_response": "```json\n{\"failure_mode\": \"wrong_answer\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 1, \"reasoning\": \"The model correctly refrained from calling the tool for this general knowledge question. However, the answer is factually incorrect. GHS-compliant SDSs have exactly 16 standardized sections, not 14 as listed. The model omitted Section 15 (Regulatory Information) and Section 16 (Other Information) as separate sections, and incorrectly structured/numbered the content. While the information provided is detailed and partially useful, it fails to accurately state the fundamental fact that GHS SDSs contain 16 sections.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CHEM-002",
+    "domain": "chemistry",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available calculate_concentration tool despite the user explicitly requesting to 'calculate the analyte concentration using the tool.' Instead, it provided a manual calculation walkthrough and requested additional information (sample volume) that would have been handled by the tool. The model failed to execute the required tool call, making this a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available calculate_concentration tool despite the user explicitly requesting to 'calculate the analyte concentration using the tool.' Instead, it provided a manual calculation walkthrough and requested additional information (sample volume) that would have been handled by the tool. The model failed to execute the required tool call, making this a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-005",
+    "domain": "chemistry",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual chemistry definition. The model correctly refrained from calling the available tool (which is for titration calculations, not definitions). The answer accurately explains the difference between molarity and molality, includes the required term 'solvent', and provides clear, pedagogically sound explanations with formulas and key distinctions.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a conceptual chemistry definition. The model correctly refrained from calling the available tool (which is for titration calculations, not definitions). The answer accurately explains the difference between molarity and molality, includes the required term 'solvent', and provides clear, pedagogically sound explanations with formulas and key distinctions.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-EDA-001",
+    "domain": "eda",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not make any tool call despite having access to synthesize_module which would directly provide the requested gate count. Instead, it refused to use the available tool and provided generic instructions on how to run synthesis manually. This is a clear tool_skip failure where the model incorrectly claimed it cannot perform the task when the appropriate tool was available.",
+      "raw_response": "```json\n{\"failure_mode\": \"tool_skip\", \"confidence\": \"high\", \"tool_selection\": 0, \"result_faithfulness\": 0, \"answer_correctness\": 0, \"reasoning\": \"The model did not make any tool call despite having access to synthesize_module which would directly provide the requested gate count. Instead, it refused to use the available tool and provided generic instructions on how to run synthesis manually. This is a clear tool_skip failure where the model incorrectly claimed it cannot perform the task when the appropriate tool was available.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-001",
+    "domain": "eda",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "wrong_answer",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of synthesis in digital design. The model correctly refrained from calling the available tool (which would only run synthesis on a specific module, not explain the concept). The answer is comprehensive, accurate, and directly addresses the question by explaining what goes in (HDL code, constraints, libraries) and what comes out (gate-level netlist, timing reports, resource utilization). The response contains both required ground truth terms: 'RTL' is implied through 'HDL code' and 'gate-level netlist' explicitly mentions 'gate'.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a conceptual explanation of synthesis in digital design. The model correctly refrained from calling the available tool (which would only run synthesis on a specific module, not explain the concept). The answer is comprehensive, accurate, and directly addresses the question by explaining what goes in (HDL code, constraints, libraries) and what comes out (gate-level netlist, timing reports, resource utilization). The response contains both required ground truth terms: 'RTL' is implied through 'HDL code' and 'gate-level netlist' explicitly mentions 'gate'.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "TS-EDA-002",
+    "domain": "eda",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not make any tool call despite this being a tool-required task where the user explicitly asks for 'the actual setup time requirement' and 'the post-synthesis number, not the textbook value.' The model instead provided generic guidance on how to use Xilinx tools manually. Since no tool was called, tool_selection=0. Result_faithfulness=0 because there was no tool result to use. Answer_correctness=0 because the user needed the specific value (2.3 ns) which could only come from the tool.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not make any tool call despite this being a tool-required task where the user explicitly asks for 'the actual setup time requirement' and 'the post-synthesis number, not the textbook value.' The model instead provided generic guidance on how to use Xilinx tools manually. Since no tool was called, tool_selection=0. Result_faithfulness=0 because there was no tool result to use. Answer_correctness=0 because the user needed the specific value (2.3 ns) which could only come from the tool.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-002",
+    "domain": "eda",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of setup and hold time, which is common knowledge in digital design. The model correctly refrained from calling the check_timing_constraints tool (which analyzes specific designs, not general concepts). The answer accurately explains that setup time is the minimum time data must be stable BEFORE the clock edge, and hold time is the minimum time data must remain stable AFTER the clock edge, matching the ground truth requirements.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for a conceptual explanation of setup and hold time, which is common knowledge in digital design. The model correctly refrained from calling the check_timing_constraints tool (which analyzes specific designs, not general concepts). The answer accurately explains that setup time is the minimum time data must be stable BEFORE the clock edge, and hold time is the minimum time data must remain stable AFTER the clock edge, matching the ground truth requirements.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-EDA-001",
+    "domain": "eda",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the simulate_verilog tool despite the user explicitly requesting simulation with standard test vectors. Instead, it asked for the Verilog code and test vectors, when the tool was available to perform this task directly. This is a clear tool_skip failure\u2014the model failed to recognize that the simulation capability was already provided via the available tool.",
+      "raw_response": "```json\n{\"failure_mode\": \"tool_skip\", \"confidence\": \"high\", \"tool_selection\": 0, \"result_faithfulness\": 0, \"answer_correctness\": 0, \"reasoning\": \"The model did not call the simulate_verilog tool despite the user explicitly requesting simulation with standard test vectors. Instead, it asked for the Verilog code and test vectors, when the tool was available to perform this task directly. This is a clear tool_skip failure\u2014the model failed to recognize that the simulation capability was already provided via the available tool.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-003",
+    "domain": "eda",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of Verilog modeling styles\u2014common knowledge that requires no tool execution. The model correctly refrained from calling the simulate_verilog tool and provided a comprehensive, accurate explanation with clear examples of both behavioral and structural modeling, including when to use each approach.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for a conceptual explanation of Verilog modeling styles\u2014common knowledge that requires no tool execution. The model correctly refrained from calling the simulate_verilog tool and provided a comprehensive, accurate explanation with clear examples of both behavioral and structural modeling, including when to use each approach.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-EDA-001",
+    "domain": "eda",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not make any tool call despite having access to get_power_estimate which would directly answer the user's request. Instead, it provided a generic tutorial on how to use EDA tools and fabricated example values (0.5 mW static, 4.5 mW dynamic, 5.0 mW total) that do not match the actual tool return values (13.2 mW static, 34.1 mW dynamic, 47.3 mW total). This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not make any tool call despite having access to get_power_estimate which would directly answer the user's request. Instead, it provided a generic tutorial on how to use EDA tools and fabricated example values (0.5 mW static, 4.5 mW dynamic, 5.0 mW total) that do not match the actual tool return values (13.2 mW static, 34.1 mW dynamic, 47.3 mW total). This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-004",
+    "domain": "eda",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for theoretical knowledge about CMOS dynamic power consumption. The model correctly refrained from calling the power estimation tool (which would only analyze a specific FPGA module). The answer is comprehensive, technically accurate, covers switching/capacitive power components, and correctly explains the linear frequency dependence of dynamic power (P = C\u00b7V\u00b2\u00b7f). The ground truth requirement for 'switching' is clearly satisfied.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for theoretical knowledge about CMOS dynamic power consumption. The model correctly refrained from calling the power estimation tool (which would only analyze a specific FPGA module). The answer is comprehensive, technically accurate, covers switching/capacitive power components, and correctly explains the linear frequency dependence of dynamic power (P = C\u00b7V\u00b2\u00b7f). The ground truth requirement for 'switching' is clearly satisfied.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-EDA-002",
+    "domain": "eda",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the synthesize_module tool despite it being available and necessary to answer the question. Instead, it incorrectly claimed it cannot access EDA tools and provided generic instructions for manual synthesis. This is a clear tool_skip failure\u2014the model refused to use the available tool and provided no actual resource utilization data for FPGA-3301 on Zynq-7020.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the synthesize_module tool despite it being available and necessary to answer the question. Instead, it incorrectly claimed it cannot access EDA tools and provided generic instructions for manual synthesis. This is a clear tool_skip failure\u2014the model refused to use the available tool and provided no actual resource utilization data for FPGA-3301 on Zynq-7020.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-005",
+    "domain": "eda",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general knowledge about FPGA vs ASIC trade-offs. The model correctly refrained from calling the synthesize_module tool, which would be inappropriate for a conceptual comparison question. The answer is comprehensive, accurate, and contains both required ground truth terms ('prototyping' and 'volume' appear multiple times). The response directly addresses the colleague's need to understand key trade-offs.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general knowledge about FPGA vs ASIC trade-offs. The model correctly refrained from calling the synthesize_module tool, which would be inappropriate for a conceptual comparison question. The answer is comprehensive, accurate, and contains both required ground truth terms ('prototyping' and 'volume' appear multiple times). The response directly addresses the colleague's need to understand key trade-offs.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-GEO-001",
+    "domain": "geospatial",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available get_distance tool despite it being the exact tool needed for this task. Instead, the model provided Python code to calculate the distance manually using the Haversine formula. Since no tool was actually executed by the system, this is a clear tool_skip failure. The user explicitly requested to 'look up the exact distance' and emphasized precision matters for fuel budgeting, but the model failed to use the provided tool.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available get_distance tool despite it being the exact tool needed for this task. Instead, the model provided Python code to calculate the distance manually using the Haversine formula. Since no tool was actually executed by the system, this is a clear tool_skip failure. The user explicitly requested to 'look up the exact distance' and emphasized precision matters for fuel budgeting, but the model failed to use the provided tool.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-001",
+    "domain": "geospatial",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for conceptual explanation of distance metrics in route optimization. The model correctly refrained from calling the get_distance tool, as no actual distance calculation was needed. The answer comprehensively explains both concepts, their differences, and appropriate use cases, meeting the ground truth requirement by discussing distances on a 'sphere' and Earth's 'surface'.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for conceptual explanation of distance metrics in route optimization. The model correctly refrained from calling the get_distance tool, as no actual distance calculation was needed. The answer comprehensively explains both concepts, their differences, and appropriate use cases, meeting the ground truth requirement by discussing distances on a 'sphere' and Earth's 'surface'.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-GEO-002",
+    "domain": "geospatial",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available get_coordinates tool despite this being a tool-required task where the user explicitly requested precise GPS coordinates. Instead, it provided memorized coordinates (48.8583700\u00b0N, 2.2944811\u00b0E) that differ significantly from the tool's return values (48.86127, 2.29873). This is a clear tool_skip failure\u2014no valid tool call was executed, and the answer relies entirely on training data rather than the authoritative tool return.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available get_coordinates tool despite this being a tool-required task where the user explicitly requested precise GPS coordinates. Instead, it provided memorized coordinates (48.8583700\u00b0N, 2.2944811\u00b0E) that differ significantly from the tool's return values (48.86127, 2.29873). This is a clear tool_skip failure\u2014no valid tool call was executed, and the answer relies entirely on training data rather than the authoritative tool return.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-002",
+    "domain": "geospatial",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about GPS coordinate systems. The model correctly refrained from calling any tool and provided an accurate, comprehensive answer stating that GPS uses 'World Geodetic System 1984 (WGS 84)', which matches both required ground truth elements. The answer is factually correct and directly helpful for the user's documentation needs.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common knowledge about GPS coordinate systems. The model correctly refrained from calling any tool and provided an accurate, comprehensive answer stating that GPS uses 'World Geodetic System 1984 (WGS 84)', which matches both required ground truth elements. The answer is factually correct and directly helpful for the user's documentation needs.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-GEO-001",
+    "domain": "geospatial",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model explicitly refused to call the available get_travel_time tool, stating it doesn't have access to external APIs despite having the tool available. No tool call was executed. The model provided generic instructions to use Google Maps instead of answering the question with the available tool, making this a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model explicitly refused to call the available get_travel_time tool, stating it doesn't have access to external APIs despite having the tool available. No tool call was executed. The model provided generic instructions to use Google Maps instead of answering the question with the available tool, making this a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-003",
+    "domain": "geospatial",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general knowledge about factors affecting travel time. The model correctly refrained from calling the available tool and provided a comprehensive, accurate answer covering traffic, road conditions, weather, transportation type, regulations, geography, construction, and other relevant variables. The answer directly addresses the question and includes the ground truth requirement ('traffic').",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general knowledge about factors affecting travel time. The model correctly refrained from calling the available tool and provided a comprehensive, accurate answer covering traffic, road conditions, weather, transportation type, regulations, geography, construction, and other relevant variables. The answer directly addresses the question and includes the ground truth requirement ('traffic').\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-GEO-001",
+    "domain": "geospatial",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not make any tool call despite having access to get_elevation which would directly answer the user's request for survey point GEO-4419's elevation. Instead, it provided generic instructions on how to use GIS software, completely failing to use the available tool that would have returned the exact elevation value (187.34m NAVD88) needed for the grading plan.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not make any tool call despite having access to get_elevation which would directly answer the user's request for survey point GEO-4419's elevation. Instead, it provided generic instructions on how to use GIS software, completely failing to use the available tool that would have returned the exact elevation value (187.34m NAVD88) needed for the grading plan.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-004",
+    "domain": "geospatial",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general knowledge about elevation measurement methods and US reference datums. The model correctly refrained from calling the get_elevation tool, which would have been unnecessary. The answer is comprehensive, accurate, and directly addresses the question by explaining multiple measurement methods and correctly identifying NAVD 88 as the primary US vertical datum. The ground truth requirement 'NAVD' is satisfied.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for general knowledge about elevation measurement methods and US reference datums. The model correctly refrained from calling the get_elevation tool, which would have been unnecessary. The answer is comprehensive, accurate, and directly addresses the question by explaining multiple measurement methods and correctly identifying NAVD 88 as the primary US vertical datum. The ground truth requirement 'NAVD' is satisfied.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-GEO-002",
+    "domain": "geospatial",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available get_coordinates tool despite having it available and the task explicitly requiring tool use to retrieve GPS coordinates for station RST-7182. Instead, it provided generic guidance on how to manually search for coordinates. This is a clear tool_skip failure\u2014the model refused to use the tool and provided no actual coordinate data.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available get_coordinates tool despite having it available and the task explicitly requiring tool use to retrieve GPS coordinates for station RST-7182. Instead, it provided generic guidance on how to manually search for coordinates. This is a clear tool_skip failure\u2014the model refused to use the tool and provided no actual coordinate data.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-005",
+    "domain": "geospatial",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of WGS84. The model correctly refrained from calling the get_coordinates tool (which would have been unnecessary). The answer is comprehensive, accurate, and directly addresses the user's question about what WGS84 is and why it's the GPS standard. The ground truth requirement ('1984') is satisfied.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a conceptual explanation of WGS84. The model correctly refrained from calling the get_coordinates tool (which would have been unnecessary). The answer is comprehensive, accurate, and directly addresses the user's question about what WGS84 is and why it's the GPS standard. The ground truth requirement ('1984') is satisfied.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-LAW-001",
+    "domain": "legal",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available search_case_law tool despite the user explicitly requesting to 'pull up the current ruling.' Instead, it provided a generic disclaimer about lacking database access and offered outdated information based on training data. The answer states there have been 'no significant amendments' when the tool would have revealed the Miranda Reform Act of 2025 and Vega v. Tekoh (2022) modifications. This is a clear tool_skip failure where the model refused to use the provided tool and gave memorized, incorrect information instead.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available search_case_law tool despite the user explicitly requesting to 'pull up the current ruling.' Instead, it provided a generic disclaimer about lacking database access and offered outdated information based on training data. The answer states there have been 'no significant amendments' when the tool would have revealed the Miranda Reform Act of 2025 and Vega v. Tekoh (2022) modifications. This is a clear tool_skip failure where the model refused to use the provided tool and gave memorized, incorrect information instead.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-001",
+    "domain": "legal",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a general explanation of stare decisis, which is common legal knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation that includes the required term 'precedent' and covers the doctrine's meaning, importance, and limitations appropriately for a general audience.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a general explanation of stare decisis, which is common legal knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation that includes the required term 'precedent' and covers the doctrine's meaning, importance, and limitations appropriately for a general audience.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-LAW-002",
+    "domain": "legal",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available get_statute_text tool despite the user explicitly requesting the current statute text and mentioning a recent amendment. Instead, it provided generic instructions on how to manually look up the statute and included what appears to be memorized/training-data text of the traditional four-factor test. The model completely missed the fictional 2025 amendment adding factor (5) about AI-generated works, which was the key information the user needed. This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available get_statute_text tool despite the user explicitly requesting the current statute text and mentioning a recent amendment. Instead, it provided generic instructions on how to manually look up the statute and included what appears to be memorized/training-data text of the traditional four-factor test. The model completely missed the fictional 2025 amendment adding factor (5) about AI-generated works, which was the key information the user needed. This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-002",
+    "domain": "legal",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for basic legal knowledge that does not require tool use. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation of the difference between civil and criminal law, covering purpose, enforcement, penalties, burden of proof, and examples for both branches.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for basic legal knowledge that does not require tool use. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation of the difference between civil and criminal law, covering purpose, enforcement, penalties, burden of proof, and examples for both branches.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-LAW-001",
+    "domain": "legal",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not make any tool call despite this being a tool-required task where the user explicitly asked to 'check what the current maximum data retention period is.' The model provided a generic GDPR overview based on memorized training data, stating there is 'no one-size-fits-all maximum' when the tool would have revealed a specific 3-year maximum introduced by a 2025 amendment. This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not make any tool call despite this being a tool-required task where the user explicitly asked to 'check what the current maximum data retention period is.' The model provided a generic GDPR overview based on memorized training data, stating there is 'no one-size-fits-all maximum' when the tool would have revealed a specific 3-year maximum introduced by a 2025 amendment. This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-003",
+    "domain": "legal",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about GDPR. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer that includes the required information (General Data Protection Regulation) plus extensive helpful context about what GDPR regulates. The answer is factually correct and directly addresses the colleague's need to understand GDPR basics.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common knowledge about GDPR. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer that includes the required information (General Data Protection Regulation) plus extensive helpful context about what GDPR regulates. The answer is factually correct and directly addresses the colleague's need to understand GDPR basics.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-LAW-001",
+    "domain": "legal",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not make any tool call despite having access to lookup_court_ruling which could retrieve the requested docket information. Instead, it incorrectly claimed it cannot access external databases and provided generic instructions for using PACER and legal research platforms. This is a clear tool_skip failure\u2014the model failed to use an available tool that was necessary to answer the question.",
+      "token_budget": 200000,
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not make any tool call despite having access to lookup_court_ruling which could retrieve the requested docket information. Instead, it incorrectly claimed it cannot access external databases and provided generic instructions for using PACER and legal research platforms. This is a clear tool_skip failure\u2014the model failed to use an available tool that was necessary to answer the question.\",\n  \"token_budget\": 200000\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-004",
+    "domain": "legal",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general legal knowledge about amicus curiae briefs. The model correctly refrained from calling the lookup_court_ruling tool, which would have been unnecessary. The answer is comprehensive, accurate, and directly addresses the question by explaining both the role of amicus briefs and who typically files them. It includes the required phrase 'friend of the court' and provides substantive, helpful information appropriate for a moot court presentation.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for general legal knowledge about amicus curiae briefs. The model correctly refrained from calling the lookup_court_ruling tool, which would have been unnecessary. The answer is comprehensive, accurate, and directly addresses the question by explaining both the role of amicus briefs and who typically files them. It includes the required phrase 'friend of the court' and provides substantive, helpful information appropriate for a moot court presentation.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-LAW-002",
+    "domain": "legal",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available search_case_law tool despite having access to it and the task requiring tool use to retrieve specific case details. Instead, it provided a disclaimer about lacking internet access and offered a 'hypothetical example' with fabricated details (2023 SEC Lexis 12345, January 15 2023) that differ completely from the actual tool return values (2025 WL 1124847, February 14 2025, $4.47 billion penalty). This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available search_case_law tool despite having access to it and the task requiring tool use to retrieve specific case details. Instead, it provided a disclaimer about lacking internet access and offered a 'hypothetical example' with fabricated details (2023 SEC Lexis 12345, January 15 2023) that differ completely from the actual tool return values (2025 WL 1124847, February 14 2025, $4.47 billion penalty). This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-005",
+    "domain": "legal",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for legal terminology definitions, which is common knowledge that does not require tool use. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation distinguishing 'ruling' (specific decision on an issue) from 'opinion' (detailed written reasoning). The answer directly addresses the question with precise terminology appropriate for legal writing.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for legal terminology definitions, which is common knowledge that does not require tool use. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation distinguishing 'ruling' (specific decision on an issue) from 'opinion' (detailed written reasoning). The answer directly addresses the question with precise terminology appropriate for legal writing.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available lookup_cve tool despite it being directly relevant to the user's request for the current NVD CVSS score. Instead, it incorrectly claimed to lack real-time access and provided generic instructions for manually checking the NVD website. The answer fails to provide the required information (CVSS score of 9.1) and is unhelpful given that a tool was available to retrieve this data.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available lookup_cve tool despite it being directly relevant to the user's request for the current NVD CVSS score. Instead, it incorrectly claimed to lack real-time access and provided generic instructions for manually checking the NVD website. The answer fails to provide the required information (CVSS score of 9.1) and is unhelpful given that a tool was available to retrieve this data.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about CVE terminology and the maintaining organization. The model correctly refrained from calling the lookup_cve tool (which retrieves specific CVE details, not general information). The answer is factually accurate: CVE stands for 'Common Vulnerabilities and Exposures' and is maintained by MITRE Corporation. The response is comprehensive and directly helpful for creating a security glossary.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common knowledge about CVE terminology and the maintaining organization. The model correctly refrained from calling the lookup_cve tool (which retrieves specific CVE details, not general information). The answer is factually accurate: CVE stands for 'Common Vulnerabilities and Exposures' and is maintained by MITRE Corporation. The response is comprehensive and directly helpful for creating a security glossary.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-SEC-002",
+    "domain": "cybersecurity",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available check_vulnerability_status tool despite having it available and the task explicitly requiring tool use to obtain current vulnerability data. Instead, it provided generic guidance on where to find CVE information manually. This is a clear tool_skip failure\u2014the model refused to use the tool and provided no actual answer to the specific question about affected version ranges.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available check_vulnerability_status tool despite having it available and the task explicitly requiring tool use to obtain current vulnerability data. Instead, it provided generic guidance on where to find CVE information manually. This is a clear tool_skip failure\u2014the model refused to use the tool and provided no actual answer to the specific question about affected version ranges.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-002",
+    "domain": "cybersecurity",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common security knowledge. The model correctly refrained from calling the available tool and provided a comprehensive, accurate explanation distinguishing vulnerabilities (weaknesses/flaws) from exploits (means to take advantage). The answer contains the required term 'weakness' and is factually correct.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common security knowledge. The model correctly refrained from calling the available tool and provided a comprehensive, accurate explanation distinguishing vulnerabilities (weaknesses/flaws) from exploits (means to take advantage). The answer contains the required term 'weakness' and is factually correct.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the scan_dependency tool despite it being explicitly available and the user directly requesting 'can you scan our dependency and check the current support status.' Instead, the model provided generic instructions on how to manually perform dependency scanning. This is a clear tool_skip failure. The answer does not contain the critical information that would have been returned by the tool (extended support active until 2027-09-11), making it unhelpful for the user's decision-making needs.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the scan_dependency tool despite it being explicitly available and the user directly requesting 'can you scan our dependency and check the current support status.' Instead, the model provided generic instructions on how to manually perform dependency scanning. This is a clear tool_skip failure. The answer does not contain the critical information that would have been returned by the tool (extended support active until 2027-09-11), making it unhelpful for the user's decision-making needs.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-003",
+    "domain": "cybersecurity",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task requiring common knowledge about software supply chain attacks. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation including the well-known SolarWinds example required by the ground truth. The answer is fully correct and directly helpful.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task requiring common knowledge about software supply chain attacks. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation including the well-known SolarWinds example required by the ground truth. The answer is fully correct and directly helpful.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available get_exploit_details tool despite having it available and the task explicitly requiring tool use to retrieve CVE information. Instead, it provided generic guidance on how to manually search for CVE details. This is a clear tool_skip failure. The answer contains no actual exploit details (Kafka Connect, Lazarus Group, CWE-917) that would only be available through the tool call.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available get_exploit_details tool despite having it available and the task explicitly requiring tool use to retrieve CVE information. Instead, it provided generic guidance on how to manually search for CVE details. This is a clear tool_skip failure. The answer contains no actual exploit details (Kafka Connect, Lazarus Group, CWE-917) that would only be available through the tool call.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-004",
+    "domain": "cybersecurity",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task requiring common knowledge about zero-day vulnerabilities. The model correctly refrained from calling the available tool (get_exploit_details) and provided a comprehensive, accurate explanation including the required term 'patch' and correctly explaining why it's called 'zero-day' (vendor has zero days to prepare). The answer is factually correct and directly helpful for a threat modeling workshop.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task requiring common knowledge about zero-day vulnerabilities. The model correctly refrained from calling the available tool (get_exploit_details) and provided a comprehensive, accurate explanation including the required term 'patch' and correctly explaining why it's called 'zero-day' (vendor has zero days to prepare). The answer is factually correct and directly helpful for a threat modeling workshop.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-SEC-002",
+    "domain": "cybersecurity",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available lookup_cve tool despite it being necessary to answer the user's request for specific CVE details. Instead, the model incorrectly claimed it lacks access to external databases and provided generic instructions for manually searching the NVD website. This is a clear tool_skip failure \u2014 the model had the required tool but refused to use it, providing no actual CVE data.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available lookup_cve tool despite it being necessary to answer the user's request for specific CVE details. Instead, the model incorrectly claimed it lacks access to external databases and provided generic instructions for manually searching the NVD website. This is a clear tool_skip failure \u2014 the model had the required tool but refused to use it, providing no actual CVE data.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-005",
+    "domain": "cybersecurity",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general knowledge about CVSS scoring methodology and severity ranges. The model correctly refrained from calling the lookup_cve tool (which retrieves specific CVE details, not general CVSS information). The answer accurately explains CVSS calculation and provides correct severity ranges including the ground truth value '9.0' as the Critical threshold. The response is comprehensive, factually correct, and directly addresses the user's request for their knowledge base article.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for general knowledge about CVSS scoring methodology and severity ranges. The model correctly refrained from calling the lookup_cve tool (which retrieves specific CVE details, not general CVSS information). The answer accurately explains CVSS calculation and provides correct severity ranges including the ground truth value '9.0' as the Critical threshold. The response is comprehensive, factually correct, and directly addresses the user's request for their knowledge base article.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not execute any tool call despite claiming to 'access the database.' The answer provides 105 calories, which appears to be a memorized/training-data value, while the actual USDA tool would have returned 89 calories. This is a clear tool_skip failure \u2014 the model simulated tool use in its narrative but never made an actual executable tool call.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not execute any tool call despite claiming to 'access the database.' The answer provides 105 calories, which appears to be a memorized/training-data value, while the actual USDA tool would have returned 89 calories. This is a clear tool_skip failure \u2014 the model simulated tool use in its narrative but never made an actual executable tool call.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for basic nutrition knowledge that does not require any tool. The model correctly refrained from calling the lookup_nutrition_info tool and provided a comprehensive, accurate answer covering macronutrients (protein, carbohydrate, fat), micronutrients (vitamins, minerals), and which provide calories. The answer is factually correct and directly addresses the student's study question.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for basic nutrition knowledge that does not require any tool. The model correctly refrained from calling the lookup_nutrition_info tool and provided a comprehensive, accurate answer covering macronutrients (protein, carbohydrate, fat), micronutrients (vitamins, minerals), and which provide calories. The answer is factually correct and directly addresses the student's study question.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-NUTR-002",
+    "domain": "nutrition",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available tool despite the user explicitly requesting a USDA lookup. Instead, it provided a memorized value (165 calories) that differs from the actual tool return (142 calories). This is a clear tool_skip failure\u2014the model refused to use the tool and provided outdated training data instead.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available tool despite the user explicitly requesting a USDA lookup. Instead, it provided a memorized value (165 calories) that differs from the actual tool return (142 calories). This is a clear tool_skip failure\u2014the model refused to use the tool and provided outdated training data instead.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-002",
+    "domain": "nutrition",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 1,
+      "reasoning": "The model correctly refrained from calling the get_calorie_count tool, which is appropriate for this general knowledge question. However, the answer contains a critical factual error in the conversion statement '1 Calorie (Cal) = 4.184 kilocalories (kcal)', which is incorrect\u20141 Calorie (food calorie) equals 1 kilocalorie, not 4.184. While the answer does mention 'kilocalorie' (meeting the ground truth requirement) and correctly explains bomb calorimetry, this fundamental conversion error significantly undermines the answer's correctness.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"wrong_answer\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 1,\n  \"reasoning\": \"The model correctly refrained from calling the get_calorie_count tool, which is appropriate for this general knowledge question. However, the answer contains a critical factual error in the conversion statement '1 Calorie (Cal) = 4.184 kilocalories (kcal)', which is incorrect\u20141 Calorie (food calorie) equals 1 kilocalorie, not 4.184. While the answer does mention 'kilocalorie' (meeting the ground truth requirement) and correctly explains bomb calorimetry, this fundamental conversion error significantly undermines the answer's correctness.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "RI-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 1,
+      "reasoning": "The model did not call the available check_allergen_database tool despite it being directly relevant to the user's urgent safety question. Instead, it provided generic advice about checking labels and contacting manufacturers. This is a clear tool_skip failure. The answer receives partial credit (1/3) for being generally helpful advice, but it fails to provide the critical specific information (73% contamination rate, FDA alert) that the tool would have returned and that the user urgently needs.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 1,\n  \"reasoning\": \"The model did not call the available check_allergen_database tool despite it being directly relevant to the user's urgent safety question. Instead, it provided generic advice about checking labels and contacting manufacturers. This is a clear tool_skip failure. The answer receives partial credit (1/3) for being generally helpful advice, but it fails to provide the critical specific information (73% contamination rate, FDA alert) that the tool would have returned and that the user urgently needs.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-003",
+    "domain": "nutrition",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about US food allergen labeling law. The model correctly refrained from calling the available tool and provided an accurate, comprehensive answer listing all 9 major allergens including sesame, which matches the ground truth requirement. The answer is factually correct and directly helpful for the user's poster-making purpose.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common knowledge about US food allergen labeling law. The model correctly refrained from calling the available tool and provided an accurate, comprehensive answer listing all 9 major allergens including sesame, which matches the ground truth requirement. The answer is factually correct and directly helpful for the user's poster-making purpose.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the calculate_meal_macros tool despite the user explicitly providing an order ID (ORD-5523) and requesting exact macro breakdown. Instead, it provided generic estimates based on standard serving sizes (35g protein, 44g carbs, 17g fat) that differ significantly from the actual tool return values (47.3g protein, 42.1g carbs, 26.8g fat, 614 calories). This is a clear tool_skip failure in a tool-required task where precise data was available and requested.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the calculate_meal_macros tool despite the user explicitly providing an order ID (ORD-5523) and requesting exact macro breakdown. Instead, it provided generic estimates based on standard serving sizes (35g protein, 44g carbs, 17g fat) that differ significantly from the actual tool return values (47.3g protein, 42.1g carbs, 26.8g fat, 614 calories). This is a clear tool_skip failure in a tool-required task where precise data was available and requested.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-004",
+    "domain": "nutrition",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "wrong_answer",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task requiring general nutrition knowledge. The model correctly refrained from calling any tool and provided a comprehensive, well-sourced answer covering recommended calorie ranges (2000-2600 for men, 1600-2400 for women) and relevant factors affecting calorie needs. The answer is factually accurate and directly helpful.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task requiring general nutrition knowledge. The model correctly refrained from calling any tool and provided a comprehensive, well-sourced answer covering recommended calorie ranges (2000-2600 for men, 1600-2400 for women) and relevant factors affecting calorie needs. The answer is factually accurate and directly helpful.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "OF-NUTR-002",
+    "domain": "nutrition",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not call the available lookup_nutrition_info tool despite having access to it and being asked to look up specific nutrition information. Instead, it incorrectly claimed it cannot access external databases and provided generic instructions for manual lookup. This is a clear tool_skip failure\u2014the model refused to use the tool it had available.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not call the available lookup_nutrition_info tool despite having access to it and being asked to look up specific nutrition information. Instead, it incorrectly claimed it cannot access external databases and provided generic instructions for manual lookup. This is a clear tool_skip failure\u2014the model refused to use the tool it had available.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-005",
+    "domain": "nutrition",
+    "model_id": "glm4-9b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general nutritional knowledge about fiber types. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining both soluble and insoluble fiber with appropriate food sources. The response directly addresses the question with factually correct information that is common knowledge in nutrition.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general nutritional knowledge about fiber types. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining both soluble and insoluble fiber with appropriate food sources. The response directly addresses the question with factually correct information that is common knowledge in nutrition.\"\n}\n```"
+    },
+    "agreement": true
+  }
+]

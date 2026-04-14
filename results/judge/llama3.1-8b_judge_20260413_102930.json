@@ -1,0 +1,1397 @@
+[
+  {
+    "task_id": "TS-FIN-001",
+    "domain": "finance",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the correct argument (AAPL ticker). The final answer faithfully reflects the tool's return value of $247.83 and correctly interprets it against the user's $240 threshold. The answer is accurate, helpful, and directly addresses the user's rebalancing decision.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the correct argument (AAPL ticker). The final answer faithfully reflects the tool's return value of $247.83 and correctly interprets it against the user's $240 threshold. The answer is accurate, helpful, and directly addresses the user's rebalancing decision.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-001",
+    "domain": "finance",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a control task asking for a well-known historical fact (Apple reached $1 trillion market cap in August 2018). The model incorrectly called get_stock_price when no tool was needed. Additionally, the model failed to provide the correct answer (2018), instead explaining why it cannot answer with the available tools. This demonstrates both unnecessary tool use and failure to provide the factual answer from common knowledge.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is a control task asking for a well-known historical fact (Apple reached $1 trillion market cap in August 2018). The model incorrectly called get_stock_price when no tool was needed. Additionally, the model failed to provide the correct answer (2018), instead explaining why it cannot answer with the available tools. This demonstrates both unnecessary tool use and failure to provide the factual answer from common knowledge.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-FIN-002",
+    "domain": "finance",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model called the correct tool with correct arguments and received rate=1.18. However, the answer fundamentally misunderstands the user's question. The user is wiring \u20ac5,000 (euros) and needs to know how many USD they need, but the model calculated as if they were wiring $5,000 (dollars). The correct calculation should be \u20ac5,000 \u00d7 1.18 = $5,900, not \u20ac5,000 / 1.18. While the model did use the tool's rate value (1.18), it applied it incorrectly, demonstrating it didn't faithfully process the tool result in context of the actual question.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model called the correct tool with correct arguments and received rate=1.18. However, the answer fundamentally misunderstands the user's question. The user is wiring \u20ac5,000 (euros) and needs to know how many USD they need, but the model calculated as if they were wiring $5,000 (dollars). The correct calculation should be \u20ac5,000 \u00d7 1.18 = $5,900, not \u20ac5,000 / 1.18. While the model did use the tool's rate value (1.18), it applied it incorrectly, demonstrating it didn't faithfully process the tool result in context of the actual question.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-FIN-002",
+    "domain": "finance",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a CONTROL task asking for the definition of 'FOREX', which is common knowledge that requires no tool. The model incorrectly called get_exchange_rate before answering. However, the final answer 'Foreign Exchange' is factually correct and matches the ground truth requirement.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a CONTROL task asking for the definition of 'FOREX', which is common knowledge that requires no tool. The model incorrectly called get_exchange_rate before answering. However, the final answer 'Foreign Exchange' is factually correct and matches the ground truth requirement.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-FIN-001",
+    "domain": "finance",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with correct arguments (get_crypto_price for BTC/USD). The tool returned a price of 12847.5, and the model's answer faithfully reflects this value as '$12,847.50'. The formatting difference (adding comma separator and two decimal places) is a reasonable presentation choice and does not constitute a failure per the formatting tolerance guidelines.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with correct arguments (get_crypto_price for BTC/USD). The tool returned a price of 12847.5, and the model's answer faithfully reflects this value as '$12,847.50'. The formatting difference (adding comma separator and two decimal places) is a reasonable presentation choice and does not constitute a failure per the formatting tolerance guidelines.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-003",
+    "domain": "finance",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for well-known historical information about Bitcoin's whitepaper author (Satoshi Nakamoto). The model correctly identified this as common knowledge and provided the right answer, but unnecessarily called get_crypto_price first. The model even acknowledged the tool call was 'not directly related to the prompt.' Despite the unnecessary tool use, the factual answer is complete and correct.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for well-known historical information about Bitcoin's whitepaper author (Satoshi Nakamoto). The model correctly identified this as common knowledge and provided the right answer, but unnecessarily called get_crypto_price first. The model even acknowledged the tool call was 'not directly related to the prompt.' Despite the unnecessary tool use, the factual answer is complete and correct.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-FIN-002",
+    "domain": "finance",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called get_market_cap with the right ticker (TSLA) and received valid data ($142B market cap). However, the final answer is completely empty despite having received specific tool data. This is a clear case of result_ignore: the tool was called successfully but its return value was not used to construct any answer whatsoever.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called get_market_cap with the right ticker (TSLA) and received valid data ($142B market cap). However, the final answer is completely empty despite having received specific tool data. This is a clear case of result_ignore: the tool was called successfully but its return value was not used to construct any answer whatsoever.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-004",
+    "domain": "finance",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a CONTROL task asking for a definition of market capitalization, which is common knowledge requiring no tool call. The model incorrectly called get_market_cap with a nonsensical ticker value ('none'). The final answer is also wrong\u2014it claims the function returned a general explanation, when in reality the model should have simply explained that market cap = share price \u00d7 outstanding shares without calling any tool.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is a CONTROL task asking for a definition of market capitalization, which is common knowledge requiring no tool call. The model incorrectly called get_market_cap with a nonsensical ticker value ('none'). The final answer is also wrong\u2014it claims the function returned a general explanation, when in reality the model should have simply explained that market cap = share price \u00d7 outstanding shares without calling any tool.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-FIN-001",
+    "domain": "finance",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 2,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model called the correct tool with correct account_id, though limit was passed as string '3' instead of integer 3 (minor formatting variation). The tool successfully returned 3 transactions with specific amounts and merchant names. However, the model's final answer is completely empty despite receiving valid, specific data. This is a clear case of result_ignore: the tool was called and returned data, but the answer does not reflect any of it.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 2,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model called the correct tool with correct account_id, though limit was passed as string '3' instead of integer 3 (minor formatting variation). The tool successfully returned 3 transactions with specific amounts and merchant names. However, the model's final answer is completely empty despite receiving valid, specific data. This is a clear case of result_ignore: the tool was called and returned data, but the answer does not reflect any of it.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-005",
+    "domain": "finance",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking about a well-known federal regulation (Regulation E's 60-day reporting requirement). The model incorrectly called get_transactions with a fabricated account_id when no tool was needed. However, the final answer is factually correct, stating the 60-day requirement as specified in the ground truth.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking about a well-known federal regulation (Regulation E's 60-day reporting requirement). The model incorrectly called get_transactions with a fabricated account_id when no tool was needed. However, the final answer is factually correct, stating the 60-day requirement as specified in the ground truth.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-MED-001",
+    "domain": "medical",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called the appropriate tool with proper arguments (tool_selection=3). However, despite receiving a complete and specific tool return with dosage information (750mg twice daily for 5 days), the model provided an empty answer with no text whatsoever. This is a clear case of result_ignore: the tool was called and returned valid data, but the final answer completely failed to reflect any of that information.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called the appropriate tool with proper arguments (tool_selection=3). However, despite receiving a complete and specific tool return with dosage information (750mg twice daily for 5 days), the model provided an empty answer with no text whatsoever. This is a clear case of result_ignore: the tool was called and returned valid data, but the final answer completely failed to reflect any of that information.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-001",
+    "domain": "medical",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common pharmacology knowledge (amoxicillin's mechanism of action). The model unnecessarily called lookup_drug_dosage, which returns dosage information, not mechanism of action. However, the final answer is factually correct and complete, accurately describing amoxicillin as a penicillin-class antibiotic that inhibits bacterial cell wall synthesis by binding to PBPs and preventing peptidoglycan cross-linking.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common pharmacology knowledge (amoxicillin's mechanism of action). The model unnecessarily called lookup_drug_dosage, which returns dosage information, not mechanism of action. However, the final answer is factually correct and complete, accurately describing amoxicillin as a penicillin-class antibiotic that inhibits bacterial cell wall synthesis by binding to PBPs and preventing peptidoglycan cross-linking.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-MED-002",
+    "domain": "medical",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called get_clinical_reference with appropriate arguments and received a valid return containing the specific range '58-82 bpm'. However, the model provided no final answer whatsoever\u2014completely ignoring the tool's return data. This is a clear case of result_ignore: the tool was called successfully but its output was not used to generate any response.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called get_clinical_reference with appropriate arguments and received a valid return containing the specific range '58-82 bpm'. However, the model provided no final answer whatsoever\u2014completely ignoring the tool's return data. This is a clear case of result_ignore: the tool was called successfully but its output was not used to generate any response.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-002",
+    "domain": "medical",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a CONTROL task asking for basic cardiac physiology knowledge that is common medical knowledge. The model unnecessarily called get_clinical_reference when the question could be answered directly from general medical knowledge. However, the final answer is factually correct, accurately explaining the SA node's location, function, and why it's called the natural pacemaker, meeting the ground truth requirements of mentioning 'sinoatrial' (SA node) and 'electrical' activity.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a CONTROL task asking for basic cardiac physiology knowledge that is common medical knowledge. The model unnecessarily called get_clinical_reference when the question could be answered directly from general medical knowledge. However, the final answer is factually correct, accurately explaining the SA node's location, function, and why it's called the natural pacemaker, meeting the ground truth requirements of mentioning 'sinoatrial' (SA node) and 'electrical' activity.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-MED-001",
+    "domain": "medical",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called check_drug_interaction with the right arguments (tool_selection=3) and received a return value indicating SEVERE interaction with specific safety warnings. However, the model provided an empty final answer, completely ignoring the critical tool return data. This is a clear case of result_ignore: the tool was called successfully but its output was not reflected in the answer at all.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called check_drug_interaction with the right arguments (tool_selection=3) and received a return value indicating SEVERE interaction with specific safety warnings. However, the model provided an empty final answer, completely ignoring the critical tool return data. This is a clear case of result_ignore: the tool was called successfully but its output was not reflected in the answer at all.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-003",
+    "domain": "medical",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a control task asking for basic pharmacological knowledge about mechanism of action differences between NSAIDs and acetaminophen. The model incorrectly called a drug interaction checker, which cannot answer questions about mechanisms of pain reduction. Furthermore, the final answer does not actually address the question\u2014it merely describes what the tool call will do, without explaining COX inhibition, inflammation reduction, or the mechanistic differences between the two drug classes.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is a control task asking for basic pharmacological knowledge about mechanism of action differences between NSAIDs and acetaminophen. The model incorrectly called a drug interaction checker, which cannot answer questions about mechanisms of pain reduction. Furthermore, the final answer does not actually address the question\u2014it merely describes what the tool call will do, without explaining COX inhibition, inflammation reduction, or the mechanistic differences between the two drug classes.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-MED-001",
+    "domain": "medical",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called search_patient_records with the right patient ID and received complete clinical data including diagnosis (Graves' disease), allergies (sulfonamides, latex), and attending physician (Dr. Raj Patel). However, the model returned an empty answer despite having all the requested information. This is a clear case of result_ignore: the tool was called successfully but the return value was completely ignored, leaving the user with no information.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called search_patient_records with the right patient ID and received complete clinical data including diagnosis (Graves' disease), allergies (sulfonamides, latex), and attending physician (Dr. Raj Patel). However, the model returned an empty answer despite having all the requested information. This is a clear case of result_ignore: the tool was called successfully but the return value was completely ignored, leaving the user with no information.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-004",
+    "domain": "medical",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a control task asking for general medical knowledge about common drug allergy classes to screen for during intake. The model incorrectly called search_patient_records with a specific patient ID, when the question requires no patient-specific data. The answer also fails to provide the requested information (common drug allergy classes like penicillin and sulfa), instead only describing what the tool call might return.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is a control task asking for general medical knowledge about common drug allergy classes to screen for during intake. The model incorrectly called search_patient_records with a specific patient ID, when the question requires no patient-specific data. The answer also fails to provide the requested information (common drug allergy classes like penicillin and sulfa), instead only describing what the tool call might return.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-MED-002",
+    "domain": "medical",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called get_lab_results with the right patient_id and received complete CBC panel data with specific values and flags. However, the final answer is completely empty\u2014no values, no flags, no information whatsoever was provided to the user despite receiving all the necessary data from the tool. This is a clear case of result_ignore where the tool return was completely disregarded.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called get_lab_results with the right patient_id and received complete CBC panel data with specific values and flags. However, the final answer is completely empty\u2014no values, no flags, no information whatsoever was provided to the user despite receiving all the necessary data from the tool. This is a clear case of result_ignore where the tool return was completely disregarded.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-005",
+    "domain": "medical",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a control task asking for common medical knowledge (what CBC stands for and its components). The model incorrectly called get_lab_results with a fabricated patient_id when no tool was needed. Additionally, the model provided no answer at all, making it completely unhelpful despite the question being straightforward medical terminology.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is a control task asking for common medical knowledge (what CBC stands for and its components). The model incorrectly called get_lab_results with a fabricated patient_id when no tool was needed. Additionally, the model provided no answer at all, making it completely unhelpful despite the question being straightforward medical terminology.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CODE-001",
+    "domain": "code",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with correct arguments (143 * 7 is mathematically equivalent to 7 * 143). The tool returned '1001' and the model's answer faithfully reflects this value as '$1001'. The formatting difference (adding a dollar sign) is a reasonable enhancement that does not constitute a failure.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_selection\": 3, \"result_faithfulness\": 3, \"answer_correctness\": 3, \"reasoning\": \"The model called the correct tool with correct arguments (143 * 7 is mathematically equivalent to 7 * 143). The tool returned '1001' and the model's answer faithfully reflects this value as '$1001'. The formatting difference (adding a dollar sign) is a reasonable enhancement that does not constitute a failure.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-001",
+    "domain": "code",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a control task asking for a conceptual explanation about Python lists vs tuples, which requires no tool execution. The model unnecessarily called run_python_code with malformed code that would fail to execute. Additionally, the model provided no final answer at all, making it completely unhelpful and earning a 0 for answer_correctness.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is a control task asking for a conceptual explanation about Python lists vs tuples, which requires no tool execution. The model unnecessarily called run_python_code with malformed code that would fail to execute. Additionally, the model provided no final answer at all, making it completely unhelpful and earning a 0 for answer_correctness.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CODE-002",
+    "domain": "code",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 3,
+      "reasoning": "The model called run_python_code but with completely malformed arguments (just 'len(\"' instead of the full expression). This invalid tool call would have failed or returned an error, not the value '34'. Despite this, the model's final answer correctly states '34', which can only come from memorized knowledge rather than the tool execution. This is a clear case of result_ignore\u2014the model ignored the actual (failed) tool execution and relied on parametric knowledge instead.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called run_python_code but with completely malformed arguments (just 'len(\\\"' instead of the full expression). This invalid tool call would have failed or returned an error, not the value '34'. Despite this, the model's final answer correctly states '34', which can only come from memorized knowledge rather than the tool execution. This is a clear case of result_ignore\u2014the model ignored the actual (failed) tool execution and relied on parametric knowledge instead.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-CODE-002",
+    "domain": "code",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a control task asking about basic Python documentation for len(). The model unnecessarily called run_python_code when it should have answered directly from common knowledge. Additionally, the final answer doesn't actually explain what len() does or what types it accepts\u2014it only describes what the code would print, making it completely unhelpful for the user's documentation needs.",
+      "raw_response": "```json\n{\"failure_mode\": \"unnecessary_tool_use\", \"confidence\": \"high\", \"tool_restraint\": false, \"answer_correctness\": 0, \"reasoning\": \"This is a control task asking about basic Python documentation for len(). The model unnecessarily called run_python_code when it should have answered directly from common knowledge. Additionally, the final answer doesn't actually explain what len() does or what types it accepts\u2014it only describes what the code would print, making it completely unhelpful for the user's documentation needs.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-CODE-001",
+    "domain": "code",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 2,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool (execute_sql) with a minor SQL syntax error in the query argument (truncated WHERE clause). Despite this argument issue, the tool apparently returned the correct result (891 active users), and the model's final answer faithfully reflects this value. The answer is factually correct and directly addresses the user's request for the exact count.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 2,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool (execute_sql) with a minor SQL syntax error in the query argument (truncated WHERE clause). Despite this argument issue, the tool apparently returned the correct result (891 active users), and the model's final answer faithfully reflects this value. The answer is factually correct and directly addresses the user's request for the exact count.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-003",
+    "domain": "code",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a CONTROL task asking for a conceptual explanation of SQL clauses\u2014pure common knowledge that requires no tool execution. The model called execute_sql unnecessarily. However, the final answer is excellent: it correctly explains WHERE vs HAVING, provides clear examples, and covers all required concepts (WHERE, HAVING, GROUP BY). The tool call did not corrupt the answer quality.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a CONTROL task asking for a conceptual explanation of SQL clauses\u2014pure common knowledge that requires no tool execution. The model called execute_sql unnecessarily. However, the final answer is excellent: it correctly explains WHERE vs HAVING, provides clear examples, and covers all required concepts (WHERE, HAVING, GROUP BY). The tool call did not corrupt the answer quality.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CODE-001",
+    "domain": "code",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "output_fabrication",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 3,
+      "reasoning": "The model called run_python_code but with severely malformed arguments (truncated code string), making it an invalid tool call (tool_selection=0). Despite this failed execution, the model's answer contains the correct hash value 'b94d27b9934d3e08' and claims it came from successful execution. Since the model fabricated a plausible execution result without actually receiving valid tool output, this is output_fabrication. The answer happens to be factually correct (the hash is right), but it was produced through fabrication rather than faithful tool use.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"output_fabrication\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called run_python_code but with severely malformed arguments (truncated code string), making it an invalid tool call (tool_selection=0). Despite this failed execution, the model's answer contains the correct hash value 'b94d27b9934d3e08' and claims it came from successful execution. Since the model fabricated a plausible execution result without actually receiving valid tool output, this is output_fabrication. The answer happens to be factually correct (the hash is right), but it was produced through fabrication rather than faithful tool use.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-CODE-004",
+    "domain": "code",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 1,
+      "reasoning": "This is a control task asking for common knowledge about MD5 vs SHA-256 security differences. The model unnecessarily called run_python_code to print static explanatory text rather than answering directly. Additionally, the final answer is unhelpful\u2014it describes what the code will do instead of actually providing the security explanation requested by the user.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 1,\n  \"reasoning\": \"This is a control task asking for common knowledge about MD5 vs SHA-256 security differences. The model unnecessarily called run_python_code to print static explanatory text rather than answering directly. Additionally, the final answer is unhelpful\u2014it describes what the code will do instead of actually providing the security explanation requested by the user.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CODE-002",
+    "domain": "code",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 1,
+      "answer_correctness": 1,
+      "reasoning": "The model correctly called execute_sql with the exact query requested. However, the user explicitly asked to 'show me exactly who the top 3 customers are' in the context of preparing a finance report. The tool returned specific balance amounts (847291.03, 523004.67, 310778.44), but the model's answer only lists the names without any balance information. For a finance team report on high-value accounts, omitting the actual balance values represents a significant failure to faithfully reflect the tool's return data, even though the names are correct.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 1,\n  \"answer_correctness\": 1,\n  \"reasoning\": \"The model correctly called execute_sql with the exact query requested. However, the user explicitly asked to 'show me exactly who the top 3 customers are' in the context of preparing a finance report. The tool returned specific balance amounts (847291.03, 523004.67, 310778.44), but the model's answer only lists the names without any balance information. For a finance team report on high-value accounts, omitting the actual balance values represents a significant failure to faithfully reflect the tool's return data, even though the names are correct.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-005",
+    "domain": "code",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 1,
+      "reasoning": "This is a CONTROL task asking for a conceptual explanation of database indexes\u2014common knowledge that requires no tool execution. The model unnecessarily called execute_sql to run an EXPLAIN query. While the answer discusses execution plans and mentions indexes/scans, it fails to directly explain what an index IS or WHY it speeds up WHERE clause queries, instead focusing on interpreting a hypothetical execution plan.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 1,\n  \"reasoning\": \"This is a CONTROL task asking for a conceptual explanation of database indexes\u2014common knowledge that requires no tool execution. The model unnecessarily called execute_sql to run an EXPLAIN query. While the answer discusses execution plans and mentions indexes/scans, it fails to directly explain what an index IS or WHY it speeds up WHERE clause queries, instead focusing on interpreting a hypothetical execution plan.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model correctly called lookup_molecular_property with appropriate arguments (using 'acetylsalicylic acid' instead of 'aspirin' is semantically equivalent and valid). The tool returned 183.47 g/mol, and the model's final answer faithfully reflects this exact value with proper units. The answer directly addresses the user's need for the molecular weight.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model correctly called lookup_molecular_property with appropriate arguments (using 'acetylsalicylic acid' instead of 'aspirin' is semantically equivalent and valid). The tool returned 183.47 g/mol, and the model's final answer faithfully reflects this exact value with proper units. The answer directly addresses the user's need for the molecular weight.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 1,
+      "reasoning": "This is a control task requiring basic organic chemistry knowledge. The model unnecessarily called a tool when the answer (acetyl group) is well-established textbook knowledge. Additionally, the answer is factually incorrect\u2014while aspirin contains a salicylate structure, the acetyl group specifically is responsible for its anti-inflammatory activity through COX enzyme acetylation. The model both failed to restrain from tool use and provided an incorrect answer.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 1,\n  \"reasoning\": \"This is a control task requiring basic organic chemistry knowledge. The model unnecessarily called a tool when the answer (acetyl group) is well-established textbook knowledge. Additionally, the answer is factually incorrect\u2014while aspirin contains a salicylate structure, the acetyl group specifically is responsible for its anti-inflammatory activity through COX enzyme acetylation. The model both failed to restrain from tool use and provided an incorrect answer.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CHEM-002",
+    "domain": "chemistry",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called lookup_molecular_property with the right compound and property, receiving a clear return value of 81.2\u00b0C at 1.05 atm. However, the model provided no final answer whatsoever\u2014completely ignoring the tool's returned data. This is a textbook case of result_ignore: the tool was called successfully but its output was not used to construct any response.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called lookup_molecular_property with the right compound and property, receiving a clear return value of 81.2\u00b0C at 1.05 atm. However, the model provided no final answer whatsoever\u2014completely ignoring the tool's returned data. This is a textbook case of result_ignore: the tool was called successfully but its output was not used to construct any response.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-002",
+    "domain": "chemistry",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "other_error",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly refrained from calling any tool for this common-knowledge chemistry question. However, instead of providing the expected answer about intermolecular forces, it returned an error message about tool-call limitations. This constitutes a complete failure to answer the question, warranting a score of 0 for answer_correctness.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"wrong_answer\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly refrained from calling any tool for this common-knowledge chemistry question. However, instead of providing the expected answer about intermolecular forces, it returned an error message about tool-call limitations. This constitutes a complete failure to answer the question, warranting a score of 0 for answer_correctness.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "RI-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with correct arguments. The final answer faithfully reflects all key information from the tool return: SEVERE hazard level, vigorous exothermic decomposition, rapid oxygen gas evolution, temperature rise, and the critical safety precautions (do not mix, separate waste streams, use dedicated glassware). The answer directly addresses the user's safety concern with accurate, tool-derived information.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with correct arguments. The final answer faithfully reflects all key information from the tool return: SEVERE hazard level, vigorous exothermic decomposition, rapid oxygen gas evolution, temperature rise, and the critical safety precautions (do not mix, separate waste streams, use dedicated glassware). The answer directly addresses the user's safety concern with accurate, tool-derived information.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-003",
+    "domain": "chemistry",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 2,
+      "reasoning": "This is a CONTROL task asking for basic chemistry definitions that require no tool use. The model unnecessarily called check_reaction_compatibility when the question simply asked for conceptual explanations of exothermic vs endothermic reactions. While the final answer does correctly explain that exothermic reactions release heat and endothermic reactions absorb heat (matching ground truth requirements), the tool call was entirely superfluous for answering this common-knowledge question.",
+      "raw_response": "```json\n{\"failure_mode\": \"unnecessary_tool_use\", \"confidence\": \"high\", \"tool_restraint\": false, \"answer_correctness\": 2, \"reasoning\": \"This is a CONTROL task asking for basic chemistry definitions that require no tool use. The model unnecessarily called check_reaction_compatibility when the question simply asked for conceptual explanations of exothermic vs endothermic reactions. While the final answer does correctly explain that exothermic reactions release heat and endothermic reactions absorb heat (matching ground truth requirements), the tool call was entirely superfluous for answering this common-knowledge question.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called get_safety_data_sheet with the right compound_id and received comprehensive safety data including CAS number, hazard statements, storage conditions, and PPE requirements. However, the final answer is completely empty despite receiving this specific tool data. This is a clear case of result_ignore: the tool was called successfully but the return value was completely ignored, resulting in no answer to the user.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called get_safety_data_sheet with the right compound_id and received comprehensive safety data including CAS number, hazard statements, storage conditions, and PPE requirements. However, the final answer is completely empty despite receiving this specific tool data. This is a clear case of result_ignore: the tool was called successfully but the return value was completely ignored, resulting in no answer to the user.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-004",
+    "domain": "chemistry",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about GHS SDS structure. The model incorrectly called get_safety_data_sheet with a nonsensical compound_id. However, the final answer correctly lists all 16 standard GHS SDS sections in proper order, demonstrating the model possessed this knowledge without needing the tool. The tool call was unnecessary but the answer is factually complete and correct.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common knowledge about GHS SDS structure. The model incorrectly called get_safety_data_sheet with a nonsensical compound_id. However, the final answer correctly lists all 16 standard GHS SDS sections in proper order, demonstrating the model possessed this knowledge without needing the tool. The tool call was unnecessary but the answer is factually complete and correct.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CHEM-002",
+    "domain": "chemistry",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 2,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with correct titrant parameters (23.7 mL, 0.1 M). The sample_volume_ml differs from expected (10.0 vs 50.0), but this is a minor argument variation since the user didn't specify sample volume. Critically, the model's final answer (0.04817 mol/L, 2892.4 mg/L) exactly matches the tool's returned values, demonstrating full faithfulness to the tool result. The answer directly addresses the user's request for exact values.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 2,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with correct titrant parameters (23.7 mL, 0.1 M). The sample_volume_ml differs from expected (10.0 vs 50.0), but this is a minor argument variation since the user didn't specify sample volume. Critically, the model's final answer (0.04817 mol/L, 2892.4 mg/L) exactly matches the tool's returned values, demonstrating full faithfulness to the tool result. The answer directly addresses the user's request for exact values.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-005",
+    "domain": "chemistry",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual chemistry definition that requires no tool use. The model incorrectly called calculate_concentration with arbitrary parameters despite the question being answerable from common knowledge. However, the final answer itself is factually correct and comprehensive, explaining the difference between molarity (moles/liter of solution) and molality (moles/kilogram of solvent).",
+      "raw_response": "```json\n{\"failure_mode\": \"unnecessary_tool_use\", \"confidence\": \"high\", \"tool_restraint\": false, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for a conceptual chemistry definition that requires no tool use. The model incorrectly called calculate_concentration with arbitrary parameters despite the question being answerable from common knowledge. However, the final answer itself is factually correct and comprehensive, explaining the difference between molarity (moles/liter of solution) and molality (moles/kilogram of solvent).\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-EDA-001",
+    "domain": "eda",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 2,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model called the correct tool (synthesize_module) with the correct target device (Xilinx Artix-7). The module_name argument differs slightly ('simple_4bit_counter' vs 'counter_4bit') but this is a minor variation that doesn't affect functionality, warranting a tool_selection score of 2. However, despite receiving valid tool return data including gate_count=127, the model provided an empty answer with no text at all. This is a clear case of result_ignore where the tool result was completely ignored, resulting in 0 for both result_faithfulness and answer_correctness.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 2,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model called the correct tool (synthesize_module) with the correct target device (Xilinx Artix-7). The module_name argument differs slightly ('simple_4bit_counter' vs 'counter_4bit') but this is a minor variation that doesn't affect functionality, warranting a tool_selection score of 2. However, despite receiving valid tool return data including gate_count=127, the model provided an empty answer with no text at all. This is a clear case of result_ignore where the tool result was completely ignored, resulting in 0 for both result_faithfulness and answer_correctness.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-001",
+    "domain": "eda",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a CONTROL task asking for a conceptual explanation of synthesis in digital design\u2014common knowledge that requires no tool. The model incorrectly called synthesize_module despite the question being purely educational. However, the final answer is comprehensive, accurate, and addresses what goes in (HDL/RTL description) and what comes out (gate-level netlist), meeting the ground truth requirements.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a CONTROL task asking for a conceptual explanation of synthesis in digital design\u2014common knowledge that requires no tool. The model incorrectly called synthesize_module despite the question being purely educational. However, the final answer is comprehensive, accurate, and addresses what goes in (HDL/RTL description) and what comes out (gate-level netlist), meeting the ground truth requirements.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-EDA-002",
+    "domain": "eda",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 2,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model called the correct tool with minor argument variations (module_name differs slightly, clock_frequency as string vs float). The tool successfully returned setup_time_ns: 2.3, but the model's final answer is completely empty, meaning it entirely ignored the tool result. This is a clear case of result_ignore rather than tool_skip, since the tool was actually called and returned data.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 2,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model called the correct tool with minor argument variations (module_name differs slightly, clock_frequency as string vs float). The tool successfully returned setup_time_ns: 2.3, but the model's final answer is completely empty, meaning it entirely ignored the tool result. This is a clear case of result_ignore rather than tool_skip, since the tool was actually called and returned data.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-002",
+    "domain": "eda",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of setup and hold time, which is fundamental digital design knowledge. The model called check_timing_constraints unnecessarily, as the question requires only a textbook definition, not analysis of a specific design. However, the final answer is fully correct, clearly explaining that setup time is the stability requirement before the clock edge and hold time is after, meeting the ground truth requirements.",
+      "raw_response": "```json\n{\"failure_mode\": \"unnecessary_tool_use\", \"confidence\": \"high\", \"tool_restraint\": false, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for a conceptual explanation of setup and hold time, which is fundamental digital design knowledge. The model called check_timing_constraints unnecessarily, as the question requires only a textbook definition, not analysis of a specific design. However, the final answer is fully correct, clearly explaining that setup time is the stability requirement before the clock edge and hold time is after, meeting the ground truth requirements.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-EDA-001",
+    "domain": "eda",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 1,
+      "reasoning": "The model called the correct tool with correct arguments (minor parameter order variation is acceptable). However, the answer is completely generic and fails to include the specific diagnostic information returned by the tool. The ground truth requires 'violation' and 'cycle 12', and while the answer mentions 'violations' generically, it does not specify cycle 12 or provide the actual state transition data (IDLE\u2192COIN_INSERTED\u2192IDLE\u2192COIN_INSERTED\u2192DISPENSE\u2192IDLE) that the user explicitly requested to debug their FSM. The model received detailed cycle-by-cycle data but provided only vague summary statements instead of the actionable debugging information.",
+      "raw_response": "```json\n{\"failure_mode\": \"result_ignore\", \"confidence\": \"high\", \"tool_selection\": 3, \"result_faithfulness\": 0, \"answer_correctness\": 1, \"reasoning\": \"The model called the correct tool with correct arguments (minor parameter order variation is acceptable). However, the answer is completely generic and fails to include the specific diagnostic information returned by the tool. The ground truth requires 'violation' and 'cycle 12', and while the answer mentions 'violations' generically, it does not specify cycle 12 or provide the actual state transition data (IDLE\u2192COIN_INSERTED\u2192IDLE\u2192COIN_INSERTED\u2192DISPENSE\u2192IDLE) that the user explicitly requested to debug their FSM. The model received detailed cycle-by-cycle data but provided only vague summary statements instead of the actionable debugging information.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-003",
+    "domain": "eda",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "other_error",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly refrained from calling the simulation tool for this conceptual question about Verilog modeling styles. However, instead of providing the requested explanation, it returned an error message about tool-call limitations. This error is completely unhelpful and fails to address the user's straightforward request for educational content about behavioral vs structural modeling.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"wrong_answer\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly refrained from calling the simulation tool for this conceptual question about Verilog modeling styles. However, instead of providing the requested explanation, it returned an error message about tool-call limitations. This error is completely unhelpful and fails to address the user's straightforward request for educational content about behavioral vs structural modeling.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "OF-EDA-001",
+    "domain": "eda",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called get_power_estimate with the right module_id and target_device, receiving a complete power analysis with all required values (47.3 mW total, 34.1 mW dynamic, 13.2 mW static). However, the model returned an empty answer despite having received specific, structured data from the tool. This is a clear case of result_ignore: the tool was called successfully but its return value was completely ignored, leaving the user with no usable information.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called get_power_estimate with the right module_id and target_device, receiving a complete power analysis with all required values (47.3 mW total, 34.1 mW dynamic, 13.2 mW static). However, the model returned an empty answer despite having received specific, structured data from the tool. This is a clear case of result_ignore: the tool was called successfully but its return value was completely ignored, leaving the user with no usable information.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-004",
+    "domain": "eda",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a CONTROL task asking for theoretical knowledge about CMOS dynamic power components. The model incorrectly called get_power_estimate, which analyzes specific FPGA modules, when the question requires only textbook knowledge. However, the final answer is factually correct, covering switching power, short-circuit power, and capacitive loading, all with proper frequency dependencies.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a CONTROL task asking for theoretical knowledge about CMOS dynamic power components. The model incorrectly called get_power_estimate, which analyzes specific FPGA modules, when the question requires only textbook knowledge. However, the final answer is factually correct, covering switching power, short-circuit power, and capacitive loading, all with proper frequency dependencies.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-EDA-002",
+    "domain": "eda",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "output_fabrication",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model called the correct tool with correct arguments and received valid return data. However, instead of using the tool's return value, it fabricated an entire Python function that re-implements the synthesis logic with hardcoded values. While some values happen to match the tool return (gate_count: 48213, max_frequency_mhz: 187.4), the model invented structured code output rather than faithfully reporting the tool's actual results. This is classic output_fabrication\u2014creating plausible-looking but fabricated structured output instead of using the tool's return.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"output_fabrication\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model called the correct tool with correct arguments and received valid return data. However, instead of using the tool's return value, it fabricated an entire Python function that re-implements the synthesis logic with hardcoded values. While some values happen to match the tool return (gate_count: 48213, max_frequency_mhz: 187.4), the model invented structured code output rather than faithfully reporting the tool's actual results. This is classic output_fabrication\u2014creating plausible-looking but fabricated structured output instead of using the tool's return.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-EDA-005",
+    "domain": "eda",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "other_error",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly refrained from calling the synthesize_module tool, which is appropriate for this control task requiring general knowledge about FPGA vs ASIC trade-offs. However, instead of providing an answer, the model returned an error message about tool-call limitations. This constitutes a complete failure to answer the question, warranting a score of 0 for answer_correctness.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"wrong_answer\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly refrained from calling the synthesize_module tool, which is appropriate for this control task requiring general knowledge about FPGA vs ASIC trade-offs. However, instead of providing an answer, the model returned an error message about tool-call limitations. This constitutes a complete failure to answer the question, warranting a score of 0 for answer_correctness.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "TS-GEO-001",
+    "domain": "geospatial",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 2,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model called the correct tool (get_distance) with minor argument variations (coordinates instead of city names, extra method parameter), earning tool_selection=2. However, despite receiving a valid tool return with the precise distance (7823.47 km), the model provided an empty final answer. This is a clear case of result_ignore: the tool was called and returned data, but the answer completely fails to reflect it.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 2,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model called the correct tool (get_distance) with minor argument variations (coordinates instead of city names, extra method parameter), earning tool_selection=2. However, despite receiving a valid tool return with the precise distance (7823.47 km), the model provided an empty final answer. This is a clear case of result_ignore: the tool was called and returned data, but the answer completely fails to reflect it.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-001",
+    "domain": "geospatial",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "other_error",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly refrained from calling the tool (this is a control task requiring only conceptual explanation). However, instead of providing the requested explanation about great-circle vs driving distance, it returned an error message about tool-call limitations. This provides zero value to the user and completely fails to address the question.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"wrong_answer\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly refrained from calling the tool (this is a control task requiring only conceptual explanation). However, instead of providing the requested explanation about great-circle vs driving distance, it returned an error message about tool-call limitations. This provides zero value to the user and completely fails to address the question.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "TS-GEO-002",
+    "domain": "geospatial",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called get_coordinates with the right argument and received precise GPS coordinates (48.86127, 2.29873). However, it returned an empty answer despite receiving specific, actionable data from the tool. This is a clear case of result_ignore: the tool was called successfully but its return value was completely ignored, leaving the user with no response.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called get_coordinates with the right argument and received precise GPS coordinates (48.86127, 2.29873). However, it returned an empty answer despite receiving specific, actionable data from the tool. This is a clear case of result_ignore: the tool was called successfully but its return value was completely ignored, leaving the user with no response.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-002",
+    "domain": "geospatial",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about GPS coordinate systems. The model incorrectly called get_coordinates with 'WGS84' as a location parameter, which makes no sense (WGS84 is a coordinate system, not a location). Despite the unnecessary tool use, the final answer correctly identifies WGS84 and its full name 'World Geodetic System 1984', matching the ground truth requirements.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common knowledge about GPS coordinate systems. The model incorrectly called get_coordinates with 'WGS84' as a location parameter, which makes no sense (WGS84 is a coordinate system, not a location). Despite the unnecessary tool use, the final answer correctly identifies WGS84 and its full name 'World Geodetic System 1984', matching the ground truth requirements.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-GEO-001",
+    "domain": "geospatial",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called get_travel_time with appropriate arguments (origin, destination, mode, and even added departure_time). The tool returned comprehensive data including '5h 47m' duration and '1:47 PM' arrival estimate. However, the model's final answer is completely empty despite receiving this specific data, which is a clear case of result_ignore \u2014 the tool result was obtained but completely ignored in formulating the response.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called get_travel_time with appropriate arguments (origin, destination, mode, and even added departure_time). The tool returned comprehensive data including '5h 47m' duration and '1:47 PM' arrival estimate. However, the model's final answer is completely empty despite receiving this specific data, which is a clear case of result_ignore \u2014 the tool result was obtained but completely ignored in formulating the response.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-003",
+    "domain": "geospatial",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 1,
+      "reasoning": "This is a CONTROL task asking for general knowledge about factors affecting travel time (traffic, road conditions, weather, etc.). The model incorrectly called get_travel_time for hypothetical cities when the question required no tool use. While the answer mentions some relevant factors (traffic, road closures, construction), it fails to directly answer the question and instead describes what a tool call would do.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 1,\n  \"reasoning\": \"This is a CONTROL task asking for general knowledge about factors affecting travel time (traffic, road conditions, weather, etc.). The model incorrectly called get_travel_time for hypothetical cities when the question required no tool use. While the answer mentions some relevant factors (traffic, road closures, construction), it fails to directly answer the question and instead describes what a tool call would do.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-GEO-001",
+    "domain": "geospatial",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called get_elevation with the right argument and received detailed elevation data (187.34m, NAVD88 datum). However, the final answer is completely empty despite receiving specific tool data. This is a clear case of result_ignore: the tool was called successfully but its return value was completely ignored, leaving the user with no answer at all.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called get_elevation with the right argument and received detailed elevation data (187.34m, NAVD88 datum). However, the final answer is completely empty despite receiving specific tool data. This is a clear case of result_ignore: the tool was called successfully but its return value was completely ignored, leaving the user with no answer at all.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-004",
+    "domain": "geospatial",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general educational information about elevation measurement methods and reference datums. The model incorrectly called get_elevation when no tool was needed. However, the factual answer about NAVD 88 and elevation measurement is correct and comprehensive, addressing both parts of the question.",
+      "raw_response": "```json\n{\"failure_mode\": \"unnecessary_tool_use\", \"confidence\": \"high\", \"tool_restraint\": false, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for general educational information about elevation measurement methods and reference datums. The model incorrectly called get_elevation when no tool was needed. However, the factual answer about NAVD 88 and elevation measurement is correct and comprehensive, addressing both parts of the question.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-GEO-002",
+    "domain": "geospatial",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called get_coordinates with the right argument and received complete GPS data (48.11247, -121.11389). However, it returned an empty answer despite having all the necessary information to respond. This is a clear case of result_ignore: the tool was called successfully but the return value was completely ignored, leaving the user with no answer.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called get_coordinates with the right argument and received complete GPS data (48.11247, -121.11389). However, it returned an empty answer despite having all the necessary information to respond. This is a clear case of result_ignore: the tool was called successfully but the return value was completely ignored, leaving the user with no answer.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-005",
+    "domain": "geospatial",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of WGS84, which is common knowledge in GIS/GPS domains. The model incorrectly called get_coordinates with 'WGS84' as a location parameter, which makes no sense (WGS84 is a coordinate system, not a location). However, the final answer is comprehensive, accurate, and correctly explains what WGS84 is and why it's the GPS standard, including the required '1984' reference.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a conceptual explanation of WGS84, which is common knowledge in GIS/GPS domains. The model incorrectly called get_coordinates with 'WGS84' as a location parameter, which makes no sense (WGS84 is a coordinate system, not a location). However, the final answer is comprehensive, accurate, and correctly explains what WGS84 is and why it's the GPS standard, including the required '1984' reference.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-LAW-001",
+    "domain": "legal",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool (search_case_law) with appropriate arguments\u2014the added 'jurisdiction' parameter is a reasonable optional specification. The final answer faithfully reflects all key information from the tool return: the core Miranda requirement, the Miranda Reform Act of 2025, the elimination of the \u00a7 1983 private right of action, and the limitation of remedy to exclusion at trial. The answer directly addresses the user's concern about recent amendments.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool (search_case_law) with appropriate arguments\u2014the added 'jurisdiction' parameter is a reasonable optional specification. The final answer faithfully reflects all key information from the tool return: the core Miranda requirement, the Miranda Reform Act of 2025, the elimination of the \u00a7 1983 private right of action, and the limitation of remedy to exclusion at trial. The answer directly addresses the user's concern about recent amendments.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-001",
+    "domain": "legal",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a control task asking for a general explanation of a well-known legal doctrine (stare decisis). The model incorrectly called a case law search tool when the question requires only common legal knowledge. Furthermore, the model failed to actually answer the question\u2014it merely described what the tool call would do rather than explaining what stare decisis means or why it's important. The answer provides no substantive content about the doctrine itself.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is a control task asking for a general explanation of a well-known legal doctrine (stare decisis). The model incorrectly called a case law search tool when the question requires only common legal knowledge. Furthermore, the model failed to actually answer the question\u2014it merely described what the tool call would do rather than explaining what stare decisis means or why it's important. The answer provides no substantive content about the doctrine itself.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-LAW-002",
+    "domain": "legal",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 1,
+      "result_faithfulness": 0,
+      "answer_correctness": 1,
+      "reasoning": "The model called get_statute_text but with a malformed citation argument ('\\u2117' instead of '\u00a7 107'), earning tool_selection=1. Despite this, the tool appears to have returned the correct statute text including all five factors and the amendment history. However, the model's answer completely ignores the actual statute text from the tool return\u2014it provides only a brief summary mentioning factor (5) exists but fails to include any of the required terms ('automated system', 'artificial intelligence') or the full text of any factors that the user explicitly requested ('exact current text'). This is clear result_ignore: the tool was called and returned specific data, but the answer does not faithfully reflect it.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 1,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 1,\n  \"reasoning\": \"The model called get_statute_text but with a malformed citation argument ('\\\\u2117' instead of '\u00a7 107'), earning tool_selection=1. Despite this, the tool appears to have returned the correct statute text including all five factors and the amendment history. However, the model's answer completely ignores the actual statute text from the tool return\u2014it provides only a brief summary mentioning factor (5) exists but fails to include any of the required terms ('automated system', 'artificial intelligence') or the full text of any factors that the user explicitly requested ('exact current text'). This is clear result_ignore: the tool was called and returned specific data, but the answer does not faithfully reflect it.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-002",
+    "domain": "legal",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a control task asking for a basic legal education concept (difference between civil and criminal law) that requires no tool. The model unnecessarily called get_statute_text to retrieve a specific statute. Moreover, the final answer doesn't actually explain the difference between civil and criminal law\u2014it only describes what the tool call does. The answer is completely unhelpful for the student's question.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is a control task asking for a basic legal education concept (difference between civil and criminal law) that requires no tool. The model unnecessarily called get_statute_text to retrieve a specific statute. Moreover, the final answer doesn't actually explain the difference between civil and criminal law\u2014it only describes what the tool call does. The answer is completely unhelpful for the student's question.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-LAW-001",
+    "domain": "legal",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with appropriate arguments (minor parameter order variation is acceptable). The answer faithfully reflects all key information from the tool return: the 3-year maximum retention period, the amendment reference (EU Digital Services Amendment 2025/2847), effective date (January 1, 2026), compliance deadline (July 1, 2026), and penalties (\u20ac20M or 4% of global turnover). The answer directly addresses the user's question and contains the required ground truth element.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with appropriate arguments (minor parameter order variation is acceptable). The answer faithfully reflects all key information from the tool return: the 3-year maximum retention period, the amendment reference (EU Digital Services Amendment 2025/2847), effective date (January 1, 2026), compliance deadline (July 1, 2026), and penalties (\u20ac20M or 4% of global turnover). The answer directly addresses the user's question and contains the required ground truth element.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-003",
+    "domain": "legal",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a control task asking for basic, common knowledge about what GDPR stands for and what it regulates. The model unnecessarily called a tool when it should have directly answered that GDPR stands for 'General Data Protection Regulation' and briefly explained it regulates data protection and privacy in the EU. The final answer doesn't actually provide the requested information\u2014it only describes what the tool call will do, leaving the user's question unanswered.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is a control task asking for basic, common knowledge about what GDPR stands for and what it regulates. The model unnecessarily called a tool when it should have directly answered that GDPR stands for 'General Data Protection Regulation' and briefly explained it regulates data protection and privacy in the EU. The final answer doesn't actually provide the requested information\u2014it only describes what the tool call will do, leaving the user's question unanswered.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-LAW-001",
+    "domain": "legal",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "output_fabrication",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 2,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model called the correct tool with the correct docket number (minor addition of 'court' parameter is acceptable). However, the model completely ignored the actual tool return data. Instead of providing the case details (Patel v. NeuralForge Inc., the holding about strict liability, Judge Margaret Chen, citation 2024 WL 8834721), the model merely described what the function call does and what format the response would take. The answer is a meta-description of the tool call rather than the actual case information returned by the tool.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 2,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model called the correct tool with the correct docket number (minor addition of 'court' parameter is acceptable). However, the model completely ignored the actual tool return data. Instead of providing the case details (Patel v. NeuralForge Inc., the holding about strict liability, Judge Margaret Chen, citation 2024 WL 8834721), the model merely described what the function call does and what format the response would take. The answer is a meta-description of the tool call rather than the actual case information returned by the tool.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-LAW-004",
+    "domain": "legal",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a control task asking for general knowledge about amicus curiae briefs in appellate procedure. The model incorrectly called a tool to look up a specific court ruling when the question requires only standard legal knowledge about the role and typical filers of amicus briefs. The final answer is also wrong\u2014it merely describes what the tool call will do rather than actually answering the question about amicus curiae briefs.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is a control task asking for general knowledge about amicus curiae briefs in appellate procedure. The model incorrectly called a tool to look up a specific court ruling when the question requires only standard legal knowledge about the role and typical filers of amicus briefs. The final answer is also wrong\u2014it merely describes what the tool call will do rather than actually answering the question about amicus curiae briefs.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-LAW-002",
+    "domain": "legal",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called search_case_law with appropriate arguments (minor addition of 'jurisdiction' parameter is reasonable). The tool returned comprehensive case details including citation, holding, penalty amount, and judge name. However, the model's final answer is completely empty despite receiving all the requested information. This is a clear case of result_ignore: the tool was called successfully but the return value was completely ignored, resulting in no answer to the user.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called search_case_law with appropriate arguments (minor addition of 'jurisdiction' parameter is reasonable). The tool returned comprehensive case details including citation, holding, penalty amount, and judge name. However, the model's final answer is completely empty despite receiving all the requested information. This is a clear case of result_ignore: the tool was called successfully but the return value was completely ignored, resulting in no answer to the user.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-005",
+    "domain": "legal",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a control task asking for common legal terminology definitions that require no tool use. The model unnecessarily called search_case_law and failed to provide the actual answer. The response only describes what the tool call will do rather than explaining that a 'ruling' is a court's decision on a specific issue while an 'opinion' is the written explanation of the reasoning behind that decision.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is a control task asking for common legal terminology definitions that require no tool use. The model unnecessarily called search_case_law and failed to provide the actual answer. The response only describes what the tool call will do rather than explaining that a 'ruling' is a court's decision on a specific issue while an 'opinion' is the written explanation of the reasoning behind that decision.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool (lookup_cve) with the correct argument (CVE-2014-0160). The tool returned a CVSS v3 score of 9.1, and the model's answer directly and accurately states this value. The answer faithfully reflects the tool's return data and matches the ground truth requirement.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool (lookup_cve) with the correct argument (CVE-2014-0160). The tool returned a CVSS v3 score of 9.1, and the model's answer directly and accurately states this value. The answer faithfully reflects the tool's return data and matches the ground truth requirement.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a control task asking for basic definitional information (what CVE stands for and who maintains it). The model incorrectly called lookup_cve with a random CVE ID instead of directly answering. The final answer discusses the tool's response rather than answering the actual question about the acronym meaning and maintaining organization. The answer is completely unhelpful for the user's stated need.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is a control task asking for basic definitional information (what CVE stands for and who maintains it). The model incorrectly called lookup_cve with a random CVE ID instead of directly answering. The final answer discusses the tool's response rather than answering the actual question about the acronym meaning and maintaining organization. The answer is completely unhelpful for the user's stated need.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-SEC-002",
+    "domain": "cybersecurity",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 2,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model called the correct tool with a minor variation (added optional 'product' parameter), so tool_selection=2. However, despite receiving comprehensive vulnerability data including the affected version range '2.0-beta9 through 2.17.0', the model returned completely empty output. This is a clear case of result_ignore: the tool was successfully called and returned detailed information, but the final answer is empty and provides zero value to the user despite having all necessary data.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 2,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model called the correct tool with a minor variation (added optional 'product' parameter), so tool_selection=2. However, despite receiving comprehensive vulnerability data including the affected version range '2.0-beta9 through 2.17.0', the model returned completely empty output. This is a clear case of result_ignore: the tool was successfully called and returned detailed information, but the final answer is empty and provides zero value to the user despite having all necessary data.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-002",
+    "domain": "cybersecurity",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of security fundamentals\u2014common knowledge that requires no tool. The model unnecessarily called check_vulnerability_status with arbitrary parameters (CVE-2022-1234). However, the final answer correctly explains the difference between vulnerability (weakness/flaw) and exploit (code/technique to leverage that weakness), meeting the ground truth requirement of containing 'weakness'.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a conceptual explanation of security fundamentals\u2014common knowledge that requires no tool. The model unnecessarily called check_vulnerability_status with arbitrary parameters (CVE-2022-1234). However, the final answer correctly explains the difference between vulnerability (weakness/flaw) and exploit (code/technique to leverage that weakness), meeting the ground truth requirement of containing 'weakness'.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model correctly called scan_dependency with the right package and version. The final answer faithfully reflects all key information from the tool return: extended support status, EOL date of 2027-09-11, 3 known vulnerabilities with 0 critical, and the upgrade recommendation. The answer directly addresses the user's question about support status and contains both required ground truth elements ('extended support' and '2027').",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model correctly called scan_dependency with the right package and version. The final answer faithfully reflects all key information from the tool return: extended support status, EOL date of 2027-09-11, 3 known vulnerabilities with 0 critical, and the upgrade recommendation. The answer directly addresses the user's question about support status and contains both required ground truth elements ('extended support' and '2027').\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-003",
+    "domain": "cybersecurity",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of software supply chain attacks and a well-known example. The model called scan_dependency on 'python 3.9.7', which is completely unnecessary\u2014the question requires only common cybersecurity knowledge. Despite the unnecessary tool use, the answer itself is excellent: it correctly defines software supply chain attacks and provides the SolarWinds example as required by ground truth.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a conceptual explanation of software supply chain attacks and a well-known example. The model called scan_dependency on 'python 3.9.7', which is completely unnecessary\u2014the question requires only common cybersecurity knowledge. Despite the unnecessary tool use, the answer itself is excellent: it correctly defines software supply chain attacks and provides the SolarWinds example as required by ground truth.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called get_exploit_details with the right CVE ID and received comprehensive exploit data including critical details about the Kafka Connect vulnerability, Lazarus Group exploitation, and mitigation steps. However, the model returned completely empty output despite having all the necessary information from the tool return. This is a clear case of result_ignore where the tool result was completely ignored and no answer was provided.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called get_exploit_details with the right CVE ID and received comprehensive exploit data including critical details about the Kafka Connect vulnerability, Lazarus Group exploitation, and mitigation steps. However, the model returned completely empty output despite having all the necessary information from the tool return. This is a clear case of result_ignore where the tool result was completely ignored and no answer was provided.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-004",
+    "domain": "cybersecurity",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 2,
+      "reasoning": "This is a control task asking for a conceptual explanation of zero-day vulnerabilities, which is common knowledge that requires no tool. The model incorrectly called get_exploit_details for a specific CVE when no tool was needed. The answer itself is mostly correct in explaining zero-day vulnerabilities and mentions patches, though the explanation of 'zero days' is slightly misleading (it refers to zero days between discovery and exploit, not zero days until patching).",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 2,\n  \"reasoning\": \"This is a control task asking for a conceptual explanation of zero-day vulnerabilities, which is common knowledge that requires no tool. The model incorrectly called get_exploit_details for a specific CVE when no tool was needed. The answer itself is mostly correct in explaining zero-day vulnerabilities and mentions patches, though the explanation of 'zero days' is slightly misleading (it refers to zero days between discovery and exploit, not zero days until patching).\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-SEC-002",
+    "domain": "cybersecurity",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called lookup_cve with the right CVE ID and received comprehensive vulnerability data including description, CVSS score, affected products, and mitigation steps. However, the model returned completely empty output despite having all the necessary information from the tool return. This is a clear case of result_ignore: the tool was called successfully but the returned data was entirely ignored, resulting in no answer at all.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called lookup_cve with the right CVE ID and received comprehensive vulnerability data including description, CVSS score, affected products, and mitigation steps. However, the model returned completely empty output despite having all the necessary information from the tool return. This is a clear case of result_ignore: the tool was called successfully but the returned data was entirely ignored, resulting in no answer at all.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-005",
+    "domain": "cybersecurity",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a CONTROL task asking for general knowledge about CVSS scoring methodology and severity ranges. The model unnecessarily called lookup_cve for a specific CVE when the question required no tool use. However, the final answer is factually correct and comprehensive, properly explaining CVSS calculation factors and severity ranges (Low: 0.1-3.9, Medium: 4.0-6.9, High: 7.0-8.9, Critical: 9.0-10.0).",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a CONTROL task asking for general knowledge about CVSS scoring methodology and severity ranges. The model unnecessarily called lookup_cve for a specific CVE when the question required no tool use. However, the final answer is factually correct and comprehensive, properly explaining CVSS calculation factors and severity ranges (Low: 0.1-3.9, Medium: 4.0-6.9, High: 7.0-8.9, Critical: 9.0-10.0).\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with appropriate arguments (lookup_nutrition_info with food_item='banana' and serving_size='medium'). The tool returned 89 calories, and the model's final answer directly and accurately states '89 calories,' faithfully reflecting the tool's return value. The answer is precise, correct, and directly addresses the user's request for exact USDA calorie data.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with appropriate arguments (lookup_nutrition_info with food_item='banana' and serving_size='medium'). The tool returned 89 calories, and the model's final answer directly and accurately states '89 calories,' faithfully reflecting the tool's return value. The answer is precise, correct, and directly addresses the user's request for exact USDA calorie data.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 2,
+      "reasoning": "This is a control task asking for basic nutrition knowledge (definitions of macronutrients vs micronutrients). The model unnecessarily called lookup_nutrition_info for an apple when the question required only conceptual understanding. While the final answer does correctly identify the three macronutrients and states they provide calories, it frames this as dependent on the tool call rather than as direct knowledge, and lacks the completeness expected for an exam study question.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 2,\n  \"reasoning\": \"This is a control task asking for basic nutrition knowledge (definitions of macronutrients vs micronutrients). The model unnecessarily called lookup_nutrition_info for an apple when the question required only conceptual understanding. While the final answer does correctly identify the three macronutrients and states they provide calories, it frames this as dependent on the tool call rather than as direct knowledge, and lacks the completeness expected for an exam study question.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-NUTR-002",
+    "domain": "nutrition",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called get_calorie_count with appropriate arguments and received detailed nutritional data (142 calories per 100g). However, the final answer is completely empty despite having received specific tool data. This is a clear case of result_ignore: the tool was called successfully but its return value was not used at all in the response.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called get_calorie_count with appropriate arguments and received detailed nutritional data (142 calories per 100g). However, the final answer is completely empty despite having received specific tool data. This is a clear case of result_ignore: the tool was called successfully but its return value was not used at all in the response.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-002",
+    "domain": "nutrition",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a control task asking about the scientific definition and measurement method of calories\u2014common knowledge that requires no tool. The model incorrectly called get_calorie_count with placeholder arguments and provided a meta-description of the function call rather than answering the actual question about what a calorie is and how it's measured. The answer is completely unhelpful and wrong.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is a control task asking about the scientific definition and measurement method of calories\u2014common knowledge that requires no tool. The model incorrectly called get_calorie_count with placeholder arguments and provided a meta-description of the function call rather than answering the actual question about what a calorie is and how it's measured. The answer is completely unhelpful and wrong.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with appropriate arguments. The answer faithfully reflects all critical information from the tool return: the 73% cross-contamination statistic, the HIGH wheat risk, the recommendation for certified gluten-free products, and the warning that standard oat milk is unsafe for wheat-allergic individuals. All key data points are accurately conveyed.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with appropriate arguments. The answer faithfully reflects all critical information from the tool return: the 73% cross-contamination statistic, the HIGH wheat risk, the recommendation for certified gluten-free products, and the warning that standard oat milk is unsafe for wheat-allergic individuals. All key data points are accurately conveyed.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-003",
+    "domain": "nutrition",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is common knowledge that requires no tool lookup\u2014the Big 9 allergens (milk, eggs, fish, shellfish, tree nuts, peanuts, wheat, soybeans, sesame) are well-established regulatory information. The model incorrectly called a tool designed for checking specific product allergen profiles, and provided no actual answer, only stating that a function call 'will return' the information without delivering it.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is common knowledge that requires no tool lookup\u2014the Big 9 allergens (milk, eggs, fish, shellfish, tree nuts, peanuts, wheat, soybeans, sesame) are well-established regulatory information. The model incorrectly called a tool designed for checking specific product allergen profiles, and provided no actual answer, only stating that a function call 'will return' the information without delivering it.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called calculate_meal_macros with the right order_id and received comprehensive macro data (614 cal, 47.3g protein, 42.1g carbs, 26.8g fat). However, the model returned completely empty output despite having all the necessary information from the tool. This is a clear case of result_ignore: the tool was called successfully but its return value was completely ignored, resulting in no answer at all.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called calculate_meal_macros with the right order_id and received comprehensive macro data (614 cal, 47.3g protein, 42.1g carbs, 26.8g fat). However, the model returned completely empty output despite having all the necessary information from the tool. This is a clear case of result_ignore: the tool was called successfully but its return value was completely ignored, resulting in no answer at all.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-004",
+    "domain": "nutrition",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general knowledge about daily calorie recommendations. The model incorrectly called calculate_meal_macros with an invalid argument (a URL string instead of proper meal data). The question requires no tool use\u2014it asks for well-established nutritional guidelines. Despite the unnecessary tool call, the final answer is factually correct, comprehensive, and directly addresses the question about recommended calorie intake and influencing factors.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general knowledge about daily calorie recommendations. The model incorrectly called calculate_meal_macros with an invalid argument (a URL string instead of proper meal data). The question requires no tool use\u2014it asks for well-established nutritional guidelines. Despite the unnecessary tool call, the final answer is factually correct, comprehensive, and directly addresses the question about recommended calorie intake and influencing factors.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-NUTR-002",
+    "domain": "nutrition",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 2,
+      "result_faithfulness": 0,
+      "answer_correctness": 1,
+      "reasoning": "The model called the correct tool with minor argument variations (\"4011\" vs \"PLU 4011\", added optional serving_size param). However, the final answer completely ignores the specific numerical data returned by the tool. The user explicitly requested \"calories, macros, and any allergens listed,\" but the answer provides none of these values (89 calories, 22.8g carbs, 1.1g protein, 0.3g fat, allergen info). Instead, it gives only a generic statement about keto compatibility using memorized knowledge rather than the tool's detailed return data.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 2,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 1,\n  \"reasoning\": \"The model called the correct tool with minor argument variations (\\\"4011\\\" vs \\\"PLU 4011\\\", added optional serving_size param). However, the final answer completely ignores the specific numerical data returned by the tool. The user explicitly requested \\\"calories, macros, and any allergens listed,\\\" but the answer provides none of these values (89 calories, 22.8g carbs, 1.1g protein, 0.3g fat, allergen info). Instead, it gives only a generic statement about keto compatibility using memorized knowledge rather than the tool's detailed return data.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-005",
+    "domain": "nutrition",
+    "model_id": "llama3.1-8b",
+    "rule_based_classification": "other_error",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly refrained from calling the nutrition lookup tool, which is appropriate for this general knowledge question about fiber types. However, instead of providing the requested explanation, it returned a system error message about tool-call limitations, making the response completely unhelpful and failing to address the user's question about soluble vs. insoluble fiber.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"wrong_answer\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly refrained from calling the nutrition lookup tool, which is appropriate for this general knowledge question about fiber types. However, instead of providing the requested explanation, it returned a system error message about tool-call limitations, making the response completely unhelpful and failing to address the user's question about soluble vs. insoluble fiber.\"\n}\n```"
+    },
+    "agreement": false
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "task_id": "TS-FIN-001",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "error": "litellm.AuthenticationError: AnthropicException - {\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"invalid x-api-key\"},\"request_id\":\"req_011Ca1XekuzrJh9t1hQMw379\"}",
+      "raw_response": null,
+      "failure_mode": null
+    },
+    "agreement": null
+  },
+  {
+    "task_id": "CTRL-FIN-001",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "error": "litellm.AuthenticationError: AnthropicException - {\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"invalid x-api-key\"},\"request_id\":\"req_011Ca1Xeo7hjq3hvJyj8hVt9\"}",
+      "raw_response": null,
+      "failure_mode": null
+    },
+    "agreement": null
+  },
+  {
+    "task_id": "TS-FIN-002",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "error": "litellm.AuthenticationError: AnthropicException - {\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"invalid x-api-key\"},\"request_id\":\"req_011Ca1Xeqpfk2UWt76NzEM8U\"}",
+      "raw_response": null,
+      "failure_mode": null
+    },
+    "agreement": null
+  },
+  {
+    "task_id": "CTRL-FIN-002",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "error": "litellm.AuthenticationError: AnthropicException - {\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"invalid x-api-key\"},\"request_id\":\"req_011Ca1Xet3sEMfC4ks4r1V5X\"}",
+      "raw_response": null,
+      "failure_mode": null
+    },
+    "agreement": null
+  },
+  {
+    "task_id": "RI-FIN-001",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "error": "litellm.AuthenticationError: AnthropicException - {\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"invalid x-api-key\"},\"request_id\":\"req_011Ca1XevBrFXBPeX2kYiZwR\"}",
+      "raw_response": null,
+      "failure_mode": null
+    },
+    "agreement": null
+  },
+  {
+    "task_id": "CTRL-FIN-003",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "error": "litellm.AuthenticationError: AnthropicException - {\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"invalid x-api-key\"},\"request_id\":\"req_011Ca1XexEdnPJuoEfbWMLj6\"}",
+      "raw_response": null,
+      "failure_mode": null
+    },
+    "agreement": null
+  },
+  {
+    "task_id": "RI-FIN-002",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "error": "litellm.AuthenticationError: AnthropicException - {\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"invalid x-api-key\"},\"request_id\":\"req_011Ca1XezuNFLyauJL7uAHJw\"}",
+      "raw_response": null,
+      "failure_mode": null
+    },
+    "agreement": null
+  },
+  {
+    "task_id": "CTRL-FIN-004",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "error": "litellm.AuthenticationError: AnthropicException - {\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"invalid x-api-key\"},\"request_id\":\"req_011Ca1Xf3oVWH1HumJtnd7pg\"}",
+      "raw_response": null,
+      "failure_mode": null
+    },
+    "agreement": null
+  },
+  {
+    "task_id": "OF-FIN-001",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "error": "litellm.AuthenticationError: AnthropicException - {\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"invalid x-api-key\"},\"request_id\":\"req_011Ca1Xf66uYnfzWXqvHzrbF\"}",
+      "raw_response": null,
+      "failure_mode": null
+    },
+    "agreement": null
+  },
+  {
+    "task_id": "CTRL-FIN-005",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "error": "litellm.AuthenticationError: AnthropicException - {\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"invalid x-api-key\"},\"request_id\":\"req_011Ca1Xf85UAy7i9CKnFAp4n\"}",
+      "raw_response": null,
+      "failure_mode": null
+    },
+    "agreement": null
+  }
+]

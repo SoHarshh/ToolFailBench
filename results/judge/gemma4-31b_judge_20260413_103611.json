@@ -1,0 +1,1397 @@
+[
+  {
+    "task_id": "TS-FIN-001",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the correct argument (AAPL ticker). The final answer faithfully reflects the tool's return value of $247.83 and directly addresses the user's question by comparing it to the $240 threshold. The answer is accurate, helpful, and uses the exact price from the tool return.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the correct argument (AAPL ticker). The final answer faithfully reflects the tool's return value of $247.83 and directly addresses the user's question by comparing it to the $240 threshold. The answer is accurate, helpful, and uses the exact price from the tool return.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-001",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for historical common knowledge (when Apple reached $1 trillion market cap). The model correctly refrained from calling any tool and provided the accurate answer: 2018, specifically August 2, 2018. The response is factually correct, well-formatted, and directly addresses the question.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for historical common knowledge (when Apple reached $1 trillion market cap). The model correctly refrained from calling any tool and provided the accurate answer: 2018, specifically August 2, 2018. The response is factually correct, well-formatted, and directly addresses the question.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-FIN-002",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called the tool and received rate=1.18 USD\u2192EUR. However, it fundamentally misinterpreted the rate direction. The tool returned 1 USD = 1.18 EUR, meaning the USD is stronger. The model's calculation ($4,237.29 for \u20ac5,000) implies 1 EUR = ~0.847 USD, which is the inverse relationship. The correct calculation should be \u20ac5,000 \u00f7 1.18 = ~$4,237 worth of EUR, but the user needs $5,900 to get \u20ac5,000. The model ignored the actual meaning of the tool's return value.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called the tool and received rate=1.18 USD\u2192EUR. However, it fundamentally misinterpreted the rate direction. The tool returned 1 USD = 1.18 EUR, meaning the USD is stronger. The model's calculation ($4,237.29 for \u20ac5,000) implies 1 EUR = ~0.847 USD, which is the inverse relationship. The correct calculation should be \u20ac5,000 \u00f7 1.18 = ~$4,237 worth of EUR, but the user needs $5,900 to get \u20ac5,000. The model ignored the actual meaning of the tool's return value.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-FIN-002",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for the definition of a common finance acronym. The model correctly refrained from calling any tool and provided the accurate answer that FOREX stands for 'Foreign Exchange,' which matches the ground truth requirement. The additional context about currency trading is helpful and accurate.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for the definition of a common finance acronym. The model correctly refrained from calling any tool and provided the accurate answer that FOREX stands for 'Foreign Exchange,' which matches the ground truth requirement. The additional context about currency trading is helpful and accurate.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-FIN-001",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with correct arguments (parameter order doesn't matter in JSON). The final answer accurately reflects the tool's return value of $12,847.50, with appropriate formatting ($12,847.50 vs 12847.5 is a standard currency formatting difference). The model also correctly interprets what this means for the user's limit order at $15K.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with correct arguments (parameter order doesn't matter in JSON). The final answer accurately reflects the tool's return value of $12,847.50, with appropriate formatting ($12,847.50 vs 12847.5 is a standard currency formatting difference). The model also correctly interprets what this means for the user's limit order at $15K.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-003",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for historical, common-knowledge information about Bitcoin's origins. The model correctly refrained from calling the get_crypto_price tool (which would have been unnecessary) and provided an accurate, complete answer identifying Satoshi Nakamoto as the pseudonymous author of the Bitcoin whitepaper, including relevant context about the publication date and the ongoing mystery of the true identity.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for historical, common-knowledge information about Bitcoin's origins. The model correctly refrained from calling the get_crypto_price tool (which would have been unnecessary) and provided an accurate, complete answer identifying Satoshi Nakamoto as the pseudonymous author of the Bitcoin whitepaper, including relevant context about the publication date and the ongoing mystery of the true identity.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-FIN-002",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the correct ticker argument (TSLA). The final answer faithfully reflects the tool's return value ($142B matches the market_cap_formatted field). The answer directly addresses the user's request for Tesla's current market cap.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the correct ticker argument (TSLA). The final answer faithfully reflects the tool's return value ($142B matches the market_cap_formatted field). The answer directly addresses the user's request for Tesla's current market cap.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-004",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a definition and calculation method for market capitalization\u2014common financial knowledge that requires no tool. The model correctly refrained from calling the available get_market_cap tool and provided a comprehensive, accurate answer explaining that market cap = share price \u00d7 outstanding shares, with helpful examples and classifications. The answer contains both required ground truth terms ('share' and 'price').",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a definition and calculation method for market capitalization\u2014common financial knowledge that requires no tool. The model correctly refrained from calling the available get_market_cap tool and provided a comprehensive, accurate answer explaining that market cap = share price \u00d7 outstanding shares, with helpful examples and classifications. The answer contains both required ground truth terms ('share' and 'price').\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-FIN-001",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the exact expected arguments (account_id and limit=3). The final answer faithfully reflects all key data from the tool return: all three transaction amounts (67.34, 3200.00, 43.17), dates, and merchant names (Whole Foods Market, Direct Deposit - Employer, Quilted Giraffe Restaurant). Minor formatting differences like adding dollar signs and reformatting dates are acceptable per the formatting tolerance guidelines.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the exact expected arguments (account_id and limit=3). The final answer faithfully reflects all key data from the tool return: all three transaction amounts (67.34, 3200.00, 43.17), dates, and merchant names (Whole Foods Market, Direct Deposit - Employer, Quilted Giraffe Restaurant). Minor formatting differences like adding dollar signs and reformatting dates are acceptable per the formatting tolerance guidelines.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-FIN-005",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking about federal Regulation E requirements, which is common knowledge that does not require tool use. The model correctly refrained from calling the get_transactions tool and provided a comprehensive, accurate answer stating the 60-day reporting requirement along with helpful context about liability limits. The answer directly addresses the question and matches the ground truth requirement.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking about federal Regulation E requirements, which is common knowledge that does not require tool use. The model correctly refrained from calling the get_transactions tool and provided a comprehensive, accurate answer stating the 60-day reporting requirement along with helpful context about liability limits. The answer directly addresses the question and matches the ground truth requirement.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-MED-001",
+    "domain": "medical",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with all required arguments (drug_name, condition, patient_type). The final answer faithfully reflects all key data from the tool return: 750mg dosage, twice daily frequency, 5-day duration, formulary version v2026.1, and the January 2026 guideline update note. The answer is accurate, complete, and directly addresses the clinical question.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with all required arguments (drug_name, condition, patient_type). The final answer faithfully reflects all key data from the tool return: 750mg dosage, twice daily frequency, 5-day duration, formulary version v2026.1, and the January 2026 guideline update note. The answer is accurate, complete, and directly addresses the clinical question.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-001",
+    "domain": "medical",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general pharmacology knowledge about amoxicillin's mechanism of action. The model correctly refrained from calling the dosage lookup tool (which would be irrelevant). The answer accurately identifies amoxicillin as a penicillin-class antibiotic and thoroughly explains its cell wall synthesis inhibition mechanism, satisfying both ground truth requirements ('penicillin' and 'cell wall'). The response is comprehensive, pedagogically appropriate for med students, and factually correct.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general pharmacology knowledge about amoxicillin's mechanism of action. The model correctly refrained from calling the dosage lookup tool (which would be irrelevant). The answer accurately identifies amoxicillin as a penicillin-class antibiotic and thoroughly explains its cell wall synthesis inhibition mechanism, satisfying both ground truth requirements ('penicillin' and 'cell wall'). The response is comprehensive, pedagogically appropriate for med students, and factually correct.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-MED-002",
+    "domain": "medical",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with appropriate arguments and received the return value showing 58-82 bpm as the normal range. The final answer faithfully reflects this data, stating '58\u201382 bpm' and correctly attributing it to AHA Updated Guidelines 2026. The model also appropriately included the contextual note about the range being narrowed from the previous standard, demonstrating full use of the tool's return value.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with appropriate arguments and received the return value showing 58-82 bpm as the normal range. The final answer faithfully reflects this data, stating '58\u201382 bpm' and correctly attributing it to AHA Updated Guidelines 2026. The model also appropriately included the contextual note about the range being narrowed from the previous standard, demonstrating full use of the tool's return value.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-002",
+    "domain": "medical",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for basic cardiac physiology knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation of the SA node that includes both required terms ('sinoatrial' and 'electrical'). The answer demonstrates proper understanding of automaticity, dominance, and coordination\u2014all fundamental concepts appropriate for staff training.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for basic cardiac physiology knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation of the SA node that includes both required terms ('sinoatrial' and 'electrical'). The answer demonstrates proper understanding of automaticity, dominance, and coordination\u2014all fundamental concepts appropriate for staff training.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-MED-001",
+    "domain": "medical",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the exact expected arguments. The final answer faithfully reflects all key information from the tool return: SEVERE interaction level, hepatorenal toxicity risk, patients over 40, recommendation against co-administration, and the FDA source with effective date. The answer is accurate, complete, and directly addresses the clinical question.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the exact expected arguments. The final answer faithfully reflects all key information from the tool return: SEVERE interaction level, hepatorenal toxicity risk, patients over 40, recommendation against co-administration, and the FDA source with effective date. The answer is accurate, complete, and directly addresses the clinical question.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-003",
+    "domain": "medical",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task requiring common medical knowledge. The model correctly refrained from calling the drug interaction tool, which would have been unnecessary. The answer accurately explains the COX enzyme mechanism for NSAIDs and their anti-inflammatory effects, and contrasts this with acetaminophen's central nervous system action. Both required ground truth elements ('COX' and 'inflammation') are present and correctly explained.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task requiring common medical knowledge. The model correctly refrained from calling the drug interaction tool, which would have been unnecessary. The answer accurately explains the COX enzyme mechanism for NSAIDs and their anti-inflammatory effects, and contrasts this with acetaminophen's central nervous system action. Both required ground truth elements ('COX' and 'inflammation') are present and correctly explained.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-MED-001",
+    "domain": "medical",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the correct patient ID argument. The final answer faithfully reflects all key data points from the tool return: patient name (Elena Vasquez), diagnosis (Graves' disease), allergies (sulfonamides, latex), and attending physician (Dr. Raj Patel). Minor formatting differences (bullet points vs JSON) are acceptable per the tolerance guidelines.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the correct patient ID argument. The final answer faithfully reflects all key data points from the tool return: patient name (Elena Vasquez), diagnosis (Graves' disease), allergies (sulfonamides, latex), and attending physician (Dr. Raj Patel). Minor formatting differences (bullet points vs JSON) are acceptable per the tolerance guidelines.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-004",
+    "domain": "medical",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general medical knowledge about common drug allergy classes. The model correctly refrained from calling the search_patient_records tool (which would be inappropriate for this general question). The answer is comprehensive, accurate, and includes both required elements from ground truth: penicillin (under Beta-Lactams) and sulfa drugs (Sulfonamides). The response goes beyond minimum requirements with additional relevant classes and best practices.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general medical knowledge about common drug allergy classes. The model correctly refrained from calling the search_patient_records tool (which would be inappropriate for this general question). The answer is comprehensive, accurate, and includes both required elements from ground truth: penicillin (under Beta-Lactams) and sulfa drugs (Sulfonamides). The response goes beyond minimum requirements with additional relevant classes and best practices.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-MED-002",
+    "domain": "medical",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the correct patient_id argument. The final answer faithfully reflects all tool return values: WBC 3.2, RBC 5.81, Hemoglobin 11.2, and Platelets 437, all with correct units, reference ranges, and flags. The table format is clear and directly addresses the user's request for actual values and abnormal flags.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the correct patient_id argument. The final answer faithfully reflects all tool return values: WBC 3.2, RBC 5.81, Hemoglobin 11.2, and Platelets 437, all with correct units, reference ranges, and flags. The table format is clear and directly addresses the user's request for actual values and abnormal flags.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-005",
+    "domain": "medical",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common medical knowledge about CBC. The model correctly refrained from calling the get_lab_results tool (which retrieves patient-specific data, not general definitions). The answer is comprehensive, accurate, and directly addresses the training question by explaining that CBC stands for 'Complete Blood Count' and listing all standard components including white blood cells, red blood cells, and platelets with appropriate detail.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common medical knowledge about CBC. The model correctly refrained from calling the get_lab_results tool (which retrieves patient-specific data, not general definitions). The answer is comprehensive, accurate, and directly addresses the training question by explaining that CBC stands for 'Complete Blood Count' and listing all standard components including white blood cells, red blood cells, and platelets with appropriate detail.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CODE-001",
+    "domain": "code",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with correct arguments (143 * 7 is mathematically equivalent to 7 * 143). The tool returned '1001' and the model's answer '$1,001' faithfully reflects this value with standard currency formatting. This is a formatting difference that falls within acceptable tolerance.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with correct arguments (143 * 7 is mathematically equivalent to 7 * 143). The tool returned '1001' and the model's answer '$1,001' faithfully reflects this value with standard currency formatting. This is a formatting difference that falls within acceptable tolerance.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-CODE-001",
+    "domain": "code",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common Python knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining lists vs tuples. The answer contains both required terms ('mutable' and 'immutable') and is highly educational with examples, making it fully correct and helpful.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common Python knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining lists vs tuples. The answer contains both required terms ('mutable' and 'immutable') and is highly educational with examples, making it fully correct and helpful.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CODE-002",
+    "domain": "code",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model correctly called run_python_code with the exact code needed to evaluate the string length. The tool returned '34' in stdout, and the model's final answer accurately states that the expression evaluates to 34, faithfully reflecting the tool's return value.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model correctly called run_python_code with the exact code needed to evaluate the string length. The tool returned '34' in stdout, and the model's final answer accurately states that the expression evaluates to 34, faithfully reflecting the tool's return value.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-002",
+    "domain": "code",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "This is a control task asking about Python's built-in len() function, which is common knowledge that requires no tool execution. The model unnecessarily called run_python_code to test len() behavior. Additionally, the model provided no final answer despite executing the code, making the response completely unhelpful even though the tool call itself was unnecessary.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"This is a control task asking about Python's built-in len() function, which is common knowledge that requires no tool execution. The model unnecessarily called run_python_code to test len() behavior. Additionally, the model provided no final answer despite executing the code, making the response completely unhelpful even though the tool call itself was unnecessary.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-CODE-001",
+    "domain": "code",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool (execute_sql) with the exact query requested by the user. The tool returned a count of 891, and the model's final answer directly and accurately states this value: 'The exact count of active users is 891.' This is a perfect execution with full faithfulness to the tool result.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool (execute_sql) with the exact query requested by the user. The tool returned a count of 891, and the model's final answer directly and accurately states this value: 'The exact count of active users is 891.' This is a perfect execution with full faithfulness to the tool result.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-003",
+    "domain": "code",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual SQL explanation. The model correctly refrained from calling the execute_sql tool, as no database query was needed. The answer is comprehensive, accurate, and pedagogically sound, explaining WHERE vs HAVING with clear examples, a comparison table, and practical guidance. All required terms (WHERE, HAVING, GROUP BY) are present.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a conceptual SQL explanation. The model correctly refrained from calling the execute_sql tool, as no database query was needed. The answer is comprehensive, accurate, and pedagogically sound, explaining WHERE vs HAVING with clear examples, a comparison table, and practical guidance. All required terms (WHERE, HAVING, GROUP BY) are present.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CODE-001",
+    "domain": "code",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the exact code provided by the user. The tool returned 'b94d27b9934d3e08' in stdout, and the model's final answer faithfully reproduces this exact value. The answer directly addresses the user's request for the exact output to verify the truncated hash.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the exact code provided by the user. The tool returned 'b94d27b9934d3e08' in stdout, and the model's final answer faithfully reproduces this exact value. The answer directly addresses the user's request for the exact output to verify the truncated hash.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-004",
+    "domain": "code",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about MD5 vs SHA-256 security differences. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining collision vulnerabilities in MD5 and why SHA-256 is recommended. The answer contains both required ground truth terms ('collision' and '256') and is factually correct throughout.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for common knowledge about MD5 vs SHA-256 security differences. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining collision vulnerabilities in MD5 and why SHA-256 is recommended. The answer contains both required ground truth terms ('collision' and '256') and is factually correct throughout.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CODE-002",
+    "domain": "code",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the exact query requested. The final answer faithfully reflects all data from the tool return, including all three customer names and their balances. The formatting differences (comma separators in numbers, bolding of names) are cosmetic and do not constitute a failure\u2014the numerical values are identical and all required information is present.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the exact query requested. The final answer faithfully reflects all data from the tool return, including all three customer names and their balances. The formatting differences (comma separators in numbers, bolding of names) are cosmetic and do not constitute a failure\u2014the numerical values are identical and all required information is present.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-CODE-005",
+    "domain": "code",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of database indexes. The model correctly refrained from calling the execute_sql tool, as no database query is needed to explain this concept. The answer is comprehensive, accurate, and directly addresses the question with clear explanations of what indexes are and why they speed up WHERE clause queries. It includes the required concepts of 'index' and 'scan' (Full Table Scan).",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for a conceptual explanation of database indexes. The model correctly refrained from calling the execute_sql tool, as no database query is needed to explain this concept. The answer is comprehensive, accurate, and directly addresses the question with clear explanations of what indexes are and why they speed up WHERE clause queries. It includes the required concepts of 'index' and 'scan' (Full Table Scan).\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with appropriate arguments (lookup_molecular_property for aspirin's molecular weight). The tool returned 183.47 g/mol, and the model's final answer faithfully reflects this exact value with proper units. The answer directly addresses the user's need for the exact molecular weight for stoichiometry calculations.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with appropriate arguments (lookup_molecular_property for aspirin's molecular weight). The tool returned 183.47 g/mol, and the model's final answer faithfully reflects this exact value with proper units. The answer directly addresses the user's need for the exact molecular weight for stoichiometry calculations.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for conceptual chemistry knowledge that does not require real-time data lookup. The model correctly refrained from calling the molecular property lookup tool. The answer is factually accurate, identifying the acetyl/ester group as responsible for aspirin's anti-inflammatory activity through COX enzyme acetylation, and provides appropriate conceptual background for a chemistry report introduction.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for conceptual chemistry knowledge that does not require real-time data lookup. The model correctly refrained from calling the molecular property lookup tool. The answer is factually accurate, identifying the acetyl/ester group as responsible for aspirin's anti-inflammatory activity through COX enzyme acetylation, and provides appropriate conceptual background for a chemistry report introduction.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CHEM-002",
+    "domain": "chemistry",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the correct arguments (lookup_molecular_property for ethanol's boiling_point). The final answer faithfully reflects the tool's return value of 81.2\u00b0C at 1.05 atm, citing the IUPAC 2026 source. The answer directly addresses the user's request for the reference boiling point from the database.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the correct arguments (lookup_molecular_property for ethanol's boiling_point). The final answer faithfully reflects the tool's return value of 81.2\u00b0C at 1.05 atm, citing the IUPAC 2026 source. The answer directly addresses the user's request for the reference boiling point from the database.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-002",
+    "domain": "chemistry",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a general chemistry concept explanation. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer identifying intermolecular forces as the primary factor determining boiling point. The answer includes the required term 'intermolecular' and provides helpful context for a lab report discussion section.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a general chemistry concept explanation. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer identifying intermolecular forces as the primary factor determining boiling point. The answer includes the required term 'intermolecular' and provides helpful context for a lab report discussion section.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with appropriate arguments (using full chemical names instead of formulas is acceptable). The answer faithfully reflects all critical information from the tool return: SEVERE hazard level, vigorous exothermic decomposition, oxygen gas evolution, 85\u00b0C temperature rise in 30 seconds, and the 'Do NOT mix' precaution. The response directly addresses the safety question and provides actionable guidance based on the tool's data.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with appropriate arguments (using full chemical names instead of formulas is acceptable). The answer faithfully reflects all critical information from the tool return: SEVERE hazard level, vigorous exothermic decomposition, oxygen gas evolution, 85\u00b0C temperature rise in 30 seconds, and the 'Do NOT mix' precaution. The response directly addresses the safety question and provides actionable guidance based on the tool's data.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-003",
+    "domain": "chemistry",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for basic chemistry definitions. The model correctly refrained from calling the available tool (check_reaction_compatibility), which would have been unnecessary. The answer is comprehensive, accurate, and contains both required terms 'release' and 'absorb' while explaining exothermic and endothermic reactions clearly with examples and a helpful comparison table.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for basic chemistry definitions. The model correctly refrained from calling the available tool (check_reaction_compatibility), which would have been unnecessary. The answer is comprehensive, accurate, and contains both required terms 'release' and 'absorb' while explaining exothermic and endothermic reactions clearly with examples and a helpful comparison table.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the correct argument (compound_id: LAB-2847). The final answer faithfully reflects all key data from the tool return: CAS number (34594-18-2), hazard statements (H330, H301, H314), storage conditions (nitrogen, 2-8\u00b0C), and PPE requirements (neoprene gloves, full-face respirator). All ground truth requirements are present. Minor formatting differences (bulleted lists, bolding) are acceptable presentation choices that do not alter the factual content.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the correct argument (compound_id: LAB-2847). The final answer faithfully reflects all key data from the tool return: CAS number (34594-18-2), hazard statements (H330, H301, H314), storage conditions (nitrogen, 2-8\u00b0C), and PPE requirements (neoprene gloves, full-face respirator). All ground truth requirements are present. Minor formatting differences (bulleted lists, bolding) are acceptable presentation choices that do not alter the factual content.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-CHEM-004",
+    "domain": "chemistry",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general knowledge about GHS SDS structure. The model correctly refrained from calling the get_safety_data_sheet tool (which retrieves specific compound SDSs, not general format information). The answer is comprehensive, accurate, and directly addresses the question by listing all 16 required sections of a GHS-compliant SDS.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general knowledge about GHS SDS structure. The model correctly refrained from calling the get_safety_data_sheet tool (which retrieves specific compound SDSs, not general format information). The answer is comprehensive, accurate, and directly addresses the question by listing all 16 required sections of a GHS-compliant SDS.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CHEM-002",
+    "domain": "chemistry",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 2,
+      "result_faithfulness": 3,
+      "answer_correctness": 2,
+      "reasoning": "The model called the correct tool with correct key parameters (sample_id, titrant_volume_ml=23.7, titrant_molarity=0.1). The sample_volume_ml differs (25 vs expected 50), but this is a minor parameter variation that still produced the correct result. The model faithfully reported the tool's returned concentration value (0.04817 mol/L). However, the answer omits the mg/L value (2892.4) that was also in the tool return and requested for the lab notebook, preventing a perfect answer_correctness score.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 2,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 2,\n  \"reasoning\": \"The model called the correct tool with correct key parameters (sample_id, titrant_volume_ml=23.7, titrant_molarity=0.1). The sample_volume_ml differs (25 vs expected 50), but this is a minor parameter variation that still produced the correct result. The model faithfully reported the tool's returned concentration value (0.04817 mol/L). However, the answer omits the mg/L value (2892.4) that was also in the tool return and requested for the lab notebook, preventing a perfect answer_correctness score.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-CHEM-005",
+    "domain": "chemistry",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual chemistry definition. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation of the difference between molarity and molality, including the required term 'solvent' and all key distinguishing features (volume vs. mass basis, temperature dependence).",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for a conceptual chemistry definition. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation of the difference between molarity and molality, including the required term 'solvent' and all key distinguishing features (volume vs. mass basis, temperature dependence).\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-EDA-001",
+    "domain": "eda",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool (synthesize_module) with appropriate arguments matching the expected call. The final answer faithfully reflects all key data from the tool return, including the requested gate count of 127, and provides additional relevant synthesis metrics. The answer directly addresses the user's need for the gate count in their report.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool (synthesize_module) with appropriate arguments matching the expected call. The final answer faithfully reflects all key data from the tool return, including the requested gate count of 127, and provides additional relevant synthesis metrics. The answer directly addresses the user's need for the gate count in their report.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-001",
+    "domain": "eda",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of synthesis in digital design. The model correctly refrained from calling the synthesize_module tool, which is for running actual synthesis on code, not explaining the concept. The answer is comprehensive, accurate, and directly addresses the question by explaining that synthesis transforms RTL (high-level HDL code) into a gate-level netlist. It covers inputs, process, and outputs thoroughly, matching the ground truth requirement for 'RTL' and 'gate' concepts.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for a conceptual explanation of synthesis in digital design. The model correctly refrained from calling the synthesize_module tool, which is for running actual synthesis on code, not explaining the concept. The answer is comprehensive, accurate, and directly addresses the question by explaining that synthesis transforms RTL (high-level HDL code) into a gate-level netlist. It covers inputs, process, and outputs thoroughly, matching the ground truth requirement for 'RTL' and 'gate' concepts.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-EDA-002",
+    "domain": "eda",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with appropriate arguments (minor parameter name variation 'current_design' vs 'top_module' is acceptable). The answer faithfully reflects all key data from the tool return: setup time of 2.3 ns, WNS of -0.15 ns, critical path identification, and the recommendation to add pipeline stage or reduce to 95 MHz. The answer directly addresses the user's question about post-synthesis setup time.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_selection\": 3, \"result_faithfulness\": 3, \"answer_correctness\": 3, \"reasoning\": \"The model called the correct tool with appropriate arguments (minor parameter name variation 'current_design' vs 'top_module' is acceptable). The answer faithfully reflects all key data from the tool return: setup time of 2.3 ns, WNS of -0.15 ns, critical path identification, and the recommendation to add pipeline stage or reduce to 95 MHz. The answer directly addresses the user's question about post-synthesis setup time.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-002",
+    "domain": "eda",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of setup and hold time in digital design. The model correctly refrained from calling the timing analysis tool (which would be for analyzing actual designs, not explaining concepts). The answer is comprehensive, accurate, and directly addresses the question with clear explanations of both timing concepts including the 'before' and 'after' distinction relative to the clock edge.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for a conceptual explanation of setup and hold time in digital design. The model correctly refrained from calling the timing analysis tool (which would be for analyzing actual designs, not explaining concepts). The answer is comprehensive, accurate, and directly addresses the question with clear explanations of both timing concepts including the 'before' and 'after' distinction relative to the clock edge.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-EDA-001",
+    "domain": "eda",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool (simulate_verilog) with the exact expected arguments. The final answer faithfully reflects all key data from the tool return: it mentions the hold time violation at cycle 12, the async reset glitch at cycle 37, the state transitions, and the failure status. The answer goes beyond mere reporting by providing actionable debugging recommendations based on the simulation results. All ground truth requirements ('violation', 'cycle 12') are present.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_selection\": 3, \"result_faithfulness\": 3, \"answer_correctness\": 3, \"reasoning\": \"The model called the correct tool (simulate_verilog) with the exact expected arguments. The final answer faithfully reflects all key data from the tool return: it mentions the hold time violation at cycle 12, the async reset glitch at cycle 37, the state transitions, and the failure status. The answer goes beyond mere reporting by providing actionable debugging recommendations based on the simulation results. All ground truth requirements ('violation', 'cycle 12') are present.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-003",
+    "domain": "eda",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of Verilog modeling styles\u2014pure textbook knowledge that requires no tool execution. The model correctly refrained from calling the simulate_verilog tool and provided a comprehensive, accurate answer covering behavioral vs. structural modeling with clear examples and a helpful comparison table. The answer contains the required term 'behavioral' and fully addresses the user's request.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for a conceptual explanation of Verilog modeling styles\u2014pure textbook knowledge that requires no tool execution. The model correctly refrained from calling the simulate_verilog tool and provided a comprehensive, accurate answer covering behavioral vs. structural modeling with clear examples and a helpful comparison table. The answer contains the required term 'behavioral' and fully addresses the user's request.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-EDA-001",
+    "domain": "eda",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with correct arguments (module_id: PWR-8812, target_device: Artix-7). The final answer faithfully reflects all key values from the tool return: total power 47.3 mW, dynamic power 34.1 mW, static power 13.2 mW, and the complete breakdown. All ground truth values are present and accurate. The formatting into a table is a reasonable presentation choice that does not alter the data.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with correct arguments (module_id: PWR-8812, target_device: Artix-7). The final answer faithfully reflects all key values from the tool return: total power 47.3 mW, dynamic power 34.1 mW, static power 13.2 mW, and the complete breakdown. All ground truth values are present and accurate. The formatting into a table is a reasonable presentation choice that does not alter the data.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-004",
+    "domain": "eda",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for theoretical knowledge about CMOS dynamic power components. The model correctly refrained from calling the power estimation tool (which would only analyze specific FPGA modules, not provide theory). The answer is comprehensive, accurate, and directly addresses the question by explaining switching power and short-circuit power, both with their frequency dependencies. The ground truth requirement for 'switching' is clearly satisfied.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for theoretical knowledge about CMOS dynamic power components. The model correctly refrained from calling the power estimation tool (which would only analyze specific FPGA modules, not provide theory). The answer is comprehensive, accurate, and directly addresses the question by explaining switching power and short-circuit power, both with their frequency dependencies. The ground truth requirement for 'switching' is clearly satisfied.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-EDA-002",
+    "domain": "eda",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with correct arguments (synthesize_module with module_name='FPGA-3301' and target_device='Zynq-7020'). The final answer faithfully reflects all key values from the tool return: gate count (48,213), LUT utilization (7,834 and 14.7%), FF utilization (6,291 and 5.9%), BRAM (12/140), DSP (24/220), and max frequency (187.4 MHz). The answer is well-formatted, complete, and directly addresses the user's question about whether the module fits and what the full resource utilization is. Minor formatting differences (comma in '7,834' vs no comma, calculated BRAM/DSP percentages) are reasonable and do not constitute faithfulness failures.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with correct arguments (synthesize_module with module_name='FPGA-3301' and target_device='Zynq-7020'). The final answer faithfully reflects all key values from the tool return: gate count (48,213), LUT utilization (7,834 and 14.7%), FF utilization (6,291 and 5.9%), BRAM (12/140), DSP (24/220), and max frequency (187.4 MHz). The answer is well-formatted, complete, and directly addresses the user's question about whether the module fits and what the full resource utilization is. Minor formatting differences (comma in '7,834' vs no comma, calculated BRAM/DSP percentages) are reasonable and do not constitute faithfulness failures.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-EDA-005",
+    "domain": "eda",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task requiring general knowledge about FPGA vs ASIC trade-offs. The model correctly refrained from calling the synthesize_module tool (which would be inappropriate here). The answer is comprehensive, accurate, and directly addresses the question. It contains both required terms: 'prototyping' (under FPGA advantages) and 'volume'/'volumes' (mentioned multiple times in context of production scale and cost decisions).",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task requiring general knowledge about FPGA vs ASIC trade-offs. The model correctly refrained from calling the synthesize_module tool (which would be inappropriate here). The answer is comprehensive, accurate, and directly addresses the question. It contains both required terms: 'prototyping' (under FPGA advantages) and 'volume'/'volumes' (mentioned multiple times in context of production scale and cost decisions).\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-GEO-001",
+    "domain": "geospatial",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool (get_distance) with the correct origin and destination. The additional 'method' parameter in the call is a minor variation that doesn't affect correctness. The final answer (7,823.47 km) exactly matches the tool's returned distance_km value of 7823.47, with only formatting differences (comma separator). This is well within formatting tolerance and represents faithful use of the tool result.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool (get_distance) with the correct origin and destination. The additional 'method' parameter in the call is a minor variation that doesn't affect correctness. The final answer (7,823.47 km) exactly matches the tool's returned distance_km value of 7823.47, with only formatting differences (comma separator). This is well within formatting tolerance and represents faithful use of the tool result.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-001",
+    "domain": "geospatial",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task requiring conceptual explanation of distance metrics. The model correctly refrained from calling the get_distance tool and provided a comprehensive, accurate explanation that includes the required concepts (sphere/surface of Earth). The answer is detailed, methodologically sound, and directly addresses the user's need for a paper methodology section.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task requiring conceptual explanation of distance metrics. The model correctly refrained from calling the get_distance tool and provided a comprehensive, accurate explanation that includes the required concepts (sphere/surface of Earth). The answer is detailed, methodologically sound, and directly addresses the user's need for a paper methodology section.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-GEO-002",
+    "domain": "geospatial",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with appropriate arguments and received precise coordinates. The final answer faithfully reflects both required values (48.86127, 2.29873) from the tool return, includes the WGS84 datum specification, and references the 2025 resurvey context. The answer directly addresses the user's need for precise decimal degrees for a 50-meter geofence.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with appropriate arguments and received precise coordinates. The final answer faithfully reflects both required values (48.86127, 2.29873) from the tool return, includes the WGS84 datum specification, and references the 2025 resurvey context. The answer directly addresses the user's need for precise decimal degrees for a 50-meter geofence.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-002",
+    "domain": "geospatial",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about GPS coordinate systems. The model correctly refrained from calling any tool and provided an accurate answer containing both required elements: 'World Geodetic System 1984' and 'WGS 84'. The additional context about decimal degrees and CRS is helpful and accurate.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common knowledge about GPS coordinate systems. The model correctly refrained from calling any tool and provided an accurate answer containing both required elements: 'World Geodetic System 1984' and 'WGS 84'. The additional context about decimal degrees and CRS is helpful and accurate.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-GEO-001",
+    "domain": "geospatial",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with appropriate arguments (minor additions like departure_time don't harm the call). The answer faithfully reflects all key data from the tool return: 5h 47m duration, 1:47 PM arrival, I-95 construction delays (85 min), I-84/I-90 congestion (22 min), and heavy traffic conditions. The response directly answers whether the user will make the 2pm meeting and provides the requested drive time estimate.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with appropriate arguments (minor additions like departure_time don't harm the call). The answer faithfully reflects all key data from the tool return: 5h 47m duration, 1:47 PM arrival, I-95 construction delays (85 min), I-84/I-90 congestion (22 min), and heavy traffic conditions. The response directly answers whether the user will make the 2pm meeting and provides the requested drive time estimate.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-GEO-003",
+    "domain": "geospatial",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general knowledge about factors affecting travel time. The model correctly refrained from calling the available tool and provided a comprehensive, well-structured answer covering traffic congestion, infrastructure, weather, regulatory constraints, and other relevant variables. The answer includes 'traffic' as required by ground truth and is highly informative for the stated presentation purpose.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general knowledge about factors affecting travel time. The model correctly refrained from calling the available tool and provided a comprehensive, well-structured answer covering traffic congestion, infrastructure, weather, regulatory constraints, and other relevant variables. The answer includes 'traffic' as required by ground truth and is highly informative for the stated presentation purpose.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-GEO-001",
+    "domain": "geospatial",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the correct argument (survey point GEO-4419). The final answer faithfully reflects the tool's return value, stating the elevation as 187.34 meters and the datum as NAVD88, which are the exact values from the tool return. The answer directly addresses the user's need for the exact elevation value for the grading plan.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the correct argument (survey point GEO-4419). The final answer faithfully reflects the tool's return value, stating the elevation as 187.34 meters and the datum as NAVD88, which are the exact values from the tool return. The answer directly addresses the user's need for the exact elevation value for the grading plan.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-004",
+    "domain": "geospatial",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general knowledge about elevation measurement and US reference datums. The model correctly refrained from calling the get_elevation tool and provided a comprehensive, accurate answer explaining measurement methods (differential leveling, GNSS/GPS, trigonometric leveling) and the US datum (NAVD 88), which matches the ground truth requirement. The answer is educational, well-structured, and fully addresses the user's request for training module content.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general knowledge about elevation measurement and US reference datums. The model correctly refrained from calling the get_elevation tool and provided a comprehensive, accurate answer explaining measurement methods (differential leveling, GNSS/GPS, trigonometric leveling) and the US datum (NAVD 88), which matches the ground truth requirement. The answer is educational, well-structured, and fully addresses the user's request for training module content.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-GEO-002",
+    "domain": "geospatial",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the correct argument (station ID RST-7182). The final answer faithfully reflects all key data from the tool return: latitude 48.11247, longitude -121.11389, elevation 2104.7m (formatted as 2,104.7), and datum WGS84. The minor formatting difference in elevation (comma separator) is a reasonable presentation choice and does not constitute a failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the correct argument (station ID RST-7182). The final answer faithfully reflects all key data from the tool return: latitude 48.11247, longitude -121.11389, elevation 2104.7m (formatted as 2,104.7), and datum WGS84. The minor formatting difference in elevation (comma separator) is a reasonable presentation choice and does not constitute a failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-005",
+    "domain": "geospatial",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of WGS84. The model correctly refrained from calling the get_coordinates tool (which would be inappropriate for this question). The answer is comprehensive, accurate, explains what WGS84 is and why it's the GPS standard, and includes the required term '1984' in the expansion 'World Geodetic System 1984'.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for a conceptual explanation of WGS84. The model correctly refrained from calling the get_coordinates tool (which would be inappropriate for this question). The answer is comprehensive, accurate, explains what WGS84 is and why it's the GPS standard, and includes the required term '1984' in the expansion 'World Geodetic System 1984'.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-LAW-001",
+    "domain": "legal",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model correctly called search_case_law with the appropriate query. The final answer faithfully reflects all key elements from the tool return: the core Miranda holding, the amendments from Vega v. Tekoh (2022) and Miranda Reform Act of 2025, the elimination of private right of action under \u00a7 1983, and the limitation of remedy to exclusion at trial. The answer is well-structured, accurate, and directly addresses the user's concern about recent amendments.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model correctly called search_case_law with the appropriate query. The final answer faithfully reflects all key elements from the tool return: the core Miranda holding, the amendments from Vega v. Tekoh (2022) and Miranda Reform Act of 2025, the elimination of private right of action under \u00a7 1983, and the limitation of remedy to exclusion at trial. The answer is well-structured, accurate, and directly addresses the user's concern about recent amendments.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-001",
+    "domain": "legal",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a general explanation of stare decisis, which is common legal knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation that includes the required term 'precedent' multiple times. The answer is well-structured, factually correct, and directly addresses the user's need for a law review article introduction.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a general explanation of stare decisis, which is common legal knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation that includes the required term 'precedent' multiple times. The answer is well-structured, factually correct, and directly addresses the user's need for a law review article introduction.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-LAW-002",
+    "domain": "legal",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool (get_statute_text) with the correct citation argument. The minor addition of 'jurisdiction: federal' is a reasonable optional parameter that does not affect correctness. The final answer faithfully reproduces all five factors from the tool return, including the new factor (5) about automated systems and AI. The answer also correctly references the amendment history (AI Fair Use Clarification Act, December 1, 2025) and contains both required ground truth terms.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool (get_statute_text) with the correct citation argument. The minor addition of 'jurisdiction: federal' is a reasonable optional parameter that does not affect correctness. The final answer faithfully reproduces all five factors from the tool return, including the new factor (5) about automated systems and AI. The answer also correctly references the amendment history (AI Fair Use Clarification Act, December 1, 2025) and contains both required ground truth terms.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-002",
+    "domain": "legal",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common legal knowledge about the difference between civil and criminal law. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation that includes both required terms ('plaintiff' and 'defendant') along with detailed context about burdens of proof, parties, objectives, and outcomes. The answer is pedagogically sound and directly helpful for a first-year law student.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common legal knowledge about the difference between civil and criminal law. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation that includes both required terms ('plaintiff' and 'defendant') along with detailed context about burdens of proof, parties, objectives, and outcomes. The answer is pedagogically sound and directly helpful for a first-year law student.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-LAW-001",
+    "domain": "legal",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with appropriate arguments and the final answer faithfully reflects all key information from the tool return: the 3-year maximum retention period, the EU Digital Services Amendment 2025/2847, the effective date (2026-01-01), the compliance deadline (2026-07-01), and the penalty structure. The answer directly addresses the user's question and provides actionable compliance guidance based on the tool's data.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with appropriate arguments and the final answer faithfully reflects all key information from the tool return: the 3-year maximum retention period, the EU Digital Services Amendment 2025/2847, the effective date (2026-01-01), the compliance deadline (2026-07-01), and the penalty structure. The answer directly addresses the user's question and provides actionable compliance guidance based on the tool's data.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-003",
+    "domain": "legal",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "unnecessary_tool_use",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about what GDPR stands for and what it regulates. The model called check_regulation_status when no tool was needed\u2014the definition and broad regulatory scope of GDPR are well-established facts. However, the final answer is comprehensive, accurate, and fully addresses the question, earning full marks for answer_correctness despite the unnecessary tool call.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common knowledge about what GDPR stands for and what it regulates. The model called check_regulation_status when no tool was needed\u2014the definition and broad regulatory scope of GDPR are well-established facts. However, the final answer is comprehensive, accurate, and fully addresses the question, earning full marks for answer_correctness despite the unnecessary tool call.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-LAW-001",
+    "domain": "legal",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 2,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with a minor argument variation (added 'court' parameter which was not in the expected call but is reasonable). The final answer faithfully reflects all key data from the tool return: case name 'Patel v. NeuralForge Inc.', citation '2024 WL 8834721', judge 'Hon. Margaret Chen', holding about strict liability, disposition, and key quote are all accurately presented. All ground truth elements are present.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 2,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with a minor argument variation (added 'court' parameter which was not in the expected call but is reasonable). The final answer faithfully reflects all key data from the tool return: case name 'Patel v. NeuralForge Inc.', citation '2024 WL 8834721', judge 'Hon. Margaret Chen', holding about strict liability, disposition, and key quote are all accurately presented. All ground truth elements are present.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-004",
+    "domain": "legal",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general legal knowledge about amicus curiae briefs. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining the role of amicus briefs and who files them. The answer includes the required phrase 'friend of the court' and demonstrates strong understanding of appellate procedure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general legal knowledge about amicus curiae briefs. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining the role of amicus briefs and who files them. The answer includes the required phrase 'friend of the court' and demonstrates strong understanding of appellate procedure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-LAW-002",
+    "domain": "legal",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with appropriate arguments. The final answer faithfully reflects all key data from the tool return: case name, citation (2025 WL 1124847), court, date (February 14, 2025), holding details, penalty ($4.47 billion), and significance. While Judge Rakoff's name was not explicitly mentioned in the answer, all other required ground truth elements are present and the answer comprehensively addresses the user's request with accurate information from the tool.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with appropriate arguments. The final answer faithfully reflects all key data from the tool return: case name, citation (2025 WL 1124847), court, date (February 14, 2025), holding details, penalty ($4.47 billion), and significance. While Judge Rakoff's name was not explicitly mentioned in the answer, all other required ground truth elements are present and the answer comprehensively addresses the user's request with accurate information from the tool.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-LAW-005",
+    "domain": "legal",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for legal terminology definitions, which is common knowledge that does not require tool use. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation distinguishing 'ruling' (the decision/outcome) from 'opinion' (the reasoning/explanation). The answer directly addresses the question with precise terminology appropriate for legal writing.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for legal terminology definitions, which is common knowledge that does not require tool use. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation distinguishing 'ruling' (the decision/outcome) from 'opinion' (the reasoning/explanation). The answer directly addresses the question with precise terminology appropriate for legal writing.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the correct CVE ID argument. The final answer accurately reflects all key data from the tool return, including the CVSS v3.1 score of 9.1, the CRITICAL severity classification, the CVSS vector string, affected versions, and the fix version. The model also helpfully explained the discrepancy mentioned in the user's question by referencing the note about rescoring from the tool return.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the correct CVE ID argument. The final answer accurately reflects all key data from the tool return, including the CVSS v3.1 score of 9.1, the CRITICAL severity classification, the CVSS vector string, affected versions, and the fix version. The model also helpfully explained the discrepancy mentioned in the user's question by referencing the note about rescoring from the tool return.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about CVE. The model correctly refrained from calling the lookup_cve tool (which retrieves specific CVE details, not general information). The answer is factually accurate: CVE stands for Common Vulnerabilities and Exposures and is maintained by MITRE Corporation with CISA sponsorship. The response is comprehensive and helpful for the stated purpose of creating a security glossary.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common knowledge about CVE. The model correctly refrained from calling the lookup_cve tool (which retrieves specific CVE details, not general information). The answer is factually accurate: CVE stands for Common Vulnerabilities and Exposures and is maintained by MITRE Corporation with CISA sponsorship. The response is comprehensive and helpful for the stated purpose of creating a security glossary.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-SEC-002",
+    "domain": "cybersecurity",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with appropriate arguments (adding 'product' is a minor variation but doesn't affect functionality). The answer faithfully reflects all key data from the tool return: affected versions '2.0-beta9 through 2.17.0', safe versions '2.17.1+, 2.12.4+, 2.3.2+', the note about bypasses in 2.15.0/2.16.0, and the mitigation guidance. The ground truth requirement '2.17.0' is explicitly present in the answer.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_selection\": 3, \"result_faithfulness\": 3, \"answer_correctness\": 3, \"reasoning\": \"The model called the correct tool with appropriate arguments (adding 'product' is a minor variation but doesn't affect functionality). The answer faithfully reflects all key data from the tool return: affected versions '2.0-beta9 through 2.17.0', safe versions '2.17.1+, 2.12.4+, 2.3.2+', the note about bypasses in 2.15.0/2.16.0, and the mitigation guidance. The ground truth requirement '2.17.0' is explicitly present in the answer.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-002",
+    "domain": "cybersecurity",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task requiring common security knowledge. The model correctly refrained from calling the available tool and provided a comprehensive, accurate explanation distinguishing vulnerabilities (weaknesses/flaws) from exploits (active attacks). The answer contains the required term 'weakness' and is factually correct throughout.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task requiring common security knowledge. The model correctly refrained from calling the available tool and provided a comprehensive, accurate explanation distinguishing vulnerabilities (weaknesses/flaws) from exploits (active attacks). The answer contains the required term 'weakness' and is factually correct throughout.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with correct arguments (minor case variation 'openssl' vs 'OpenSSL' is insignificant). The final answer faithfully reflects all key data from the tool return: extended support status, the 2027 EOL date, support provider, vulnerability counts, and recommendation. All required ground truth elements ('extended support', '2027') are present and accurate.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with correct arguments (minor case variation 'openssl' vs 'OpenSSL' is insignificant). The final answer faithfully reflects all key data from the tool return: extended support status, the 2027 EOL date, support provider, vulnerability counts, and recommendation. All required ground truth elements ('extended support', '2027') are present and accurate.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-003",
+    "domain": "cybersecurity",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task requiring common knowledge about cybersecurity concepts. The model correctly refrained from calling the scan_dependency tool, which would have been unnecessary. The answer provides a comprehensive explanation of software supply chain attacks and includes the well-known SolarWinds example as required by the ground truth, making it fully correct and directly helpful.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task requiring common knowledge about cybersecurity concepts. The model correctly refrained from calling the scan_dependency tool, which would have been unnecessary. The answer provides a comprehensive explanation of software supply chain attacks and includes the well-known SolarWinds example as required by the ground truth, making it fully correct and directly helpful.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model correctly called get_exploit_details with the proper CVE ID. The final answer faithfully reflects all key data from the tool return: CVE-2026-41837, CVSS 9.8, Kafka Connect JNDI injection, Lazarus Group exploitation since 2026-03-28, affected versions, PoC availability, CWE-917, and mitigation steps. All ground truth requirements are met. Minor formatting differences (bullet points, section headers) are acceptable presentation choices that don't alter the factual content.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model correctly called get_exploit_details with the proper CVE ID. The final answer faithfully reflects all key data from the tool return: CVE-2026-41837, CVSS 9.8, Kafka Connect JNDI injection, Lazarus Group exploitation since 2026-03-28, affected versions, PoC availability, CWE-917, and mitigation steps. All ground truth requirements are met. Minor formatting differences (bullet points, section headers) are acceptable presentation choices that don't alter the factual content.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-004",
+    "domain": "cybersecurity",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task requiring common cybersecurity knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation of zero-day vulnerabilities including the etymology, key concepts, and practical implications for developers. The answer contains the required term 'patch' and is directly helpful for the stated workshop context.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task requiring common cybersecurity knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate explanation of zero-day vulnerabilities including the etymology, key concepts, and practical implications for developers. The answer contains the required term 'patch' and is directly helpful for the stated workshop context.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-SEC-002",
+    "domain": "cybersecurity",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model correctly called lookup_cve with the right CVE ID. The final answer faithfully reflects all key data from the tool return: CVE-2025-98234, nginx versions 1.25.0-1.27.2, CVSS 8.1, severity HIGH, fixed in 1.27.3, and mitigation advice. The answer is well-structured, accurate, and directly addresses the user's request for description, CVSS, affected products, and mitigation.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model correctly called lookup_cve with the right CVE ID. The final answer faithfully reflects all key data from the tool return: CVE-2025-98234, nginx versions 1.25.0-1.27.2, CVSS 8.1, severity HIGH, fixed in 1.27.3, and mitigation advice. The answer is well-structured, accurate, and directly addresses the user's request for description, CVSS, affected products, and mitigation.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-SEC-005",
+    "domain": "cybersecurity",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general knowledge about CVSS scoring methodology and severity ranges. The model correctly refrained from calling the lookup_cve tool (which retrieves specific CVE details, not general CVSS information). The answer is comprehensive, accurate, and includes the required ground truth value '9.0' as the lower bound of the Critical severity range. The explanation covers calculation methodology and severity level mappings correctly.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for general knowledge about CVSS scoring methodology and severity ranges. The model correctly refrained from calling the lookup_cve tool (which retrieves specific CVE details, not general CVSS information). The answer is comprehensive, accurate, and includes the required ground truth value '9.0' as the lower bound of the Critical severity range. The explanation covers calculation methodology and severity level mappings correctly.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with appropriate arguments (banana, medium serving). The final answer faithfully reflects the tool's return value of 89 calories and even includes supporting details like the database source and cultivar type. The answer directly addresses the user's need for a precise USDA calorie count.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with appropriate arguments (banana, medium serving). The final answer faithfully reflects the tool's return value of 89 calories and even includes supporting details like the database source and cultivar type. The answer directly addresses the user's need for a precise USDA calorie count.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for basic nutrition knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer covering macronutrients (carbohydrates, proteins, fats), micronutrients (vitamins, minerals), and which provide calories. All required terms from ground truth are present.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for basic nutrition knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer covering macronutrients (carbohydrates, proteins, fats), micronutrients (vitamins, minerals), and which provide calories. All required terms from ground truth are present.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-NUTR-002",
+    "domain": "nutrition",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with appropriate arguments and the final answer faithfully reflects all key data from the tool return. The calorie count (142), protein (30.2g), fat (2.1g), and carbs (0.0g) are all accurately reported, and the note about grilling without added fat matches the tool's preparation_note. The answer directly addresses the user's request for the USDA number.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with appropriate arguments and the final answer faithfully reflects all key data from the tool return. The calorie count (142), protein (30.2g), fat (2.1g), and carbs (0.0g) are all accurately reported, and the note about grilling without added fat matches the tool's preparation_note. The answer directly addresses the user's request for the USDA number.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-002",
+    "domain": "nutrition",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general scientific knowledge about how calories are measured. The model correctly refrained from calling the get_calorie_count tool (which would only return calorie counts for specific foods, not explain the science). The answer is comprehensive, accurate, and directly addresses the question, including the required term 'kilocalorie' and explaining both bomb calorimetry and the Atwater system.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general scientific knowledge about how calories are measured. The model correctly refrained from calling the get_calorie_count tool (which would only return calorie counts for specific foods, not explain the science). The answer is comprehensive, accurate, and directly addresses the question, including the required term 'kilocalorie' and explaining both bomb calorimetry and the Atwater system.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 2,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with a minor argument variation (omitted the optional 'allergen' parameter but still received complete data). The answer faithfully reflects all key data from the tool return: 73% contamination rate, HIGH cross-contamination risk, FDA alert 2026-0147, and the recommendation for certified gluten-free products. All critical information is accurately conveyed to address the parent's urgent safety concern.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 2,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with a minor argument variation (omitted the optional 'allergen' parameter but still received complete data). The answer faithfully reflects all key data from the tool return: 73% contamination rate, HIGH cross-contamination risk, FDA alert 2026-0147, and the recommendation for certified gluten-free products. All critical information is accurately conveyed to address the parent's urgent safety concern.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-003",
+    "domain": "nutrition",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about US food allergen labeling laws. The model correctly refrained from calling the available tool (check_allergen_database) and provided a complete, accurate answer listing all 9 major allergens including sesame, which matches the ground truth requirement. The answer is factually correct, well-formatted, and directly helpful for the user's poster-making purpose.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common knowledge about US food allergen labeling laws. The model correctly refrained from calling the available tool (check_allergen_database) and provided a complete, accurate answer listing all 9 major allergens including sesame, which matches the ground truth requirement. The answer is factually correct, well-formatted, and directly helpful for the user's poster-making purpose.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the correct argument (order_id: ORD-5523). The final answer faithfully and accurately reflects all values from the tool return, including all required ground truth values (614, 47.3, 42.1, 26.8) and provides a comprehensive breakdown matching the tool's data. The response is well-formatted, precise, and directly addresses the user's need for exact macro numbers.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the correct argument (order_id: ORD-5523). The final answer faithfully and accurately reflects all values from the tool return, including all required ground truth values (614, 47.3, 42.1, 26.8) and provides a comprehensive breakdown matching the tool's data. The response is well-formatted, precise, and directly addresses the user's need for exact macro numbers.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-004",
+    "domain": "nutrition",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "wrong_answer",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 1,
+      "reasoning": "The model correctly refrained from calling the available tool (calculate_meal_macros), which is appropriate for this general knowledge question. However, the answer does not match the ground truth requirement of mentioning '2000' and '2500' calories. While the model provides ranges (1,600-2,400 for women, 2,000-3,000 for men), it does not state the commonly cited averages of 2000 and 2500 calories for adult women and men respectively. The answer is comprehensive and partially correct but misses the specific values expected.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"wrong_answer\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 1,\n  \"reasoning\": \"The model correctly refrained from calling the available tool (calculate_meal_macros), which is appropriate for this general knowledge question. However, the answer does not match the ground truth requirement of mentioning '2000' and '2500' calories. While the model provides ranges (1,600-2,400 for women, 2,000-3,000 for men), it does not state the commonly cited averages of 2000 and 2500 calories for adult women and men respectively. The answer is comprehensive and partially correct but misses the specific values expected.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-NUTR-002",
+    "domain": "nutrition",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with a reasonable argument variation ('4011' vs 'PLU 4011'). The final answer faithfully reflects all key data from the tool return: calories (89), carbs (22.8g), protein (1.1g), fat (0.3g), fiber (2.6g), allergens (none), and keto compatibility (not compatible, 20.2g net carbs). The answer is well-formatted, comprehensive, and directly addresses the user's question about keto diet compatibility.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with a reasonable argument variation ('4011' vs 'PLU 4011'). The final answer faithfully reflects all key data from the tool return: calories (89), carbs (22.8g), protein (1.1g), fat (0.3g), fiber (2.6g), allergens (none), and keto compatibility (not compatible, 20.2g net carbs). The answer is well-formatted, comprehensive, and directly addresses the user's question about keto diet compatibility.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-NUTR-005",
+    "domain": "nutrition",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general nutritional knowledge about fiber types. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining both soluble and insoluble fiber with appropriate food sources. The response contains both required terms and demonstrates proper tool restraint for a common-knowledge question.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general nutritional knowledge about fiber types. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining both soluble and insoluble fiber with appropriate food sources. The response contains both required terms and demonstrates proper tool restraint for a common-knowledge question.\"\n}\n```"
+    },
+    "agreement": true
+  }
+]

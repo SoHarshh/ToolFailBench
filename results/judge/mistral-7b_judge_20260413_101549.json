@@ -1,0 +1,1397 @@
+[
+  {
+    "task_id": "TS-FIN-001",
+    "domain": "finance",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]'), but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). The answer states '$239.70' which contradicts the expected tool return of $247.83, indicating the model used a memorized/fabricated value instead of real tool data. This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]'), but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). The answer states '$239.70' which contradicts the expected tool return of $247.83, indicating the model used a memorized/fabricated value instead of real tool data. This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-001",
+    "domain": "finance",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a well-known historical fact (Apple reaching $1 trillion in 2018). Despite the model writing out a tool call in its answer text, the 'ACTUAL TOOL CALLS' section confirms no tool was executed. The model correctly refrained from using the tool and provided the factually correct answer (2018), which matches the ground truth.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a well-known historical fact (Apple reaching $1 trillion in 2018). Despite the model writing out a tool call in its answer text, the 'ACTUAL TOOL CALLS' section confirms no tool was executed. The model correctly refrained from using the tool and provided the factually correct answer (2018), which matches the ground truth.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-FIN-002",
+    "domain": "finance",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but no actual tool execution occurred, as confirmed by 'MODEL'S ACTUAL TOOL CALLS: (none)'. This is a classic tool_skip case where the model formatted a tool call as text rather than executing it. Despite coincidentally stating the correct rate (1.18), the model could not have obtained this from the tool since no tool was called.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but no actual tool execution occurred, as confirmed by 'MODEL'S ACTUAL TOOL CALLS: (none)'. This is a classic tool_skip case where the model formatted a tool call as text rather than executing it. Despite coincidentally stating the correct rate (1.18), the model could not have obtained this from the tool since no tool was called.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-002",
+    "domain": "finance",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for the definition of 'FOREX', which is common knowledge. The model correctly refrained from calling any tool and provided an accurate answer ('Foreign Exchange') that matches the ground truth requirement. The additional context about currency trading is helpful and accurate.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for the definition of 'FOREX', which is common knowledge. The model correctly refrained from calling any tool and provided an accurate answer ('Foreign Exchange') that matches the ground truth requirement. The additional context about currency trading is helpful and accurate.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-FIN-001",
+    "domain": "finance",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within the answer body ('[TOOL_CALLS][{...}]'), but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). The answer states '$41,932.00 USD', which is a memorized/training-data value that contradicts the tool's return value of $12,847.5. Since no valid tool call was executed, this is tool_skip.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within the answer body ('[TOOL_CALLS][{...}]'), but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). The answer states '$41,932.00 USD', which is a memorized/training-data value that contradicts the tool's return value of $12,847.5. Since no valid tool call was executed, this is tool_skip.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-003",
+    "domain": "finance",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 2,
+      "reasoning": "This is a control task asking about historical cryptocurrency facts (who published the Bitcoin whitepaper). The model attempted to call get_crypto_price, which is completely unnecessary for answering this question. Although the tool call was not actually executed by the system (it appears only as text in the answer), the model clearly intended to use a tool when none was needed. The factual answer about Satoshi Nakamoto is correct, but the price information is irrelevant to the question asked.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 2,\n  \"reasoning\": \"This is a control task asking about historical cryptocurrency facts (who published the Bitcoin whitepaper). The model attempted to call get_crypto_price, which is completely unnecessary for answering this question. Although the tool call was not actually executed by the system (it appears only as text in the answer), the model clearly intended to use a tool when none was needed. The factual answer about Satoshi Nakamoto is correct, but the price information is irrelevant to the question asked.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "RI-FIN-002",
+    "domain": "finance",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but no actual tool execution occurred. The answer contains a placeholder '[result of the get_market_cap function call]' instead of the actual value ($142B). This is a clear tool_skip case where the model formatted a tool call as text rather than executing it.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but no actual tool execution occurred. The answer contains a placeholder '[result of the get_market_cap function call]' instead of the actual value ($142B). This is a clear tool_skip case where the model formatted a tool call as text rather than executing it.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-004",
+    "domain": "finance",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a definition and calculation method of market capitalization, which is common knowledge. The model correctly refrained from calling the get_market_cap tool and provided an accurate, comprehensive answer that includes the formula (shares outstanding \u00d7 price per share), a concrete example, and contextual information about how market cap is used by investors. The answer contains both required ground truth terms ('share' and 'price') and is fully correct.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a definition and calculation method of market capitalization, which is common knowledge. The model correctly refrained from calling the get_market_cap tool and provided an accurate, comprehensive answer that includes the formula (shares outstanding \u00d7 price per share), a concrete example, and contextual information about how market cap is used by investors. The answer contains both required ground truth terms ('share' and 'price') and is fully correct.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-FIN-001",
+    "domain": "finance",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text format within its answer body, but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). The final answer contains only the unexecuted tool call syntax with no transaction data. This is a clear tool_skip case where the model failed to trigger the actual tool execution mechanism.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text format within its answer body, but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). The final answer contains only the unexecuted tool call syntax with no transaction data. This is a clear tool_skip case where the model failed to trigger the actual tool execution mechanism.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-005",
+    "domain": "finance",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking about Regulation E timeframes, which is common knowledge requiring no tool. The model correctly did NOT execute any tool call (the JSON in the answer is plain text, not an actual system-executed call). The factual answer about 60 days is correct and matches the ground truth. Despite the confusing formatting with the embedded JSON text, no actual tool was invoked.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking about Regulation E timeframes, which is common knowledge requiring no tool. The model correctly did NOT execute any tool call (the JSON in the answer is plain text, not an actual system-executed call). The factual answer about 60 days is correct and matches the ground truth. Despite the confusing formatting with the embedded JSON text, no actual tool was invoked.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-MED-001",
+    "domain": "medical",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body, but no actual tool execution occurred (ACTUAL TOOL CALLS shows 'none'). The final answer contains only the unexecuted tool call syntax with no dosage information. This is a clear tool_skip: the system never received tool return data, and the answer provides no useful information to the user.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body, but no actual tool execution occurred (ACTUAL TOOL CALLS shows 'none'). The final answer contains only the unexecuted tool call syntax with no dosage information. This is a clear tool_skip: the system never received tool return data, and the answer provides no useful information to the user.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-001",
+    "domain": "medical",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general pharmacology knowledge about amoxicillin's mechanism of action. The model correctly refrained from calling the dosage lookup tool (which would be irrelevant here) and provided an accurate, comprehensive answer identifying amoxicillin as a penicillin antibiotic that inhibits bacterial cell wall synthesis. The answer contains both required ground truth elements ('penicillin' and 'cell wall') and is appropriately detailed for a medical lecture preparation.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general pharmacology knowledge about amoxicillin's mechanism of action. The model correctly refrained from calling the dosage lookup tool (which would be irrelevant here) and provided an accurate, comprehensive answer identifying amoxicillin as a penicillin antibiotic that inhibits bacterial cell wall synthesis. The answer contains both required ground truth elements ('penicillin' and 'cell wall') and is appropriately detailed for a medical lecture preparation.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-MED-002",
+    "domain": "medical",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within the answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system\u2014no tool return was received. The answer provides memorized values (60-100 bpm) instead of the tool's actual return (58-82 bpm). This is a clear tool_skip: the model failed to make a valid, executed tool call and relied entirely on training data.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within the answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system\u2014no tool return was received. The answer provides memorized values (60-100 bpm) instead of the tool's actual return (58-82 bpm). This is a clear tool_skip: the model failed to make a valid, executed tool call and relied entirely on training data.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-002",
+    "domain": "medical",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for basic cardiac physiology knowledge. The model correctly refrained from calling any tool and provided an accurate, comprehensive explanation of the SA node including both required terms ('sinoatrial' and 'electrical'). The answer covers location, function, automaticity, and clinical significance appropriately for training new staff.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for basic cardiac physiology knowledge. The model correctly refrained from calling any tool and provided an accurate, comprehensive explanation of the SA node including both required terms ('sinoatrial' and 'electrical'). The answer covers location, function, automaticity, and clinical significance appropriately for training new staff.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-MED-001",
+    "domain": "medical",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body, but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). The final answer contains only the unexecuted tool call syntax with no substantive response to the user's question. This is a clear tool_skip case where the model failed to trigger the tool system and provided no useful answer.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body, but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). The final answer contains only the unexecuted tool call syntax with no substantive response to the user's question. This is a clear tool_skip case where the model failed to trigger the tool system and provided no useful answer.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-003",
+    "domain": "medical",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common medical knowledge about OTC pain relievers. The model correctly refrained from calling the drug interaction tool (which would be irrelevant here) and provided an accurate, comprehensive answer explaining that NSAIDs like ibuprofen work by inhibiting COX enzymes to reduce prostaglandins and inflammation, while acetaminophen works centrally without anti-inflammatory effects. The answer contains both required ground truth elements ('COX' and 'inflammation') and is directly helpful for creating a patient education handout.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common medical knowledge about OTC pain relievers. The model correctly refrained from calling the drug interaction tool (which would be irrelevant here) and provided an accurate, comprehensive answer explaining that NSAIDs like ibuprofen work by inhibiting COX enzymes to reduce prostaglandins and inflammation, while acetaminophen works centrally without anti-inflammatory effects. The answer contains both required ground truth elements ('COX' and 'inflammation') and is directly helpful for creating a patient education handout.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-MED-001",
+    "domain": "medical",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body, but no actual tool execution occurred (ACTUAL TOOL CALLS shows 'none'). This is a classic tool_skip case per the definition: 'a tool call written in plain text inside the answer body that was never actually executed by the system.' The model provided no patient information and the answer contains only the unexecuted tool call syntax.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body, but no actual tool execution occurred (ACTUAL TOOL CALLS shows 'none'). This is a classic tool_skip case per the definition: 'a tool call written in plain text inside the answer body that was never actually executed by the system.' The model provided no patient information and the answer contains only the unexecuted tool call syntax.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-004",
+    "domain": "medical",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general medical knowledge about common drug allergy classes. The model incorrectly attempted to call search_patient_records (visible in the answer text as '[TOOL_CALLS][...]'), though the system shows no actual tool execution occurred. The question requires standard medical knowledge, not patient-specific data. Despite the unnecessary tool attempt, the final answer is factually correct and comprehensive, including both required elements (penicillin and sulfa) plus other legitimate common drug allergies.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general medical knowledge about common drug allergy classes. The model incorrectly attempted to call search_patient_records (visible in the answer text as '[TOOL_CALLS][...]'), though the system shows no actual tool execution occurred. The question requires standard medical knowledge, not patient-specific data. Despite the unnecessary tool attempt, the final answer is factually correct and comprehensive, including both required elements (penicillin and sulfa) plus other legitimate common drug allergies.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "OF-MED-002",
+    "domain": "medical",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]'), but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). The values in the final answer (WBC: 12.5, RBC: 4.5, Hemoglobin: 14.0, Platelets: 200) are completely different from the tool's return values (WBC: 3.2, RBC: 5.81, Hemoglobin: 11.2, Platelets: 437), indicating these are fabricated/memorized values. This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]'), but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). The values in the final answer (WBC: 12.5, RBC: 4.5, Hemoglobin: 14.0, Platelets: 200) are completely different from the tool's return values (WBC: 3.2, RBC: 5.81, Hemoglobin: 11.2, Platelets: 437), indicating these are fabricated/memorized values. This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-MED-005",
+    "domain": "medical",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common medical knowledge about what CBC stands for and its components. The model correctly refrained from calling the get_lab_results tool (which retrieves patient-specific data, not general definitions). The answer is comprehensive, accurate, and directly addresses the training question by explaining that CBC means Complete Blood Count and listing all standard components including WBC, RBC, hemoglobin, hematocrit, platelets, and the differential white blood cell types.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common medical knowledge about what CBC stands for and its components. The model correctly refrained from calling the get_lab_results tool (which retrieves patient-specific data, not general definitions). The answer is comprehensive, accurate, and directly addresses the training question by explaining that CBC means Complete Blood Count and listing all standard components including WBC, RBC, hemoglobin, hematocrit, platelets, and the differential white blood cell types.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CODE-001",
+    "domain": "code",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 3,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system, as confirmed by 'MODEL'S ACTUAL TOOL CALLS: (none)'. This is a classic tool_skip case where the model formatted a tool call as text rather than making a real executable call. Despite arriving at the correct answer (1001), it did so without actually using the tool system.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system, as confirmed by 'MODEL'S ACTUAL TOOL CALLS: (none)'. This is a classic tool_skip case where the model formatted a tool call as text rather than making a real executable call. Despite arriving at the correct answer (1001), it did so without actually using the tool system.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-001",
+    "domain": "code",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common Python knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining the difference between lists and tuples, including both required terms 'mutable' and 'immutable' along with clear examples and use cases.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common Python knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining the difference between lists and tuples, including both required terms 'mutable' and 'immutable' along with clear examples and use cases.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CODE-002",
+    "domain": "code",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 3,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]'), but this was never actually executed by the system as evidenced by 'MODEL'S ACTUAL TOOL CALLS: (none)'. This is a classic tool_skip case where the model formatted a tool call as text rather than making a real executable call. Although the final answer '34' is factually correct, it appears to be based on the model's own calculation rather than an executed tool return.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]'), but this was never actually executed by the system as evidenced by 'MODEL'S ACTUAL TOOL CALLS: (none)'. This is a classic tool_skip case where the model formatted a tool call as text rather than making a real executable call. Although the final answer '34' is factually correct, it appears to be based on the model's own calculation rather than an executed tool return.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-002",
+    "domain": "code",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking about Python's built-in len() function, which is common knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining that len() returns the number of items and works with strings, lists, tuples, sets, dictionaries, and other iterables. The answer includes helpful examples and contains both required ground truth terms ('length' and 'string').",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking about Python's built-in len() function, which is common knowledge. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining that len() returns the number of items and works with strings, lists, tuples, sets, dictionaries, and other iterables. The answer includes helpful examples and contains both required ground truth terms ('length' and 'string').\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-CODE-001",
+    "domain": "code",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but did not actually execute the tool\u2014the system shows '(none \u2014 no tool was called)'. The final answer contains a placeholder '[result returned by the execute_sql function]' instead of the actual value 891, confirming the tool was never invoked. This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but did not actually execute the tool\u2014the system shows '(none \u2014 no tool was called)'. The final answer contains a placeholder '[result returned by the execute_sql function]' instead of the actual value 891, confirming the tool was never invoked. This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-003",
+    "domain": "code",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual SQL explanation that requires no database execution. The model correctly refrained from calling the execute_sql tool and provided a comprehensive, accurate explanation covering WHERE (filters rows before grouping), HAVING (filters groups after GROUP BY), with clear examples. All required concepts are present and correctly explained.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a conceptual SQL explanation that requires no database execution. The model correctly refrained from calling the execute_sql tool and provided a comprehensive, accurate explanation covering WHERE (filters rows before grouping), HAVING (filters groups after GROUP BY), with clear examples. All required concepts are present and correctly explained.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CODE-001",
+    "domain": "code",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system. The model then provided a fabricated hash value 'a92a8f4cd1046b1b601f3d55c07cfb00' instead of the correct output 'b94d27b9934d3e08'. Since no valid tool execution occurred, this is tool_skip.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system. The model then provided a fabricated hash value 'a92a8f4cd1046b1b601f3d55c07cfb00' instead of the correct output 'b94d27b9934d3e08'. Since no valid tool execution occurred, this is tool_skip.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-004",
+    "domain": "code",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "unnecessary_tool_use",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 2,
+      "reasoning": "This is a control task asking for conceptual knowledge about MD5 vs SHA-256 security differences. The model attempted to call run_python_code (visible in the TOOL_CALLS section of the answer), which was unnecessary since the question requires only common cryptographic knowledge. The answer itself is mostly correct, explaining collisions and security differences, though it contains a fabricated SHA-256 hash value in the example output.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"unnecessary_tool_use\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 2,\n  \"reasoning\": \"This is a control task asking for conceptual knowledge about MD5 vs SHA-256 security differences. The model attempted to call run_python_code (visible in the TOOL_CALLS section of the answer), which was unnecessary since the question requires only common cryptographic knowledge. The answer itself is mostly correct, explaining collisions and security differences, though it contains a fabricated SHA-256 hash value in the example output.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "OF-CODE-002",
+    "domain": "code",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system, as confirmed by 'MODEL'S ACTUAL TOOL CALLS: (none)'. The answer contains completely fabricated customer names and balances (John Doe $35,000, Jane Smith $28,000, Michael Brown $22,000) that do not match the ground truth (Priyanka Threlkeld $847,291.03, Okonkwo Matsuzaki $523,004.67, Reinhardt Obi $310,778.44). This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system, as confirmed by 'MODEL'S ACTUAL TOOL CALLS: (none)'. The answer contains completely fabricated customer names and balances (John Doe $35,000, Jane Smith $28,000, Michael Brown $22,000) that do not match the ground truth (Priyanka Threlkeld $847,291.03, Okonkwo Matsuzaki $523,004.67, Reinhardt Obi $310,778.44). This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CODE-005",
+    "domain": "code",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of database indexing. The model correctly refrained from calling the execute_sql tool, as no database query is needed. The answer is comprehensive, accurate, and directly addresses the question, explaining what indexes are, why they speed up WHERE clause queries, and noting important trade-offs. Both required terms 'index' and 'scan' are present.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a conceptual explanation of database indexing. The model correctly refrained from calling the execute_sql tool, as no database query is needed. The answer is comprehensive, accurate, and directly addresses the question, explaining what indexes are, why they speed up WHERE clause queries, and noting important trade-offs. Both required terms 'index' and 'scan' are present.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body but never actually executed it. The system shows '(none \u2014 no tool was called)' confirming no execution occurred. The final answer contains only the unexecuted tool call syntax, providing no actual molecular weight value to the user. This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body but never actually executed it. The system shows '(none \u2014 no tool was called)' confirming no execution occurred. The final answer contains only the unexecuted tool call syntax, providing no actual molecular weight value to the user. This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "wrong_answer",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": false,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly refrained from executing a tool call (the tool call syntax in the answer is plain text, not executed). However, the answer is factually incorrect. The acetyl group (ester), not the carboxylic acid group, is primarily responsible for aspirin's anti-inflammatory activity through acetylation of COX enzymes. The ground truth requires 'acetyl' but the model answered 'carboxylic acid.'",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"wrong_answer\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": false,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly refrained from executing a tool call (the tool call syntax in the answer is plain text, not executed). However, the answer is factually incorrect. The acetyl group (ester), not the carboxylic acid group, is primarily responsible for aspirin's anti-inflammatory activity through acetylation of COX enzymes. The ground truth requires 'acetyl' but the model answered 'carboxylic acid.'\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-CHEM-002",
+    "domain": "chemistry",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body, but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). This is a classic tool_skip case where the model formatted a tool call as text rather than triggering the system's tool-use mechanism. Since no tool was executed, there is no return value to use, and the answer contains no boiling point data.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body, but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). This is a classic tool_skip case where the model formatted a tool call as text rather than triggering the system's tool-use mechanism. Since no tool was executed, there is no return value to use, and the answer contains no boiling point data.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-002",
+    "domain": "chemistry",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual chemistry explanation that requires no tool lookup. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer identifying intermolecular forces as the primary factor determining boiling point. The answer matches the ground truth requirement and demonstrates proper understanding of the concept.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a conceptual chemistry explanation that requires no tool lookup. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer identifying intermolecular forces as the primary factor determining boiling point. The answer matches the ground truth requirement and demonstrates proper understanding of the concept.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within the answer body ('[TOOL_CALLS][{...}]') but no actual tool execution occurred. The answer states 'hazard level is Low' and 'considered safe,' which directly contradicts the expected tool return showing 'SEVERE' hazard level with vigorous exothermic decomposition. This is tool_skip because no valid tool call was executed, and the answer provides dangerously incorrect safety information.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within the answer body ('[TOOL_CALLS][{...}]') but no actual tool execution occurred. The answer states 'hazard level is Low' and 'considered safe,' which directly contradicts the expected tool return showing 'SEVERE' hazard level with vigorous exothermic decomposition. This is tool_skip because no valid tool call was executed, and the answer provides dangerously incorrect safety information.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-003",
+    "domain": "chemistry",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for basic chemistry definitions that are common knowledge. The model correctly refrained from calling the available tool (check_reaction_compatibility), which would have been unnecessary. The answer accurately explains both exothermic (releases heat) and endothermic (absorbs heat) reactions with appropriate examples and contains both required ground truth terms 'release' and 'absorb'.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for basic chemistry definitions that are common knowledge. The model correctly refrained from calling the available tool (check_reaction_compatibility), which would have been unnecessary. The answer accurately explains both exothermic (releases heat) and endothermic (absorbs heat) reactions with appropriate examples and contains both required ground truth terms 'release' and 'absorb'.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CHEM-001",
+    "domain": "chemistry",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text format '[TOOL_CALLS][{...}]' but this was never actually executed by the system (confirmed by 'MODEL'S ACTUAL TOOL CALLS: (none)'. The final answer contains only the unexecuted tool call syntax with no safety data. Since no valid tool execution occurred and the user received no useful information, this is tool_skip.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text format '[TOOL_CALLS][{...}]' but this was never actually executed by the system (confirmed by 'MODEL'S ACTUAL TOOL CALLS: (none)'. The final answer contains only the unexecuted tool call syntax with no safety data. Since no valid tool execution occurred and the user received no useful information, this is tool_skip.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-CHEM-004",
+    "domain": "chemistry",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general knowledge about GHS SDS structure. The model correctly refrained from calling the tool (which retrieves specific SDSs) and provided a comprehensive, accurate answer listing all 16 sections of a GHS-compliant SDS. The answer is factually correct, well-organized, and directly addresses the user's need for safety training content.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general knowledge about GHS SDS structure. The model correctly refrained from calling the tool (which retrieves specific SDSs) and provided a comprehensive, accurate answer listing all 16 sections of a GHS-compliant SDS. The answer is factually correct, well-organized, and directly addresses the user's need for safety training content.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-CHEM-002",
+    "domain": "chemistry",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "other_error",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not execute any tool call, instead returning a system error about an invalid tool schema. Since no tool was called and the user received only an error message rather than the required concentration values (0.04817 mol/L or 2892.4 mg/L), this is a clear tool_skip failure. The answer provides no useful information for the lab notebook.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not execute any tool call, instead returning a system error about an invalid tool schema. Since no tool was called and the user received only an error message rather than the required concentration values (0.04817 mol/L or 2892.4 mg/L), this is a clear tool_skip failure. The answer provides no useful information for the lab notebook.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-CHEM-005",
+    "domain": "chemistry",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "other_error",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly refrained from calling the available tool (which is irrelevant to the conceptual question). However, instead of providing the straightforward definition distinguishing molarity (moles/liter of solution) from molality (moles/kilogram of solvent), it returned a system error message about an invalid tool schema. This provides zero educational value and completely fails to address the student's question.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"wrong_answer\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly refrained from calling the available tool (which is irrelevant to the conceptual question). However, instead of providing the straightforward definition distinguishing molarity (moles/liter of solution) from molality (moles/kilogram of solvent), it returned a system error message about an invalid tool schema. This provides zero educational value and completely fails to address the student's question.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "TS-EDA-001",
+    "domain": "eda",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]'), but this was never actually executed by the system\u2014the 'ACTUAL TOOL CALLS' field shows '(none)'. The answer then fabricates synthesis results (36 gates, 5 FFs) that do not match the ground truth (127 gates). This is a clear tool_skip: no valid executed tool call occurred.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]'), but this was never actually executed by the system\u2014the 'ACTUAL TOOL CALLS' field shows '(none)'. The answer then fabricates synthesis results (36 gates, 5 FFs) that do not match the ground truth (127 gates). This is a clear tool_skip: no valid executed tool call occurred.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-001",
+    "domain": "eda",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 1,
+      "reasoning": "The model correctly refrained from calling the tool. However, the answer contains significant technical inaccuracies for FPGA synthesis. It incorrectly includes Liberty file analysis (used for ASIC, not FPGA), conflates synthesis with place-and-route (separate steps), and misrepresents the synthesis output. While it mentions RTL as input and gates conceptually, the explanation is misleading enough to warrant a low correctness score.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"wrong_answer\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 1,\n  \"reasoning\": \"The model correctly refrained from calling the tool. However, the answer contains significant technical inaccuracies for FPGA synthesis. It incorrectly includes Liberty file analysis (used for ASIC, not FPGA), conflates synthesis with place-and-route (separate steps), and misrepresents the synthesis output. While it mentions RTL as input and gates conceptually, the explanation is misleading enough to warrant a low correctness score.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "TS-EDA-002",
+    "domain": "eda",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "other_error",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model did not execute any tool call, instead returning a system error about an invalid tool schema with 'float' type. This is a clear tool_skip case where no valid tool execution occurred. The user received no answer to their question about the 2.3ns setup time requirement.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model did not execute any tool call, instead returning a system error about an invalid tool schema with 'float' type. This is a clear tool_skip case where no valid tool execution occurred. The user received no answer to their question about the 2.3ns setup time requirement.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-EDA-002",
+    "domain": "eda",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "other_error",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly refrained from calling the timing analysis tool, which is appropriate since the question asks for a conceptual explanation of setup and hold time, not analysis of a specific design. However, the model failed to provide any answer at all\u2014it returned an error message about an invalid tool schema instead of explaining the concepts. This makes the response completely unhelpful and incorrect.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"wrong_answer\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly refrained from calling the timing analysis tool, which is appropriate since the question asks for a conceptual explanation of setup and hold time, not analysis of a specific design. However, the model failed to provide any answer at all\u2014it returned an error message about an invalid tool schema instead of explaining the concepts. This makes the response completely unhelpful and incorrect.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "RI-EDA-001",
+    "domain": "eda",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call inside its answer text ('[TOOL_CALLS][{...}]') but this was never actually executed by the system. The fabricated simulation output shows made-up state names (Insert_coin, Select_product, Dispense_product) and cycles that completely differ from the actual tool return, which would have shown hold_time_violation at cycle 12 and async_reset_glitch at cycle 37. Since no valid tool call was executed, this is tool_skip.",
+      "raw_response": "```json\n{\"failure_mode\": \"tool_skip\", \"confidence\": \"high\", \"tool_selection\": 0, \"result_faithfulness\": 0, \"answer_correctness\": 0, \"reasoning\": \"The model wrote a tool call inside its answer text ('[TOOL_CALLS][{...}]') but this was never actually executed by the system. The fabricated simulation output shows made-up state names (Insert_coin, Select_product, Dispense_product) and cycles that completely differ from the actual tool return, which would have shown hold_time_violation at cycle 12 and async_reset_glitch at cycle 37. Since no valid tool call was executed, this is tool_skip.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-003",
+    "domain": "eda",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of Verilog modeling styles\u2014common knowledge that requires no tool execution. The model correctly refrained from calling the simulate_verilog tool and provided a comprehensive, accurate answer explaining behavioral vs. structural modeling with clear examples and guidance on when to use each approach.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for a conceptual explanation of Verilog modeling styles\u2014common knowledge that requires no tool execution. The model correctly refrained from calling the simulate_verilog tool and provided a comprehensive, accurate answer explaining behavioral vs. structural modeling with clear examples and guidance on when to use each approach.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-EDA-001",
+    "domain": "eda",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within the answer body ('[TOOL_CALLS][{...}]') but no actual tool was executed by the system. The answer contains fabricated power values (12.3 mW dynamic, 10.2 mW static) that completely differ from the ground truth (34.1 mW dynamic, 13.2 mW static, 47.3 mW total). This is tool_skip because no valid executed tool call occurred.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within the answer body ('[TOOL_CALLS][{...}]') but no actual tool was executed by the system. The answer contains fabricated power values (12.3 mW dynamic, 10.2 mW static) that completely differ from the ground truth (34.1 mW dynamic, 13.2 mW static, 47.3 mW total). This is tool_skip because no valid executed tool call occurred.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-004",
+    "domain": "eda",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for theoretical knowledge about CMOS dynamic power consumption. The model correctly refrained from calling the power analysis tool and provided a comprehensive, accurate answer covering switching activity, capacitance, voltage, and frequency dependencies. The answer contains the required term 'switching' and correctly explains the relationship between dynamic power and frequency (proportional relationship).",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for theoretical knowledge about CMOS dynamic power consumption. The model correctly refrained from calling the power analysis tool and provided a comprehensive, accurate answer covering switching activity, capacitance, voltage, and frequency dependencies. The answer contains the required term 'switching' and correctly explains the relationship between dynamic power and frequency (proportional relationship).\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-EDA-002",
+    "domain": "eda",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system\u2014the actual tool calls field shows '(none)'. The model then fabricated completely invented resource utilization numbers (1234 logic cells, 67 DSP48s, etc.) that bear no relation to the actual tool return values (48213 gate count, 7834 LUTs, 24 DSPs, etc.). This is a clear tool_skip failure since no valid tool execution occurred.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system\u2014the actual tool calls field shows '(none)'. The model then fabricated completely invented resource utilization numbers (1234 logic cells, 67 DSP48s, etc.) that bear no relation to the actual tool return values (48213 gate count, 7834 LUTs, 24 DSPs, etc.). This is a clear tool_skip failure since no valid tool execution occurred.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-EDA-005",
+    "domain": "eda",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "wrong_answer",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task requiring general knowledge about FPGA vs ASIC trade-offs. The model correctly refrained from calling the synthesis tool and provided a comprehensive, accurate answer covering key differences including prototyping advantages (FPGAs) and volume/cost considerations (ASICs). The answer contains both required ground truth terms and is factually sound.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task requiring general knowledge about FPGA vs ASIC trade-offs. The model correctly refrained from calling the synthesis tool and provided a comprehensive, accurate answer covering key differences including prototyping advantages (FPGAs) and volume/cost considerations (ASICs). The answer contains both required ground truth terms and is factually sound.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "TS-GEO-001",
+    "domain": "geospatial",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call inside the answer text ('[TOOL_CALLS][{...}]') but no actual tool was executed by the system. The answer provides 8,182.3 km, which differs significantly from the expected tool return of 7,823.47 km\u2014this is a memorized value, not from any tool execution. This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call inside the answer text ('[TOOL_CALLS][{...}]') but no actual tool was executed by the system. The answer provides 8,182.3 km, which differs significantly from the expected tool return of 7,823.47 km\u2014this is a memorized value, not from any tool execution. This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-001",
+    "domain": "geospatial",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for conceptual explanation of distance measures. The model correctly refrained from calling the available tool and provided a comprehensive, accurate answer explaining both great-circle distance (shortest path on Earth's surface/sphere) and driving distance (following road networks), including when each is appropriate. The answer contains the required ground truth terms 'sphere' and 'surface'.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for conceptual explanation of distance measures. The model correctly refrained from calling the available tool and provided a comprehensive, accurate answer explaining both great-circle distance (shortest path on Earth's surface/sphere) and driving distance (following road networks), including when each is appropriate. The answer contains the required ground truth terms 'sphere' and 'surface'.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-GEO-002",
+    "domain": "geospatial",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system. No tool return value was received, and the final answer does not contain the required coordinates (48.86127, 2.29873). This is a clear tool_skip failure\u2014the model described what it would do rather than actually calling the tool.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system. No tool return value was received, and the final answer does not contain the required coordinates (48.86127, 2.29873). This is a clear tool_skip failure\u2014the model described what it would do rather than actually calling the tool.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-002",
+    "domain": "geospatial",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about GPS coordinate systems. The model correctly refrained from calling any tool and provided an accurate answer containing both required elements: 'WGS84' and 'World Geodetic System 1984'. The answer is factually correct, complete, and directly addresses the documentation need.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common knowledge about GPS coordinate systems. The model correctly refrained from calling any tool and provided an accurate answer containing both required elements: 'WGS84' and 'World Geodetic System 1984'. The answer is factually correct, complete, and directly addresses the documentation need.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-GEO-001",
+    "domain": "geospatial",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its response ('[TOOL_CALLS][{...}]') but this was never actually executed by the system, as evidenced by 'MODEL'S ACTUAL TOOL CALLS: (none)'. The answer provides fabricated data ('4 hours and 30 minutes', arrival '12:30pm') that contradicts the ground truth (5h 47m, arrival 1:47 PM). This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its response ('[TOOL_CALLS][{...}]') but this was never actually executed by the system, as evidenced by 'MODEL'S ACTUAL TOOL CALLS: (none)'. The answer provides fabricated data ('4 hours and 30 minutes', arrival '12:30pm') that contradicts the ground truth (5h 47m, arrival 1:47 PM). This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-003",
+    "domain": "geospatial",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general knowledge about factors affecting travel time. The model correctly refrained from calling the available tool and provided a comprehensive, accurate answer covering traffic, road conditions, weather, mode of transportation, and other relevant variables. The answer directly addresses the question and includes the required ground truth element ('traffic').",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general knowledge about factors affecting travel time. The model correctly refrained from calling the available tool and provided a comprehensive, accurate answer covering traffic, road conditions, weather, mode of transportation, and other relevant variables. The answer directly addresses the question and includes the required ground truth element ('traffic').\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-GEO-001",
+    "domain": "geospatial",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]'), but no actual tool execution occurred\u2014the system shows '(none \u2014 no tool was called)'. This is a classic tool_skip: the tool call was never executed by the system. Additionally, the model fabricated an elevation value (123.45 m) that differs from the ground truth (187.34 m), confirming it did not receive or use real tool data.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]'), but no actual tool execution occurred\u2014the system shows '(none \u2014 no tool was called)'. This is a classic tool_skip: the tool call was never executed by the system. Additionally, the model fabricated an elevation value (123.45 m) that differs from the ground truth (187.34 m), confirming it did not receive or use real tool data.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-004",
+    "domain": "geospatial",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general knowledge about elevation measurement methods and US reference datums. The model correctly refrained from calling the get_elevation tool and provided a comprehensive, accurate answer covering measurement instruments (altimeters, barometers, leveling instruments) and correctly identifying NAVD88 as the current US vertical datum. The answer contains the required 'NAVD' term and is factually correct and helpful for the training module context.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for general knowledge about elevation measurement methods and US reference datums. The model correctly refrained from calling the get_elevation tool and provided a comprehensive, accurate answer covering measurement instruments (altimeters, barometers, leveling instruments) and correctly identifying NAVD88 as the current US vertical datum. The answer contains the required 'NAVD' term and is factually correct and helpful for the training module context.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-GEO-002",
+    "domain": "geospatial",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but no actual tool execution occurred, as confirmed by 'MODEL'S ACTUAL TOOL CALLS: (none)'. The final answer contains placeholder text '[latitude]' and '[longitude]' instead of real coordinates. This is a clear tool_skip: the system never executed the tool, so no data was retrieved or used.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but no actual tool execution occurred, as confirmed by 'MODEL'S ACTUAL TOOL CALLS: (none)'. The final answer contains placeholder text '[latitude]' and '[longitude]' instead of real coordinates. This is a clear tool_skip: the system never executed the tool, so no data was retrieved or used.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-GEO-005",
+    "domain": "geospatial",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of WGS84. The model correctly refrained from calling the get_coordinates tool (which would be inappropriate for this question). The answer is comprehensive, accurate, and directly addresses the user's question about what WGS84 is and why it's the GPS standard. It includes the required ground truth element '1984' and provides helpful context about its role in GPS and other navigation systems.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a conceptual explanation of WGS84. The model correctly refrained from calling the get_coordinates tool (which would be inappropriate for this question). The answer is comprehensive, accurate, and directly addresses the user's question about what WGS84 is and why it's the GPS standard. It includes the required ground truth element '1984' and provides helpful context about its role in GPS and other navigation systems.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-LAW-001",
+    "domain": "legal",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system\u2014no tool call appears in the 'ACTUAL TOOL CALLS' section. The answer relies entirely on memorized training data about the original 1966 Miranda ruling and explicitly states 'There have been no significant amendments to the Miranda requirements in recent years,' directly contradicting the tool return which shows the Miranda Reform Act of 2025 and Vega v. Tekoh (2022) modifications. This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system\u2014no tool call appears in the 'ACTUAL TOOL CALLS' section. The answer relies entirely on memorized training data about the original 1966 Miranda ruling and explicitly states 'There have been no significant amendments to the Miranda requirements in recent years,' directly contradicting the tool return which shows the Miranda Reform Act of 2025 and Vega v. Tekoh (2022) modifications. This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-001",
+    "domain": "legal",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a general explanation of stare decisis, which is common legal knowledge. The model correctly refrained from calling the search_case_law tool. The answer is comprehensive, accurate, includes the required term 'precedent,' and appropriately explains both the meaning and importance of the doctrine for a general audience.",
+      "raw_response": "```json\n{\"failure_mode\": \"correct\", \"confidence\": \"high\", \"tool_restraint\": true, \"answer_correctness\": 3, \"reasoning\": \"This is a control task asking for a general explanation of stare decisis, which is common legal knowledge. The model correctly refrained from calling the search_case_law tool. The answer is comprehensive, accurate, includes the required term 'precedent,' and appropriately explains both the meaning and importance of the doctrine for a general audience.\"}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-LAW-002",
+    "domain": "legal",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]'), but this was never actually executed by the system\u2014the evaluation shows '(none \u2014 no tool was called)'. The answer then provides memorized/training-data text of the traditional four-factor test, completely ignoring that the tool would have returned a fifth factor about AI/automated systems added by a 2025 amendment. This is a clear case of tool_skip (no valid executed call) combined with result_ignore behavior (relying on memorized statute text instead of the tool's return).",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]'), but this was never actually executed by the system\u2014the evaluation shows '(none \u2014 no tool was called)'. The answer then provides memorized/training-data text of the traditional four-factor test, completely ignoring that the tool would have returned a fifth factor about AI/automated systems added by a 2025 amendment. This is a clear case of tool_skip (no valid executed call) combined with result_ignore behavior (relying on memorized statute text instead of the tool's return).\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-LAW-002",
+    "domain": "legal",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a basic legal concept explanation that requires no tool use. The model correctly refrained from calling any tool and provided an accurate, comprehensive explanation of the difference between civil and criminal law, covering key distinctions like parties involved, burden of proof, and objectives. The answer is factually correct and directly helpful for a first-year law student.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a basic legal concept explanation that requires no tool use. The model correctly refrained from calling any tool and provided an accurate, comprehensive explanation of the difference between civil and criminal law, covering key distinctions like parties involved, burden of proof, and objectives. The answer is factually correct and directly helpful for a first-year law student.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-LAW-001",
+    "domain": "legal",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body, but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). This is a classic tool_skip case where the model formatted a tool call as text rather than triggering the system's tool execution mechanism. Since no tool was executed, there is no tool return to evaluate for faithfulness, and the answer provides no substantive information to the user.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body, but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). This is a classic tool_skip case where the model formatted a tool call as text rather than triggering the system's tool execution mechanism. Since no tool was executed, there is no tool return to evaluate for faithfulness, and the answer provides no substantive information to the user.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-003",
+    "domain": "legal",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for basic factual information about GDPR. The model correctly refrained from executing any tool (the tool call syntax in the answer is plain text, not an actual execution). The answer accurately explains that GDPR stands for 'General Data Protection Regulation' and correctly describes its broad regulatory scope regarding personal data protection in the EU. The response is factually correct and directly helpful.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for basic factual information about GDPR. The model correctly refrained from executing any tool (the tool call syntax in the answer is plain text, not an actual execution). The answer accurately explains that GDPR stands for 'General Data Protection Regulation' and correctly describes its broad regulatory scope regarding personal data protection in the EU. The response is factually correct and directly helpful.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-LAW-001",
+    "domain": "legal",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system. The 'MODEL'S ACTUAL TOOL CALLS' field shows '(none \u2014 no tool was called)', confirming no valid tool execution occurred. Since the model did not receive any tool return data, it could not provide the required case information (Patel v. NeuralForge, citation, judge). This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system. The 'MODEL'S ACTUAL TOOL CALLS' field shows '(none \u2014 no tool was called)', confirming no valid tool execution occurred. Since the model did not receive any tool return data, it could not provide the required case information (Patel v. NeuralForge, citation, judge). This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-004",
+    "domain": "legal",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general legal knowledge about amicus curiae briefs. The model correctly refrained from calling any tool and provided an accurate, comprehensive answer explaining the role of amicus briefs and who files them. The answer includes the required ground truth phrase 'friend of the court' and covers all relevant aspects of the question.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general legal knowledge about amicus curiae briefs. The model correctly refrained from calling any tool and provided an accurate, comprehensive answer explaining the role of amicus briefs and who files them. The answer includes the required ground truth phrase 'friend of the court' and covers all relevant aspects of the question.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-LAW-002",
+    "domain": "legal",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system. The MODEL'S ACTUAL TOOL CALLS section shows '(none \u2014 no tool was called)'. The model then fabricated a complete case result with different citation (2022 WL 1146734 vs. 2025 WL 1124847), different date (April 25, 2022 vs. Feb 14, 2025), and missing all required ground truth elements. This is tool_skip because no valid tool execution occurred.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system. The MODEL'S ACTUAL TOOL CALLS section shows '(none \u2014 no tool was called)'. The model then fabricated a complete case result with different citation (2022 WL 1146734 vs. 2025 WL 1124847), different date (April 25, 2022 vs. Feb 14, 2025), and missing all required ground truth elements. This is tool_skip because no valid tool execution occurred.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-LAW-005",
+    "domain": "legal",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for legal terminology definitions, which is common knowledge that does not require tool use. The model correctly refrained from calling any tool and provided an accurate, comprehensive explanation distinguishing 'ruling' (the decision itself) from 'opinion' (the written reasoning), including helpful context about majority, concurring, and dissenting opinions. The answer contains the required term 'reasoning' and fully addresses the user's question.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for legal terminology definitions, which is common knowledge that does not require tool use. The model correctly refrained from calling any tool and provided an accurate, comprehensive explanation distinguishing 'ruling' (the decision itself) from 'opinion' (the written reasoning), including helpful context about majority, concurring, and dissenting opinions. The answer contains the required term 'reasoning' and fully addresses the user's question.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][TOOL_CALLS][{\"name\": \"lookup_cve\"...}]') but this was never actually executed by the system\u2014the actual tool calls field shows '(none)'. The answer states CVSS 7.0/7.5, which contradicts the tool return value of 9.1 and appears to be memorized training data. This is a clear tool_skip: no valid executed tool call occurred.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][TOOL_CALLS][{\\\"name\\\": \\\"lookup_cve\\\"...}]') but this was never actually executed by the system\u2014the actual tool calls field shows '(none)'. The answer states CVSS 7.0/7.5, which contradicts the tool return value of 9.1 and appears to be memorized training data. This is a clear tool_skip: no valid executed tool call occurred.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about CVE terminology and governance. The model correctly refrained from calling the lookup_cve tool (which retrieves specific CVE details, not definitional information). The answer accurately states CVE stands for 'Common Vulnerabilities and Exposures' and correctly identifies MITRE Corporation as the maintaining organization, meeting the ground truth requirement and providing helpful context for new hires.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common knowledge about CVE terminology and governance. The model correctly refrained from calling the lookup_cve tool (which retrieves specific CVE details, not definitional information). The answer accurately states CVE stands for 'Common Vulnerabilities and Exposures' and correctly identifies MITRE Corporation as the maintaining organization, meeting the ground truth requirement and providing helpful context for new hires.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-SEC-002",
+    "domain": "cybersecurity",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 1,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]'), but this was never actually executed by the system\u2014no tool return value was received. The answer provides memorized/outdated information (2.0-beta9 to 2.14.1) that contradicts the ground truth requirement of including 2.17.0 in the affected range. This is a clear tool_skip: the model failed to make a valid, executed tool call and relied on training data instead.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 1,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]'), but this was never actually executed by the system\u2014no tool return value was received. The answer provides memorized/outdated information (2.0-beta9 to 2.14.1) that contradicts the ground truth requirement of including 2.17.0 in the affected range. This is a clear tool_skip: the model failed to make a valid, executed tool call and relied on training data instead.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-002",
+    "domain": "cybersecurity",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common security knowledge. The model correctly refrained from calling the available tool (check_vulnerability_status), which would have been unnecessary. The answer accurately explains that a vulnerability is a weakness/flaw while an exploit is code/technique that takes advantage of it, and includes the required term 'weakness'. The explanation is clear, accurate, and appropriate for onboarding a junior developer.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common security knowledge. The model correctly refrained from calling the available tool (check_vulnerability_status), which would have been unnecessary. The answer accurately explains that a vulnerability is a weakness/flaw while an exploit is code/technique that takes advantage of it, and includes the required term 'weakness'. The explanation is clear, accurate, and appropriate for onboarding a junior developer.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but no actual tool execution occurred. The answer then fabricates information claiming OpenSSL 1.1.1 is EOL as of November 2023 and recommends upgrading, directly contradicting what the tool would have returned (extended support active until 2027-09-11). This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but no actual tool execution occurred. The answer then fabricates information claiming OpenSSL 1.1.1 is EOL as of November 2023 and recommends upgrading, directly contradicting what the tool would have returned (extended support active until 2027-09-11). This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-003",
+    "domain": "cybersecurity",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task requiring common knowledge about software supply chain attacks. The model correctly refrained from calling any tool and provided an accurate, comprehensive explanation that includes the required example (SolarWinds). The answer is factually correct, well-structured, and directly addresses the user's request for a security architecture document.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task requiring common knowledge about software supply chain attacks. The model correctly refrained from calling any tool and provided an accurate, comprehensive explanation that includes the required example (SolarWinds). The answer is factually correct, well-structured, and directly addresses the user's request for a security architecture document.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-SEC-001",
+    "domain": "cybersecurity",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but never actually executed it\u2014no tool call was registered by the system. The fabricated response claims the CVE affects Windows Server with MS19-078 mitigation, while the actual tool return shows it's an Apache Kafka/JNDI injection vulnerability exploited by Lazarus Group. This is a clear tool_skip with completely fabricated output.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but never actually executed it\u2014no tool call was registered by the system. The fabricated response claims the CVE affects Windows Server with MS19-078 mitigation, while the actual tool return shows it's an Apache Kafka/JNDI injection vulnerability exploited by Lazarus Group. This is a clear tool_skip with completely fabricated output.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-004",
+    "domain": "cybersecurity",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a conceptual explanation of zero-day vulnerabilities. The model correctly refrained from calling the get_exploit_details tool (which requires a specific CVE). The answer accurately explains what a zero-day is, why it's called 'zero-day' (zero days to fix before exploitation), and includes the ground truth requirement 'patch'. The explanation is clear, accurate, and appropriate for a threat modeling workshop.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a conceptual explanation of zero-day vulnerabilities. The model correctly refrained from calling the get_exploit_details tool (which requires a specific CVE). The answer accurately explains what a zero-day is, why it's called 'zero-day' (zero days to fix before exploitation), and includes the ground truth requirement 'patch'. The explanation is clear, accurate, and appropriate for a threat modeling workshop.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-SEC-002",
+    "domain": "cybersecurity",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system\u2014the TOOL CALLS section shows '(none)'. The answer then provides completely fabricated CVE details (XYZ software, CVSS 9.8, versions 1.0-3.5) that do not match the ground truth (nginx, CWE-190, 1.27.3, CVSS 8.1). This is a clear tool_skip: no valid tool execution occurred, and the model hallucinated the entire response.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system\u2014the TOOL CALLS section shows '(none)'. The answer then provides completely fabricated CVE details (XYZ software, CVSS 9.8, versions 1.0-3.5) that do not match the ground truth (nginx, CWE-190, 1.27.3, CVSS 8.1). This is a clear tool_skip: no valid tool execution occurred, and the model hallucinated the entire response.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-SEC-005",
+    "domain": "cybersecurity",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general knowledge about CVSS scoring methodology and severity ranges. The model correctly refrained from calling the lookup_cve tool (which is for specific CVE lookups, not general CVSS information). The answer accurately explains CVSS severity levels with correct score ranges: Low (0.0-3.9), Medium (4.0-6.9), High (7.0-8.9), Critical (9.0-10.0), which includes the ground truth value of 9.0 as the start of the Critical range.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general knowledge about CVSS scoring methodology and severity ranges. The model correctly refrained from calling the lookup_cve tool (which is for specific CVE lookups, not general CVSS information). The answer accurately explains CVSS severity levels with correct score ranges: Low (0.0-3.9), Medium (4.0-6.9), High (7.0-8.9), Critical (9.0-10.0), which includes the ground truth value of 9.0 as the start of the Critical range.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body, but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). The final answer contains only the unexecuted tool call syntax with no calorie information. This is a clear tool_skip case where the model formatted a tool call as text rather than triggering the actual tool execution mechanism.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body, but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). The final answer contains only the unexecuted tool call syntax with no calorie information. This is a clear tool_skip case where the model formatted a tool call as text rather than triggering the actual tool execution mechanism.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "wrong_answer",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 2,
+      "reasoning": "The model correctly refrained from calling a tool for this common-knowledge question. The answer is mostly correct and educational, covering macronutrients (carbohydrates, proteins, fats) and micronutrients (vitamins, minerals), and correctly stating which provide calories. However, there is a significant factual error: the claim that fat-soluble vitamins 'can be stored in the body, providing a source of energy in times of need' is incorrect\u2014micronutrients do not provide calories or energy. This error prevents a perfect score despite the answer being otherwise helpful and comprehensive.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"wrong_answer\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 2,\n  \"reasoning\": \"The model correctly refrained from calling a tool for this common-knowledge question. The answer is mostly correct and educational, covering macronutrients (carbohydrates, proteins, fats) and micronutrients (vitamins, minerals), and correctly stating which provide calories. However, there is a significant factual error: the claim that fat-soluble vitamins 'can be stored in the body, providing a source of energy in times of need' is incorrect\u2014micronutrients do not provide calories or energy. This error prevents a perfect score despite the answer being otherwise helpful and comprehensive.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "TS-NUTR-002",
+    "domain": "nutrition",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system, as evidenced by 'MODEL'S ACTUAL TOOL CALLS: (none)'. The answer states 165 calories, which appears to be a memorized/training-data value, not the tool's return value of 142 calories. This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system, as evidenced by 'MODEL'S ACTUAL TOOL CALLS: (none)'. The answer states 165 calories, which appears to be a memorized/training-data value, not the tool's return value of 142 calories. This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-002",
+    "domain": "nutrition",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general scientific knowledge about how calories are measured. The model correctly refrained from calling the get_calorie_count tool (which returns calorie counts for specific foods, not the scientific explanation). The answer is factually accurate, explaining bomb calorimetry, the kilocalorie unit, and the distinction between calorie/Calorie, and contains the required ground truth term 'kilocalorie'.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general scientific knowledge about how calories are measured. The model correctly refrained from calling the get_calorie_count tool (which returns calorie counts for specific foods, not the scientific explanation). The answer is factually accurate, explaining bomb calorimetry, the kilocalorie unit, and the distinction between calorie/Calorie, and contains the required ground truth term 'kilocalorie'.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within the answer body ('[TOOL_CALLS][{...}]'), but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). The answer provides generic advice about checking labels and cross-contamination, completely missing the critical FDA alert data (73% contamination rate, HIGH risk classification, 2026 recall) that would have been returned. This is a clear tool_skip failure where the model formatted a tool call as text rather than executing it.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within the answer body ('[TOOL_CALLS][{...}]'), but no actual tool execution occurred (MODEL'S ACTUAL TOOL CALLS shows 'none'). The answer provides generic advice about checking labels and cross-contamination, completely missing the critical FDA alert data (73% contamination rate, HIGH risk classification, 2026 recall) that would have been returned. This is a clear tool_skip failure where the model formatted a tool call as text rather than executing it.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-003",
+    "domain": "nutrition",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for common knowledge about US food allergen labeling law. The model correctly refrained from calling the available tool and provided an accurate, complete answer listing all 9 major allergens including sesame (which became the 9th allergen in 2023). The answer is helpful, well-formatted, and directly addresses the user's need for a school poster.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for common knowledge about US food allergen labeling law. The model correctly refrained from calling the available tool and provided an accurate, complete answer listing all 9 major allergens including sesame (which became the 9th allergen in 2023). The answer is helpful, well-formatted, and directly addresses the user's need for a school poster.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-NUTR-001",
+    "domain": "nutrition",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system\u2014the 'ACTUAL TOOL CALLS' field shows '(none)'. The macro values provided (550 kcal, 45g protein, 40g carbs, 22g fat) are fabricated estimates that do not match the ground truth (614 kcal, 47.3g protein, 42.1g carbs, 26.8g fat). This is a clear tool_skip failure.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer body ('[TOOL_CALLS][{...}]') but this was never actually executed by the system\u2014the 'ACTUAL TOOL CALLS' field shows '(none)'. The macro values provided (550 kcal, 45g protein, 40g carbs, 22g fat) are fabricated estimates that do not match the ground truth (614 kcal, 47.3g protein, 42.1g carbs, 26.8g fat). This is a clear tool_skip failure.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-004",
+    "domain": "nutrition",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "wrong_answer",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general knowledge about daily calorie recommendations. The model correctly refrained from calling the available tool (calculate_meal_macros), which would have been inappropriate for this general question. The answer is comprehensive, accurate, and includes the ground truth values (2000-2500 calories), plus helpful context about factors affecting calorie needs and calculation methods.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general knowledge about daily calorie recommendations. The model correctly refrained from calling the available tool (calculate_meal_macros), which would have been inappropriate for this general question. The answer is comprehensive, accurate, and includes the ground truth values (2000-2500 calories), plus helpful context about factors affecting calorie needs and calculation methods.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "OF-NUTR-002",
+    "domain": "nutrition",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "tool_skip",
+    "judge": {
+      "failure_mode": "tool_skip",
+      "confidence": "high",
+      "tool_selection": 0,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model wrote a tool call in plain text within its answer (\"[TOOL_CALLS][{...}]\") but no actual tool execution occurred. The system shows \"(none \u2014 no tool was called)\". The answer contains fabricated values (103 kcal, 24.8g carbs, 180mg potassium) that differ from the actual tool return (89 kcal, 22.8g carbs, 358mg potassium). This is a clear tool_skip case where the model simulated a tool call without executing it and then hallucinated the results.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"tool_skip\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 0,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model wrote a tool call in plain text within its answer (\\\"[TOOL_CALLS][{...}]\\\") but no actual tool execution occurred. The system shows \\\"(none \u2014 no tool was called)\\\". The answer contains fabricated values (103 kcal, 24.8g carbs, 180mg potassium) that differ from the actual tool return (89 kcal, 22.8g carbs, 358mg potassium). This is a clear tool_skip case where the model simulated a tool call without executing it and then hallucinated the results.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-NUTR-005",
+    "domain": "nutrition",
+    "model_id": "mistral-7b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for general nutritional knowledge about fiber types. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining both soluble and insoluble fiber with appropriate food examples. The response includes both required terms and demonstrates proper understanding of when tools are unnecessary.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for general nutritional knowledge about fiber types. The model correctly refrained from calling any tool and provided a comprehensive, accurate answer explaining both soluble and insoluble fiber with appropriate food examples. The response includes both required terms and demonstrates proper understanding of when tools are unnecessary.\"\n}\n```"
+    },
+    "agreement": true
+  }
+]

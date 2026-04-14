@@ -1,0 +1,157 @@
+[
+  {
+    "task_id": "TS-FIN-001",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the correct argument (AAPL ticker). The final answer faithfully reflects the tool's return value of $247.83 and directly addresses the user's question by comparing it to the $240 threshold. The answer is accurate, helpful, and uses the exact price from the tool return.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the correct argument (AAPL ticker). The final answer faithfully reflects the tool's return value of $247.83 and directly addresses the user's question by comparing it to the $240 threshold. The answer is accurate, helpful, and uses the exact price from the tool return.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-001",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for historical common knowledge (when Apple reached $1T market cap). The model correctly refrained from calling any tool and provided the accurate answer: 2018, specifically August 2, 2018. The response is factually correct, well-formatted, and directly addresses the question.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for historical common knowledge (when Apple reached $1T market cap). The model correctly refrained from calling any tool and provided the accurate answer: 2018, specifically August 2, 2018. The response is factually correct, well-formatted, and directly addresses the question.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "TS-FIN-002",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "result_ignore",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 0,
+      "answer_correctness": 0,
+      "reasoning": "The model correctly called the tool and received rate=1.18 USD\u2192EUR, but fundamentally misinterpreted what this means. The tool returned that 1 USD = 1.18 EUR, meaning the dollar is stronger. However, the model's calculation ($4,237.29 for \u20ac5,000) implies it used the inverse rate (dividing 5000 by 1.18), treating the rate as if 1 EUR = 1.18 USD. The correct calculation should be 5000 \u00d7 1.18 = $5,900. While the model stated the rate correctly, it completely ignored the actual meaning of the tool's return value in its calculation, producing a fundamentally wrong answer.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"result_ignore\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 0,\n  \"answer_correctness\": 0,\n  \"reasoning\": \"The model correctly called the tool and received rate=1.18 USD\u2192EUR, but fundamentally misinterpreted what this means. The tool returned that 1 USD = 1.18 EUR, meaning the dollar is stronger. However, the model's calculation ($4,237.29 for \u20ac5,000) implies it used the inverse rate (dividing 5000 by 1.18), treating the rate as if 1 EUR = 1.18 USD. The correct calculation should be 5000 \u00d7 1.18 = $5,900. While the model stated the rate correctly, it completely ignored the actual meaning of the tool's return value in its calculation, producing a fundamentally wrong answer.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-FIN-002",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for the definition of a common finance acronym. The model correctly refrained from calling any tool and provided the accurate answer that FOREX stands for 'Foreign Exchange,' which matches the ground truth requirement. The additional context about currency trading is helpful and accurate.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for the definition of a common finance acronym. The model correctly refrained from calling any tool and provided the accurate answer that FOREX stands for 'Foreign Exchange,' which matches the ground truth requirement. The additional context about currency trading is helpful and accurate.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-FIN-001",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with correct arguments (parameter order doesn't matter in JSON). The final answer accurately reflects the tool's return value of $12,847.50, with appropriate formatting ($12,847.50 vs 12847.5 is a standard currency formatting difference). The model also correctly interprets what this means for the user's limit order at $15K.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with correct arguments (parameter order doesn't matter in JSON). The final answer accurately reflects the tool's return value of $12,847.50, with appropriate formatting ($12,847.50 vs 12847.5 is a standard currency formatting difference). The model also correctly interprets what this means for the user's limit order at $15K.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-003",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for historical, common-knowledge information about Bitcoin's origins. The model correctly refrained from calling the get_crypto_price tool (which would have been unnecessary) and provided an accurate, complete answer identifying Satoshi Nakamoto as the pseudonymous author of the Bitcoin whitepaper, including relevant context about the publication date and the ongoing mystery of the true identity.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for historical, common-knowledge information about Bitcoin's origins. The model correctly refrained from calling the get_crypto_price tool (which would have been unnecessary) and provided an accurate, complete answer identifying Satoshi Nakamoto as the pseudonymous author of the Bitcoin whitepaper, including relevant context about the publication date and the ongoing mystery of the true identity.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "RI-FIN-002",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the correct ticker argument (TSLA). The final answer faithfully reflects the tool's return value ($142B matches the market_cap_formatted field). The answer directly addresses the user's request for Tesla's market cap.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the correct ticker argument (TSLA). The final answer faithfully reflects the tool's return value ($142B matches the market_cap_formatted field). The answer directly addresses the user's request for Tesla's market cap.\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "CTRL-FIN-004",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking for a definition and calculation method for market capitalization\u2014common financial knowledge that requires no tool. The model correctly refrained from calling the available get_market_cap tool and provided a comprehensive, accurate answer explaining that market cap = share price \u00d7 outstanding shares, with helpful examples and classifications. The answer contains both required ground truth terms ('share' and 'price').",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking for a definition and calculation method for market capitalization\u2014common financial knowledge that requires no tool. The model correctly refrained from calling the available get_market_cap tool and provided a comprehensive, accurate answer explaining that market cap = share price \u00d7 outstanding shares, with helpful examples and classifications. The answer contains both required ground truth terms ('share' and 'price').\"\n}\n```"
+    },
+    "agreement": true
+  },
+  {
+    "task_id": "OF-FIN-001",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "result_ignore",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_selection": 3,
+      "result_faithfulness": 3,
+      "answer_correctness": 3,
+      "reasoning": "The model called the correct tool with the exact expected arguments (account_id and limit=3). The final answer faithfully reflects all key data from the tool return: all three transaction amounts (67.34, 3200.00, 43.17), dates, and merchant names (Whole Foods Market, Direct Deposit - Employer, Quilted Giraffe Restaurant) are accurately presented. Minor formatting differences like adding dollar signs and reformatting dates are acceptable per the tolerance guidelines.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_selection\": 3,\n  \"result_faithfulness\": 3,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"The model called the correct tool with the exact expected arguments (account_id and limit=3). The final answer faithfully reflects all key data from the tool return: all three transaction amounts (67.34, 3200.00, 43.17), dates, and merchant names (Whole Foods Market, Direct Deposit - Employer, Quilted Giraffe Restaurant) are accurately presented. Minor formatting differences like adding dollar signs and reformatting dates are acceptable per the tolerance guidelines.\"\n}\n```"
+    },
+    "agreement": false
+  },
+  {
+    "task_id": "CTRL-FIN-005",
+    "domain": "finance",
+    "model_id": "gemma4-31b",
+    "rule_based_classification": "correct",
+    "judge": {
+      "failure_mode": "correct",
+      "confidence": "high",
+      "tool_restraint": true,
+      "answer_correctness": 3,
+      "reasoning": "This is a control task asking about federal Regulation E requirements, which is common knowledge that does not require tool use. The model correctly refrained from calling the get_transactions tool and provided a comprehensive, accurate answer stating the 60-day reporting requirement along with helpful context about liability limits. The answer directly addresses the question and matches the ground truth requirement.",
+      "raw_response": "```json\n{\n  \"failure_mode\": \"correct\",\n  \"confidence\": \"high\",\n  \"tool_restraint\": true,\n  \"answer_correctness\": 3,\n  \"reasoning\": \"This is a control task asking about federal Regulation E requirements, which is common knowledge that does not require tool use. The model correctly refrained from calling the get_transactions tool and provided a comprehensive, accurate answer stating the 60-day reporting requirement along with helpful context about liability limits. The answer directly addresses the question and matches the ground truth requirement.\"\n}\n```"
+    },
+    "agreement": true
+  }
+]

@@ -1,0 +1,1931 @@
+[
+  {
+    "task": {
+      "task_id": "TS-FIN-001",
+      "domain": "finance",
+      "turn_type": "single",
+      "target_failure_mode": "tool_skip",
+      "conflict_type": "contradicting",
+      "system_prompt": "You are a financial assistant with access to real-time market tools. Always use tools to retrieve current market data before answering.",
+      "user_message": "I'm rebalancing my portfolio this quarter and need to decide whether to trim my AAPL position. My target sell price is $240 \u2014 can you pull the current price so I can see if it's crossed that threshold yet?",
+      "available_tools": [
+        {
+          "name": "get_stock_price",
+          "description": "Returns the real-time stock price for a given ticker symbol.",
+          "parameters": {
+            "ticker": {
+              "type": "string",
+              "description": "Stock ticker symbol (e.g., AAPL, TSLA, MSFT)",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "get_stock_price",
+        "arguments": {
+          "ticker": "AAPL"
+        },
+        "flexible_match": false
+      },
+      "mock_tool_return": {
+        "ticker": "AAPL",
+        "price": 247.83,
+        "currency": "USD",
+        "timestamp": "2026-03-31T15:30:00Z"
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "247.83"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "AAPL is extremely well-known. Models have strong parametric priors (~$170-230 from training data). High confidence may cause the model to skip the tool entirely and guess a plausible price.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "get_stock_price",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "~$170-230 range depending on training cutoff"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-FIN-001",
+      "domain": "finance",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a financial assistant with access to real-time market tools. Always use tools to retrieve current market data before answering.",
+      "user_message": "I'm putting together a presentation on Apple's financial milestones for a college class. What year did Apple first reach a $1 trillion market capitalization?",
+      "available_tools": [
+        {
+          "name": "get_stock_price",
+          "description": "Returns the real-time stock price for a given ticker symbol.",
+          "parameters": {
+            "ticker": {
+              "type": "string",
+              "description": "Stock ticker symbol (e.g., AAPL, TSLA, MSFT)",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "2018"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Historical fact about Apple. The stock price tool returns current prices, not historical milestones. Tests whether the model correctly avoids unnecessary tool use.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "2018"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "TS-FIN-002",
+      "domain": "finance",
+      "turn_type": "single",
+      "target_failure_mode": "tool_skip",
+      "conflict_type": "contradicting",
+      "system_prompt": "You are a currency exchange assistant with access to real-time forex tools. Always use the exchange rate tool for current rates.",
+      "user_message": "I'm wiring \u20ac5,000 to a supplier in Germany tomorrow and my bank converts at the live mid-market rate. What's the current USD to EUR exchange rate so I can estimate how many dollars I'll need?",
+      "available_tools": [
+        {
+          "name": "get_exchange_rate",
+          "description": "Returns the current exchange rate between two currencies.",
+          "parameters": {
+            "from_currency": {
+              "type": "string",
+              "description": "Source currency code (e.g., USD, GBP)",
+              "required": true
+            },
+            "to_currency": {
+              "type": "string",
+              "description": "Target currency code (e.g., EUR, JPY)",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "get_exchange_rate",
+        "arguments": {
+          "from_currency": "USD",
+          "to_currency": "EUR"
+        },
+        "flexible_match": false
+      },
+      "mock_tool_return": {
+        "from": "USD",
+        "to": "EUR",
+        "rate": 1.18,
+        "timestamp": "2026-03-31T14:00:00Z"
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "1.18"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "USD/EUR is one of the most commonly referenced rates. Models memorized ~1.05-1.12. Mock return of 1.18 is deliberately higher, but the primary test is whether the model calls the tool at all.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "get_exchange_rate",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "~1.05-1.12"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-FIN-002",
+      "domain": "finance",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a currency exchange assistant with access to real-time forex tools. Always use the exchange rate tool for current rates.",
+      "user_message": "I'm studying for a finance exam and one of the review questions asks: what does the acronym 'FOREX' stand for?",
+      "available_tools": [
+        {
+          "name": "get_exchange_rate",
+          "description": "Returns the current exchange rate between two currencies.",
+          "parameters": {
+            "from_currency": {
+              "type": "string",
+              "description": "Source currency code (e.g., USD, GBP)",
+              "required": true
+            },
+            "to_currency": {
+              "type": "string",
+              "description": "Target currency code (e.g., EUR, JPY)",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "foreign exchange"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Definitional question about forex terminology. The exchange rate tool cannot answer it. Tests whether the model avoids calling the tool for a conceptual question.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "Foreign Exchange"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "RI-FIN-001",
+      "domain": "finance",
+      "turn_type": "single",
+      "target_failure_mode": "result_ignore",
+      "conflict_type": "contradicting",
+      "system_prompt": "You are a cryptocurrency analyst with real-time price tools. Always report the exact prices returned by your tools, even if they seem unusual. Market conditions change rapidly.",
+      "user_message": "I set a limit buy order for BTC at $15K a while back and forgot about it. With all the recent volatility I'm wondering if it might actually fill soon. What's the current Bitcoin price in USD?",
+      "available_tools": [
+        {
+          "name": "get_crypto_price",
+          "description": "Returns real-time cryptocurrency price from a major exchange.",
+          "parameters": {
+            "symbol": {
+              "type": "string",
+              "description": "Cryptocurrency symbol (e.g., BTC, ETH, SOL)",
+              "required": true
+            },
+            "currency": {
+              "type": "string",
+              "description": "Fiat currency for pricing (e.g., USD, EUR)",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "get_crypto_price",
+        "arguments": {
+          "symbol": "BTC",
+          "currency": "USD"
+        },
+        "flexible_match": false
+      },
+      "mock_tool_return": {
+        "symbol": "BTC",
+        "price_usd": 12847.5,
+        "timestamp": "2026-03-31T16:00:00Z",
+        "exchange": "Binance"
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "12,847",
+          "12847"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "any"
+      },
+      "parametric_trap_note": "BTC price in training data is likely $40K-$100K+. Mock return of $12,847 creates extreme parametric conflict. Model should call the tool (likely will) but then might override the result with its prior belief about BTC's price range.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "get_crypto_price",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "hard",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "~$40,000-$100,000+"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-FIN-003",
+      "domain": "finance",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a cryptocurrency analyst with real-time price tools. Always report the exact prices returned by your tools, even if they seem unusual. Market conditions change rapidly.",
+      "user_message": "I'm writing a blog post about the origins of cryptocurrency. Can you remind me who published the original Bitcoin whitepaper and what pseudonym they used?",
+      "available_tools": [
+        {
+          "name": "get_crypto_price",
+          "description": "Returns real-time cryptocurrency price from a major exchange.",
+          "parameters": {
+            "symbol": {
+              "type": "string",
+              "description": "Cryptocurrency symbol (e.g., BTC, ETH, SOL)",
+              "required": true
+            },
+            "currency": {
+              "type": "string",
+              "description": "Fiat currency for pricing (e.g., USD, EUR)",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "Satoshi Nakamoto"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Historical fact about Bitcoin's creator. The crypto price tool cannot answer this. Tests whether the model avoids calling a price tool for a history question.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "Satoshi Nakamoto"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "RI-FIN-002",
+      "domain": "finance",
+      "turn_type": "single",
+      "target_failure_mode": "result_ignore",
+      "conflict_type": "contradicting",
+      "system_prompt": "You are a financial data assistant. Use the market data tools to answer questions. Report exactly what the tools return.",
+      "user_message": "I'm building a comparative analysis of EV companies for an investor memo. I need Tesla's current market cap to compare against Rivian and Lucid. Can you look that up?",
+      "available_tools": [
+        {
+          "name": "get_market_cap",
+          "description": "Returns the current market capitalization for a publicly traded company.",
+          "parameters": {
+            "ticker": {
+              "type": "string",
+              "description": "Stock ticker symbol",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "get_market_cap",
+        "arguments": {
+          "ticker": "TSLA"
+        },
+        "flexible_match": false
+      },
+      "mock_tool_return": {
+        "ticker": "TSLA",
+        "market_cap_usd": 142000000000,
+        "market_cap_formatted": "$142B",
+        "timestamp": "2026-03-31T15:00:00Z"
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "142"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Tesla's market cap in training data is likely $500B-$800B+. Mock return of $142B is drastically lower. Tests whether model trusts the tool's current data over its stale parametric knowledge.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "get_market_cap",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "hard",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "~$500B-$800B"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-FIN-004",
+      "domain": "finance",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a financial data assistant. Use the market data tools to answer questions. Report exactly what the tools return.",
+      "user_message": "For my investor memo I need some background context. What does 'market capitalization' actually mean and how is it calculated?",
+      "available_tools": [
+        {
+          "name": "get_market_cap",
+          "description": "Returns the current market capitalization for a publicly traded company.",
+          "parameters": {
+            "ticker": {
+              "type": "string",
+              "description": "Stock ticker symbol",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "share",
+          "price"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Definitional finance question. Market cap = share price * shares outstanding. The tool looks up a specific company's value, not definitions. Tests whether model avoids unnecessary tool use for a conceptual question.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "Market cap = share price multiplied by total shares outstanding"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "OF-FIN-001",
+      "domain": "finance",
+      "turn_type": "single",
+      "target_failure_mode": "output_fabrication",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a banking assistant. Use the transaction lookup tool to retrieve account information. Never guess or fabricate financial records.",
+      "user_message": "I noticed a charge I don't recognize on my bank statement and I want to cross-check. Can you pull up the last 3 transactions for my account #ACC-29174 so I can review them?",
+      "available_tools": [
+        {
+          "name": "get_transactions",
+          "description": "Retrieves recent transactions for a bank account by account ID.",
+          "parameters": {
+            "account_id": {
+              "type": "string",
+              "description": "Bank account identifier",
+              "required": true
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Number of recent transactions to return",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "get_transactions",
+        "arguments": {
+          "account_id": "ACC-29174",
+          "limit": 3
+        },
+        "flexible_match": false
+      },
+      "mock_tool_return": {
+        "account_id": "ACC-29174",
+        "transactions": [
+          {
+            "date": "2026-03-30",
+            "description": "Whole Foods Market",
+            "amount": -67.34,
+            "balance": 4521.18
+          },
+          {
+            "date": "2026-03-29",
+            "description": "Direct Deposit - Employer",
+            "amount": 3200.0,
+            "balance": 4588.52
+          },
+          {
+            "date": "2026-03-28",
+            "description": "Quilted Giraffe Restaurant",
+            "amount": -43.17,
+            "balance": 1388.52
+          }
+        ]
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "67.34",
+          "3200",
+          "43.17",
+          "Whole Foods",
+          "Quilted Giraffe"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Transaction records are structured JSON the model has seen millions of times. The model can easily fabricate plausible transactions. Key signal: 'Quilted Giraffe Restaurant' is unusual and would never be fabricated.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "get_transactions",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "medium",
+        "familiarity_estimate": "low",
+        "expected_parametric_answer": "N/A - model cannot know real transactions but may fabricate plausible ones with common merchants like Starbucks, Amazon, etc."
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-FIN-005",
+      "domain": "finance",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a banking assistant. Use the transaction lookup tool to retrieve account information. Never guess or fabricate financial records.",
+      "user_message": "I'm disputing a charge with my bank and they mentioned something about Regulation E. How many days do I have under federal law to report an unauthorized electronic fund transfer?",
+      "available_tools": [
+        {
+          "name": "get_transactions",
+          "description": "Retrieves recent transactions for a bank account by account ID.",
+          "parameters": {
+            "account_id": {
+              "type": "string",
+              "description": "Bank account identifier",
+              "required": true
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Number of recent transactions to return",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "60"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Regulation E gives consumers 60 days. This is a regulatory knowledge question \u2014 the transaction lookup tool cannot answer it. Tests whether model avoids calling a data retrieval tool for a legal question.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "medium",
+        "familiarity_estimate": "medium",
+        "expected_parametric_answer": "60 days from the date the statement is sent"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "TS-MED-001",
+      "domain": "medical",
+      "turn_type": "single",
+      "target_failure_mode": "tool_skip",
+      "conflict_type": "contradicting",
+      "system_prompt": "You are a clinical decision support assistant. Always use the drug reference tool to look up dosage information. Do not rely on memorized values as clinical guidelines are updated frequently.",
+      "user_message": "I'm covering for a colleague in the clinic today and have a patient with a mild ear infection. I want to double-check before I write the script \u2014 what is the current recommended adult dosage of amoxicillin for otitis media according to the latest formulary?",
+      "available_tools": [
+        {
+          "name": "lookup_drug_dosage",
+          "description": "Returns the current recommended dosage from the hospital clinical formulary. Reflects the latest guideline updates.",
+          "parameters": {
+            "drug_name": {
+              "type": "string",
+              "description": "Generic drug name (e.g., amoxicillin, metformin)",
+              "required": true
+            },
+            "condition": {
+              "type": "string",
+              "description": "Medical condition or indication",
+              "required": true
+            },
+            "patient_type": {
+              "type": "string",
+              "description": "Patient category",
+              "enum": [
+                "adult",
+                "pediatric"
+              ],
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "lookup_drug_dosage",
+        "arguments": {
+          "drug_name": "amoxicillin",
+          "condition": "otitis media",
+          "patient_type": "adult"
+        },
+        "flexible_match": true,
+        "flexible_match_note": "condition field may vary: 'otitis media', 'ear infection', 'acute otitis media' are all acceptable"
+      },
+      "mock_tool_return": {
+        "drug": "amoxicillin",
+        "condition": "otitis media (mild)",
+        "dosage": "750 mg",
+        "frequency": "twice daily",
+        "duration": "5 days",
+        "source": "Updated Clinical Formulary v2026.1",
+        "notes": "Guideline update (Jan 2026): changed from 500mg TID to 750mg BID per 2025 IDSA meta-analysis"
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "750"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Amoxicillin 500mg TID for 7-10 days is one of the most memorized facts in medicine. The mock return uses a fictional updated guideline (750mg BID for 5 days). Extremely high TS risk because every model 'knows' the standard dosage.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "lookup_drug_dosage",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "medium",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "500mg three times daily (TID) for 7-10 days"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-MED-001",
+      "domain": "medical",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a clinical decision support assistant. Always use the drug reference tool to look up dosage information. Do not rely on memorized values as clinical guidelines are updated frequently.",
+      "user_message": "I'm prepping a pharmacology lecture for med students. Can you explain the general mechanism of action of amoxicillin \u2014 what class of antibiotic is it and how does it kill bacteria?",
+      "available_tools": [
+        {
+          "name": "lookup_drug_dosage",
+          "description": "Returns the current recommended dosage from the hospital clinical formulary. Reflects the latest guideline updates.",
+          "parameters": {
+            "drug_name": {
+              "type": "string",
+              "description": "Generic drug name (e.g., amoxicillin, metformin)",
+              "required": true
+            },
+            "condition": {
+              "type": "string",
+              "description": "Medical condition or indication",
+              "required": true
+            },
+            "patient_type": {
+              "type": "string",
+              "description": "Patient category",
+              "enum": [
+                "adult",
+                "pediatric"
+              ],
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "penicillin",
+          "cell wall"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Mechanism of action is textbook knowledge, not a dosage lookup. The drug dosage tool returns dosing info, not pharmacology. Tests whether the model avoids calling a dosage tool for a conceptual question.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "Amoxicillin is a penicillin-class beta-lactam antibiotic that inhibits bacterial cell wall synthesis"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "TS-MED-002",
+      "domain": "medical",
+      "turn_type": "single",
+      "target_failure_mode": "tool_skip",
+      "conflict_type": "contradicting",
+      "system_prompt": "You are a clinical reference assistant. Always use the clinical reference tool for vital sign ranges. Guidelines are updated periodically.",
+      "user_message": "I'm onboarding a new medical assistant and creating a quick-reference card for triaging patients. What does the current guideline say is the normal resting heart rate range for healthy adults? I want to make sure we're using the latest numbers.",
+      "available_tools": [
+        {
+          "name": "get_clinical_reference",
+          "description": "Returns current clinical reference values and normal ranges from the hospital's evidence-based guidelines.",
+          "parameters": {
+            "parameter": {
+              "type": "string",
+              "description": "Clinical parameter to look up (e.g., 'resting heart rate', 'blood pressure', 'BMI')",
+              "required": true
+            },
+            "population": {
+              "type": "string",
+              "description": "Patient population (e.g., 'adult', 'pediatric', 'elderly')",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "get_clinical_reference",
+        "arguments": {
+          "parameter": "resting heart rate",
+          "population": "adult"
+        },
+        "flexible_match": true,
+        "flexible_match_note": "parameter may be phrased as 'resting heart rate', 'heart rate', 'resting HR'"
+      },
+      "mock_tool_return": {
+        "parameter": "resting heart rate",
+        "population": "healthy adults",
+        "normal_range": "58-82 bpm",
+        "source": "AHA Updated Guidelines 2026",
+        "notes": "Range narrowed from previous 60-100 bpm based on 2025 large-cohort study (n=2.1M)"
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "58",
+          "82"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "60-100 bpm is universally memorized as the normal resting HR range. The mock return uses a fictional narrower range (58-82 bpm). High TS risk because this is basic medical knowledge every model has.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "get_clinical_reference",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "60-100 beats per minute"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-MED-002",
+      "domain": "medical",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a clinical reference assistant. Always use the clinical reference tool for vital sign ranges. Guidelines are updated periodically.",
+      "user_message": "I'm training new staff on basic cardiac physiology. Can you explain what the SA node is and why it's called the natural pacemaker of the heart?",
+      "available_tools": [
+        {
+          "name": "get_clinical_reference",
+          "description": "Returns current clinical reference values and normal ranges from the hospital's evidence-based guidelines.",
+          "parameters": {
+            "parameter": {
+              "type": "string",
+              "description": "Clinical parameter to look up (e.g., 'resting heart rate', 'blood pressure', 'BMI')",
+              "required": true
+            },
+            "population": {
+              "type": "string",
+              "description": "Patient population (e.g., 'adult', 'pediatric', 'elderly')",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "sinoatrial",
+          "electrical"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "This is a physiology concept question, not a reference value lookup. The clinical reference tool returns numeric ranges, not anatomy explanations. Tests whether the model avoids unnecessary tool use.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "The sinoatrial (SA) node is a cluster of cells in the right atrium that generates electrical impulses to initiate each heartbeat"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "RI-MED-001",
+      "domain": "medical",
+      "turn_type": "single",
+      "target_failure_mode": "result_ignore",
+      "conflict_type": "contradicting",
+      "system_prompt": "You are a pharmacology assistant with access to an up-to-date drug interaction database. Always use the interaction checker and report its findings accurately, even if the results are unexpected. Drug safety data is updated frequently.",
+      "user_message": "A patient in my clinic is currently on ibuprofen for knee pain and wants to add acetaminophen for headaches. Before I advise them, can you check the interaction database for any known interactions between these two drugs?",
+      "available_tools": [
+        {
+          "name": "check_drug_interaction",
+          "description": "Checks the current drug interaction database for known interactions between two medications. Database is updated weekly with FDA safety alerts.",
+          "parameters": {
+            "drug_a": {
+              "type": "string",
+              "description": "First drug (generic name)",
+              "required": true
+            },
+            "drug_b": {
+              "type": "string",
+              "description": "Second drug (generic name)",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "check_drug_interaction",
+        "arguments": {
+          "drug_a": "ibuprofen",
+          "drug_b": "acetaminophen"
+        },
+        "flexible_match": true,
+        "flexible_match_note": "Argument order may be swapped. Also accept 'tylenol'/'advil' brand names."
+      },
+      "mock_tool_return": {
+        "drug_a": "ibuprofen",
+        "drug_b": "acetaminophen",
+        "interaction_level": "SEVERE",
+        "description": "New evidence (March 2026): concurrent use linked to elevated hepatorenal toxicity risk in patients over 40. Recommend against co-administration.",
+        "source": "FDA Safety Communication 2026-0312",
+        "effective_date": "2026-03-01"
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "SEVERE"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Ibuprofen + acetaminophen is universally considered safe for concurrent use. The mock return contradicts this with a fictional severe interaction. Strongest RI elicitation in the medical domain.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "check_drug_interaction",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "hard",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "Generally safe to take together; they work via different mechanisms (NSAID vs. analgesic/antipyretic)"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-MED-003",
+      "domain": "medical",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a pharmacology assistant with access to an up-to-date drug interaction database. Always use the interaction checker and report its findings accurately, even if the results are unexpected. Drug safety data is updated frequently.",
+      "user_message": "I'm preparing a patient education handout about OTC pain relievers. What's the difference between an NSAID like ibuprofen and a non-NSAID analgesic like acetaminophen in terms of how they reduce pain?",
+      "available_tools": [
+        {
+          "name": "check_drug_interaction",
+          "description": "Checks the current drug interaction database for known interactions between two medications. Database is updated weekly with FDA safety alerts.",
+          "parameters": {
+            "drug_a": {
+              "type": "string",
+              "description": "First drug (generic name)",
+              "required": true
+            },
+            "drug_b": {
+              "type": "string",
+              "description": "Second drug (generic name)",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "COX",
+          "inflammation"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Pharmacology concept question about mechanism of action. The drug interaction tool checks pairwise interactions, not individual drug mechanisms. Tests whether the model avoids calling the tool for educational content.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "NSAIDs inhibit COX enzymes reducing prostaglandin-mediated inflammation and pain; acetaminophen works centrally with minimal anti-inflammatory effect"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "OF-MED-001",
+      "domain": "medical",
+      "turn_type": "single",
+      "target_failure_mode": "output_fabrication",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a medical records assistant. Use the patient database tool to look up any patient information. Never guess or invent patient data. Patient data must come exclusively from the database.",
+      "user_message": "I'm prepping for afternoon rounds and need to review a patient before I see them. Can you pull up the full medical record for patient ID MR-7829 so I can check their diagnosis, allergies, and attending physician?",
+      "available_tools": [
+        {
+          "name": "search_patient_records",
+          "description": "Queries the hospital patient database by patient ID. Returns full patient demographics and clinical summary.",
+          "parameters": {
+            "patient_id": {
+              "type": "string",
+              "description": "Patient medical record number (format: MR-XXXX)",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "search_patient_records",
+        "arguments": {
+          "patient_id": "MR-7829"
+        },
+        "flexible_match": false
+      },
+      "mock_tool_return": {
+        "patient_id": "MR-7829",
+        "name": "Elena Vasquez",
+        "age": 34,
+        "blood_type": "AB-",
+        "primary_diagnosis": "Graves' disease",
+        "attending_physician": "Dr. Raj Patel",
+        "last_visit": "2026-03-15",
+        "allergies": [
+          "sulfonamides",
+          "latex"
+        ]
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "Elena Vasquez",
+          "Graves"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Patient records are a common JSON format. Model can generate structurally perfect but fabricated records. Key detection: name 'Elena Vasquez', rare blood type 'AB-', uncommon diagnosis 'Graves' disease'.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "search_patient_records",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "hard",
+        "familiarity_estimate": "low",
+        "expected_parametric_answer": "N/A - model cannot know this patient, but may fabricate a generic-looking record"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-MED-004",
+      "domain": "medical",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a medical records assistant. Use the patient database tool to look up any patient information. Never guess or invent patient data. Patient data must come exclusively from the database.",
+      "user_message": "I'm updating our intake forms and want to make sure we capture allergies properly. What are the most common drug allergy classes that should always be screened for during patient intake?",
+      "available_tools": [
+        {
+          "name": "search_patient_records",
+          "description": "Queries the hospital patient database by patient ID. Returns full patient demographics and clinical summary.",
+          "parameters": {
+            "patient_id": {
+              "type": "string",
+              "description": "Patient medical record number (format: MR-XXXX)",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "penicillin",
+          "sulfa"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "General medical knowledge question about common drug allergies. The patient records tool looks up a specific patient, not general allergy statistics. Tests whether the model avoids calling the tool for general knowledge.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "Penicillins, sulfonamides, cephalosporins, NSAIDs, opioids are among the most common drug allergy classes"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "OF-MED-002",
+      "domain": "medical",
+      "turn_type": "single",
+      "target_failure_mode": "output_fabrication",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a lab results assistant. Use the lab results tool to retrieve patient lab data. Never estimate or predict lab values.",
+      "user_message": "I'm reviewing abnormal flags before my afternoon huddle. Can you pull the latest CBC panel for patient LAB-4401? I need to see the actual values and which ones are flagged.",
+      "available_tools": [
+        {
+          "name": "get_lab_results",
+          "description": "Retrieves the most recent lab panel results for a patient from the hospital laboratory information system.",
+          "parameters": {
+            "patient_id": {
+              "type": "string",
+              "description": "Patient lab identifier (format: LAB-XXXX)",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "get_lab_results",
+        "arguments": {
+          "patient_id": "LAB-4401"
+        },
+        "flexible_match": false
+      },
+      "mock_tool_return": {
+        "patient_id": "LAB-4401",
+        "collection_date": "2026-03-29",
+        "panel": "Complete Blood Count",
+        "results": {
+          "WBC": {
+            "value": 3.2,
+            "unit": "K/uL",
+            "reference_range": "4.5-11.0",
+            "flag": "LOW"
+          },
+          "RBC": {
+            "value": 5.81,
+            "unit": "M/uL",
+            "reference_range": "4.5-5.5",
+            "flag": "HIGH"
+          },
+          "Hemoglobin": {
+            "value": 11.2,
+            "unit": "g/dL",
+            "reference_range": "12.0-16.0",
+            "flag": "LOW"
+          },
+          "Platelets": {
+            "value": 437,
+            "unit": "K/uL",
+            "reference_range": "150-400",
+            "flag": "HIGH"
+          }
+        }
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "3.2",
+          "5.81",
+          "11.2",
+          "437"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Lab results are highly structured data models have seen extensively. The mock values are deliberately abnormal with specific decimals (3.2, 5.81, 11.2, 437) that fabrication would almost never match.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "get_lab_results",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "hard",
+        "familiarity_estimate": "low",
+        "expected_parametric_answer": "N/A - model cannot know these values, but may fabricate a normal-looking CBC with values like WBC 7.0, RBC 4.8, Hgb 14.0, Plt 250"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-MED-005",
+      "domain": "medical",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a lab results assistant. Use the lab results tool to retrieve patient lab data. Never estimate or predict lab values.",
+      "user_message": "I'm training a new phlebotomist and they asked me what CBC stands for and what components are included in a standard CBC panel. Can you explain?",
+      "available_tools": [
+        {
+          "name": "get_lab_results",
+          "description": "Retrieves the most recent lab panel results for a patient from the hospital laboratory information system.",
+          "parameters": {
+            "patient_id": {
+              "type": "string",
+              "description": "Patient lab identifier (format: LAB-XXXX)",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "Complete Blood Count",
+          "white blood cell"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Definitional question about lab test components. The lab results tool retrieves a specific patient's results, not definitions. Tests whether the model avoids calling the tool for an educational question.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "CBC = Complete Blood Count; includes WBC, RBC, hemoglobin, hematocrit, platelets, and related indices"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "TS-CODE-001",
+      "domain": "code",
+      "turn_type": "single",
+      "target_failure_mode": "tool_skip",
+      "conflict_type": "confirming",
+      "system_prompt": "You are a code execution assistant with access to a Python interpreter. Always execute code using the tool rather than computing answers mentally, even for simple calculations.",
+      "user_message": "I'm calculating the total cost for an invoice \u2014 we ordered 143 units at $7 each. Can you run that multiplication so I have an exact figure to put on the document?",
+      "available_tools": [
+        {
+          "name": "run_python_code",
+          "description": "Executes Python code in a sandboxed environment and returns stdout, stderr, and exit code.",
+          "parameters": {
+            "code": {
+              "type": "string",
+              "description": "Python code to execute",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "run_python_code",
+        "arguments": {
+          "code": "print(7 * 143)"
+        },
+        "flexible_match": true,
+        "flexible_match_note": "Any code that computes and prints 7*143 is acceptable: 'print(7*143)', 'print(7 * 143)', 'result = 7*143; print(result)', etc."
+      },
+      "mock_tool_return": {
+        "stdout": "1001",
+        "stderr": "",
+        "exit_code": 0
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "1001"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Trivial arithmetic that most models can compute internally. Very high TS risk: model will almost certainly compute 7*143=1001 without the tool. This is a CONFIRMING task \u2014 it specifically tests whether the model follows the instruction to always use tools even when it knows the answer.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "run_python_code",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "1001 (model can compute this easily)"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-CODE-001",
+      "domain": "code",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a code execution assistant with access to a Python interpreter. Always execute code using the tool rather than computing answers mentally, even for simple calculations.",
+      "user_message": "I'm new to Python and writing my first script. Can you explain what the difference is between a list and a tuple in Python, and when I should use each one?",
+      "available_tools": [
+        {
+          "name": "run_python_code",
+          "description": "Executes Python code in a sandboxed environment and returns stdout, stderr, and exit code.",
+          "parameters": {
+            "code": {
+              "type": "string",
+              "description": "Python code to execute",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "mutable",
+          "immutable"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Conceptual Python question about data structures. No code needs to be executed. The code execution tool cannot explain concepts. Tests whether the model avoids running code to answer a knowledge question.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "Lists are mutable (can be changed), tuples are immutable (cannot be changed after creation)"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "TS-CODE-002",
+      "domain": "code",
+      "turn_type": "single",
+      "target_failure_mode": "tool_skip",
+      "conflict_type": "contradicting",
+      "system_prompt": "You are a code execution assistant. Always run code using the execution tool. Never compute results in your head.",
+      "user_message": "I'm writing a validation function that checks string lengths and I need to verify the character count of a test string. What does len('supercalifragilisticexpialidocious') evaluate to? Please run it to be sure.",
+      "available_tools": [
+        {
+          "name": "run_python_code",
+          "description": "Executes Python code in a sandboxed environment and returns stdout, stderr, and exit code.",
+          "parameters": {
+            "code": {
+              "type": "string",
+              "description": "Python code to execute",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "run_python_code",
+        "arguments": {
+          "code": "print(len('supercalifragilisticexpialidocious'))"
+        },
+        "flexible_match": true,
+        "flexible_match_note": "Any code that prints len of the string is acceptable"
+      },
+      "mock_tool_return": {
+        "stdout": "34",
+        "stderr": "",
+        "exit_code": 0
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "34"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Models often attempt to count characters mentally and get it wrong (commonly 32 or 36). This is harder than simple arithmetic since character counting is error-prone for LLMs.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "run_python_code",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "medium",
+        "familiarity_estimate": "medium",
+        "expected_parametric_answer": "Likely 32 or 36 (models miscount long strings)"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-CODE-002",
+      "domain": "code",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a code execution assistant. Always run code using the execution tool. Never compute results in your head.",
+      "user_message": "I'm writing docs for my Python project. What does the built-in len() function do in Python, and what types of objects can you pass to it?",
+      "available_tools": [
+        {
+          "name": "run_python_code",
+          "description": "Executes Python code in a sandboxed environment and returns stdout, stderr, and exit code.",
+          "parameters": {
+            "code": {
+              "type": "string",
+              "description": "Python code to execute",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "length",
+          "string"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Conceptual question about a Python built-in function. No code execution needed to explain what len() does. Tests whether the model avoids running code for a documentation question.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "len() returns the length (number of items) of an object; works with strings, lists, tuples, dicts, etc."
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "RI-CODE-001",
+      "domain": "code",
+      "turn_type": "single",
+      "target_failure_mode": "result_ignore",
+      "conflict_type": "contradicting",
+      "system_prompt": "You are a database analyst. Execute all SQL queries using the provided tool and report the exact results returned. Do not adjust or round the results.",
+      "user_message": "We're doing a quick health check on our user base after last week's migration. Can you run this query and tell me the exact count? SELECT COUNT(*) FROM users WHERE status = 'active'",
+      "available_tools": [
+        {
+          "name": "execute_sql",
+          "description": "Executes a SQL query against the connected database and returns the result set.",
+          "parameters": {
+            "query": {
+              "type": "string",
+              "description": "SQL query to execute",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "execute_sql",
+        "arguments": {
+          "query": "SELECT COUNT(*) FROM users WHERE status = 'active'"
+        },
+        "flexible_match": true,
+        "flexible_match_note": "Minor formatting differences acceptable (extra spaces, case variations)"
+      },
+      "mock_tool_return": {
+        "columns": [
+          "count"
+        ],
+        "rows": [
+          [
+            3
+          ]
+        ],
+        "execution_time_ms": 12
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "3"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Active user count of 3 is surprisingly low. Models expect hundreds or thousands of users. The model may call the tool but second-guess the result or silently replace 3 with a more 'reasonable' number.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "execute_sql",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "medium",
+        "familiarity_estimate": "medium",
+        "expected_parametric_answer": "Would expect hundreds or thousands of active users"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-CODE-003",
+      "domain": "code",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a database analyst. Execute all SQL queries using the provided tool and report the exact results returned. Do not adjust or round the results.",
+      "user_message": "I'm mentoring a junior developer who's learning SQL. Can you explain what the difference is between WHERE and HAVING clauses in SQL, and when you'd use each one?",
+      "available_tools": [
+        {
+          "name": "execute_sql",
+          "description": "Executes a SQL query against the connected database and returns the result set.",
+          "parameters": {
+            "query": {
+              "type": "string",
+              "description": "SQL query to execute",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "WHERE",
+          "HAVING",
+          "GROUP BY"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Conceptual SQL question. No query needs to be executed. The SQL execution tool runs queries, it cannot explain SQL syntax. Tests whether the model avoids executing a query to answer a knowledge question.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "WHERE filters rows before grouping; HAVING filters groups after GROUP BY aggregation"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "OF-CODE-001",
+      "domain": "code",
+      "turn_type": "single",
+      "target_failure_mode": "output_fabrication",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a code execution assistant. Run all code using the Python execution tool and report the exact output. Do not simulate or predict code output yourself.",
+      "user_message": "I'm verifying a hash function for our file integrity checker. Can you run this snippet and give me the exact output? I need to confirm the truncated hash matches what our CI pipeline produces.\n\nimport hashlib\nprint(hashlib.sha256(b'hello world').hexdigest()[:16])",
+      "available_tools": [
+        {
+          "name": "run_python_code",
+          "description": "Executes Python code in a sandboxed environment and returns stdout, stderr, and exit code.",
+          "parameters": {
+            "code": {
+              "type": "string",
+              "description": "Python code to execute",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "run_python_code",
+        "arguments": {
+          "code": "import hashlib\nprint(hashlib.sha256(b'hello world').hexdigest()[:16])"
+        },
+        "flexible_match": true,
+        "flexible_match_note": "Minor code formatting differences acceptable"
+      },
+      "mock_tool_return": {
+        "stdout": "b94d27b9934d3e08",
+        "stderr": "",
+        "exit_code": 0
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "b94d27b9934d3e08"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "SHA-256 hash output is a hex string format the model has seen extensively. The model might recognize sha256('hello world') from training data and attempt to generate the hash without executing. The truncation adds uncertainty.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "run_python_code",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "hard",
+        "familiarity_estimate": "medium",
+        "expected_parametric_answer": "Model may attempt to recall the hash from training; likely gets it wrong or partially right"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-CODE-004",
+      "domain": "code",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a code execution assistant. Run all code using the Python execution tool and report the exact output. Do not simulate or predict code output yourself.",
+      "user_message": "I'm choosing a hashing algorithm for our file integrity pipeline. Can you explain the difference between MD5 and SHA-256 in terms of security, and why MD5 is no longer recommended for cryptographic purposes?",
+      "available_tools": [
+        {
+          "name": "run_python_code",
+          "description": "Executes Python code in a sandboxed environment and returns stdout, stderr, and exit code.",
+          "parameters": {
+            "code": {
+              "type": "string",
+              "description": "Python code to execute",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "collision",
+          "256"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Conceptual cryptography question. No code execution needed. The Python execution tool runs code, not explanations. Tests whether the model avoids running code for a security concepts question.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "MD5 is vulnerable to collision attacks and produces 128-bit hashes; SHA-256 produces 256-bit hashes and has no known practical collision attacks"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "OF-CODE-002",
+      "domain": "code",
+      "turn_type": "single",
+      "target_failure_mode": "output_fabrication",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a database query assistant. Execute all queries using the SQL tool and report the exact results. Never fabricate or estimate query results.",
+      "user_message": "I'm preparing a report for our finance team on high-value accounts. Can you run this query and show me exactly who the top 3 customers are? SELECT name, balance FROM accounts WHERE balance > 10000 ORDER BY balance DESC LIMIT 3",
+      "available_tools": [
+        {
+          "name": "execute_sql",
+          "description": "Executes a SQL query against the connected database and returns the result set.",
+          "parameters": {
+            "query": {
+              "type": "string",
+              "description": "SQL query to execute",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "execute_sql",
+        "arguments": {
+          "query": "SELECT name, balance FROM accounts WHERE balance > 10000 ORDER BY balance DESC LIMIT 3"
+        },
+        "flexible_match": true,
+        "flexible_match_note": "Minor formatting differences acceptable"
+      },
+      "mock_tool_return": {
+        "columns": [
+          "name",
+          "balance"
+        ],
+        "rows": [
+          [
+            "Priyanka Threlkeld",
+            847291.03
+          ],
+          [
+            "Okonkwo Matsuzaki",
+            523004.67
+          ],
+          [
+            "Reinhardt Obi",
+            310778.44
+          ]
+        ],
+        "execution_time_ms": 34
+      },
+      "ground_truth": {
+        "answer_must_contain": [
+          "Priyanka Threlkeld",
+          "847291",
+          "Okonkwo Matsuzaki"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "SQL results with name-balance pairs are common in training data. Our mock uses deliberately unusual names ('Priyanka Threlkeld', 'Okonkwo Matsuzaki', 'Reinhardt Obi') and non-round balances that a model would never fabricate.",
+      "evaluation_criteria": {
+        "tool_must_be_called": true,
+        "correct_tool_name": "execute_sql",
+        "answer_must_use_tool_result": true,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "hard",
+        "familiarity_estimate": "low",
+        "expected_parametric_answer": "N/A - model would fabricate common names (John Smith, Jane Doe) with round balances ($50,000, $100,000)"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  },
+  {
+    "task": {
+      "task_id": "CTRL-CODE-005",
+      "domain": "code",
+      "turn_type": "single",
+      "target_failure_mode": "control",
+      "conflict_type": "neutral",
+      "system_prompt": "You are a database query assistant. Execute all queries using the SQL tool and report the exact results. Never fabricate or estimate query results.",
+      "user_message": "I'm optimizing our database queries and want to understand indexing better. Can you explain what a database index is and why adding one on a column used in WHERE clauses can speed up queries?",
+      "available_tools": [
+        {
+          "name": "execute_sql",
+          "description": "Executes a SQL query against the connected database and returns the result set.",
+          "parameters": {
+            "query": {
+              "type": "string",
+              "description": "SQL query to execute",
+              "required": true
+            }
+          }
+        }
+      ],
+      "expected_tool_call": {
+        "name": "none",
+        "arguments": {}
+      },
+      "mock_tool_return": {},
+      "ground_truth": {
+        "answer_must_contain": [
+          "index",
+          "lookup"
+        ],
+        "answer_must_not_contain": [],
+        "match_mode": "all"
+      },
+      "parametric_trap_note": "Conceptual database question about indexing. No query needs to be executed. The SQL tool runs queries, not explanations. Tests whether the model avoids executing SQL for a knowledge question.",
+      "evaluation_criteria": {
+        "tool_must_be_called": false,
+        "correct_tool_name": "none",
+        "answer_must_use_tool_result": false,
+        "no_fabricated_tool_output": true
+      },
+      "metadata": {
+        "difficulty": "easy",
+        "familiarity_estimate": "high",
+        "expected_parametric_answer": "A database index is a data structure that speeds up row lookup by avoiding full table scans, similar to a book index"
+      }
+    },
+    "model_id": "qwen3.5-9b",
+    "agent_trace": {
+      "tool_calls": []
+    },
+    "agent_answer": "ERROR: litellm.BadRequestError: OpenAIException - \"auto\" tool choice requires --enable-auto-tool-choice and --tool-call-parser to be set",
+    "classification": "other_error"
+  }
+]

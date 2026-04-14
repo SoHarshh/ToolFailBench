@@ -1,0 +1,53 @@
+{
+  "model_id": "mistral-7b",
+  "eval_file": "results/mistral-7b_20260413_020138.json",
+  "baseline_file": "results/baselines/mistral-7b_baseline_20260413_035627.json",
+  "total_tasks": 90,
+  "classification_stats": {
+    "correct": {
+      "count": 40,
+      "empty_eval_answers": 0,
+      "non_empty_eval_answers": 40,
+      "mean_jaccard": 0.396,
+      "mean_containment": 0.6233,
+      "mean_ngram3": 0.4706,
+      "eval_gt_match_rate": 0.9875,
+      "baseline_gt_match_rate": 0.9375
+    },
+    "other_error": {
+      "count": 4,
+      "empty_eval_answers": 0,
+      "non_empty_eval_answers": 4,
+      "mean_jaccard": 0.0353,
+      "mean_containment": 0.1912,
+      "mean_ngram3": 0.0573,
+      "eval_gt_match_rate": 0.0,
+      "baseline_gt_match_rate": 0.5
+    },
+    "tool_skip": {
+      "count": 43,
+      "empty_eval_answers": 0,
+      "non_empty_eval_answers": 43,
+      "mean_jaccard": 0.1988,
+      "mean_containment": 0.4782,
+      "mean_ngram3": 0.23,
+      "eval_gt_match_rate": 0.0814,
+      "baseline_gt_match_rate": 0.0465
+    },
+    "wrong_answer": {
+      "count": 3,
+      "empty_eval_answers": 0,
+      "non_empty_eval_answers": 3,
+      "mean_jaccard": 0.3365,
+      "mean_containment": 0.4863,
+      "mean_ngram3": 0.4312,
+      "eval_gt_match_rate": 0.1667,
+      "baseline_gt_match_rate": 0.6667
+    }
+  },
+  "rir_fallback_analysis": {
+    "count": 0,
+    "message": "No RIR tasks to analyze"
+  },
+  "rir_by_domain": {}
+}
