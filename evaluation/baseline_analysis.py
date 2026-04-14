@@ -180,7 +180,7 @@ def analyze_task(eval_result: dict, baseline: dict) -> dict:
 
 
 def _extract_key_values(obj, values=None, depth=0) -> list:
-    """Extract leaf values from mock return, filtering out noisy/generic ones."""
+    """Extract unique leaf values from mock return, filtering out noisy/generic ones."""
     if values is None:
         values = []
     if depth > 5:
@@ -196,10 +196,11 @@ def _extract_key_values(obj, values=None, depth=0) -> list:
             _extract_key_values(v, values, depth + 1)
     elif isinstance(obj, (int, float)):
         # Only include numbers that are distinctive (not 0, 1, etc.)
-        if abs(obj) > 1:
+        if abs(obj) > 1 and obj not in values:
             values.append(obj)
     elif isinstance(obj, str) and len(obj) > 2 and obj not in ("true", "false", "null", "none"):
-        values.append(obj)
+        if obj not in values:
+            values.append(obj)
     return values
 
 

@@ -161,6 +161,34 @@ def _parse_tool_calls(choice) -> tuple[list[dict], None]:
     return tool_calls, None
 
 
+def _extract_raw_response(response) -> dict:
+    """Extract key fields from a litellm response for archival."""
+    try:
+        choice = response.choices[0]
+        raw = {
+            "content": choice.message.content,
+            "finish_reason": choice.finish_reason,
+            "tool_calls": None,
+        }
+        if choice.message.tool_calls:
+            raw["tool_calls"] = [
+                {
+                    "id": tc.id,
+                    "function": {"name": tc.function.name, "arguments": tc.function.arguments},
+                }
+                for tc in choice.message.tool_calls
+            ]
+        if hasattr(response, "usage") and response.usage:
+            raw["usage"] = {
+                "prompt_tokens": response.usage.prompt_tokens,
+                "completion_tokens": response.usage.completion_tokens,
+                "total_tokens": response.usage.total_tokens,
+            }
+        return raw
+    except Exception:
+        return {"error": "failed to extract raw response"}
+
+
 def run_single_task(task: dict, model_cfg: dict, config: dict) -> dict:
     """Run one task against a model. Returns result dict."""
     try:
@@ -195,11 +223,13 @@ def run_single_task(task: dict, model_cfg: dict, config: dict) -> dict:
         tool_calls = []
         raw_tcs = []
         agent_answer = ""
+        raw_responses = []  # archive all raw API responses
 
         try:
             response = litellm.completion(**call_kwargs)
             choice = response.choices[0]
             tool_calls, _ = _parse_tool_calls(choice)
+            raw_responses.append({"step": "initial", **_extract_raw_response(response)})
         except Exception as litellm_err:
             err_str = str(litellm_err)
             if "FunctionCall" in err_str or "arguments" in err_str or "validation error" in err_str:
@@ -208,6 +238,7 @@ def run_single_task(task: dict, model_cfg: dict, config: dict) -> dict:
                 choice_dict = resp_json["choices"][0]
                 tool_calls, raw_tcs = _parse_tool_calls_from_dict(choice_dict)
                 use_raw = True
+                raw_responses.append({"step": "initial_raw", "response": choice_dict})
             else:
                 raise
 
@@ -240,6 +271,7 @@ def run_single_task(task: dict, model_cfg: dict, config: dict) -> dict:
                 followup_inf = {**inf, "tool_choice": "none"}
                 follow_json = _raw_http_call(tool_messages, tools, followup_inf, base_url, model_cfg["hf_model_id"])
                 agent_answer = follow_json["choices"][0].get("message", {}).get("content") or ""
+                raw_responses.append({"step": "followup_raw", "response": follow_json["choices"][0]})
             else:
                 tool_messages = messages + [choice.message]
                 for tc in choice.message.tool_calls:
@@ -259,6 +291,7 @@ def run_single_task(task: dict, model_cfg: dict, config: dict) -> dict:
                     **extra_kwargs,
                 )
                 agent_answer = follow_up.choices[0].message.content or ""
+                raw_responses.append({"step": "followup", **_extract_raw_response(follow_up)})
         else:
             if use_raw:
                 agent_answer = resp_json["choices"][0].get("message", {}).get("content") or ""
@@ -274,6 +307,7 @@ def run_single_task(task: dict, model_cfg: dict, config: dict) -> dict:
             "agent_trace": agent_trace,
             "agent_answer": agent_answer,
             "classification": classification,
+            "raw_responses": raw_responses,
         }
 
     except Exception as e:
@@ -283,6 +317,7 @@ def run_single_task(task: dict, model_cfg: dict, config: dict) -> dict:
             "agent_trace": {"tool_calls": []},
             "agent_answer": f"ERROR: {str(e)}",
             "classification": "other_error",
+            "raw_responses": [],
         }
 
 
