@@ -237,7 +237,8 @@ def run_single_task(task: dict, model_cfg: dict, config: dict) -> dict:
                         "content": json.dumps(task["mock_tool_return"]),
                     })
                 base_url = extra_kwargs.get("api_base", "http://localhost:8000/v1")
-                follow_json = _raw_http_call(tool_messages, tools, inf, base_url, model_cfg["hf_model_id"])
+                followup_inf = {**inf, "tool_choice": "none"}
+                follow_json = _raw_http_call(tool_messages, tools, followup_inf, base_url, model_cfg["hf_model_id"])
                 agent_answer = follow_json["choices"][0].get("message", {}).get("content") or ""
             else:
                 tool_messages = messages + [choice.message]
@@ -251,6 +252,7 @@ def run_single_task(task: dict, model_cfg: dict, config: dict) -> dict:
                     model=litellm_model,
                     messages=tool_messages,
                     tools=tools,
+                    tool_choice="none",
                     temperature=inf["temperature"],
                     max_tokens=inf["max_tokens"],
                     seed=inf["seed"],
