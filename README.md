@@ -3,6 +3,7 @@
 <p align="center"><b>A Diagnostic Benchmark for Tool-Use Failures in LLM Agents</b></p>
 
 <p align="center">
+  <a href="https://arxiv.org/abs/2607.04686"><img alt="Paper (arXiv)" src="https://img.shields.io/badge/arXiv-2607.04686-b31b1b?logo=arxiv&logoColor=white"></a>
   <a href="https://openreview.net/forum?id=JhaxRN8QDV"><img alt="Paper (OpenReview)" src="https://img.shields.io/badge/OpenReview-Paper-8c1b13?logo=openreview&logoColor=white"></a>
   <a href="https://github.com/SoHarshh/ToolFailBench"><img alt="Code (GitHub)" src="https://img.shields.io/badge/GitHub-Code-181717?logo=github&logoColor=white"></a>
 </p>
@@ -189,11 +190,14 @@ python evaluation/validate_results.py
 
 ```bibtex
 @inproceedings{soni2026toolfailbench,
-  title     = {ToolFailBench: Diagnosing Tool-Use Failures in {LLM} Agents},
-  author    = {Harsh Soni},
-  booktitle = {Second Workshop on Agents in the Wild: Safety, Security, and Beyond},
-  year      = {2026},
-  url       = {https://openreview.net/forum?id=JhaxRN8QDV}
+  title         = {ToolFailBench: Diagnosing Tool-Use Failures in {LLM} Agents},
+  author        = {Harsh Soni},
+  booktitle     = {Second Workshop on Agents in the Wild: Safety, Security, and Beyond},
+  year          = {2026},
+  eprint        = {2607.04686},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CL},
+  url           = {https://arxiv.org/abs/2607.04686}
 }
 ```
 
